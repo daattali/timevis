@@ -1,0 +1,9 @@
+.timelinevis.html-widget {
+  margin-bottom: 20px;
+}
+.vis-background .vis-minor.vis-odd {
+  background: #fdfdfd;
+}
+.vis-major {
+  font-weight: bold;
+}
