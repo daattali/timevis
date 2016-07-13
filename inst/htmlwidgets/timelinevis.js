@@ -20,6 +20,8 @@ HTMLWidgets.widget({
       renderValue: function(x) {
         data.add(x.items);
         timeline.fit({ animation : false });
+
+        if (HTMLWidgets.shinyMode) {}
       },
 
       resize : function(width, height) {

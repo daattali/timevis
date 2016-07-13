@@ -1,8 +1,8 @@
 dependencies:
-  - name: vis
+  - name: vis-timeline
     version: 4.16.1
-    src: htmlwidgets/lib/vis-4.16.1
-    script: vis.min.js
+    src: htmlwidgets/lib/vis-timeline-4.16.1
+    script: vis-timeline.min.js
     stylesheet: vis.min.css
 
   - name: timeline
