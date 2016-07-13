@@ -1,31 +1,33 @@
+// http://visjs.org/docs/timeline/
+
 HTMLWidgets.widget({
 
-  name: 'timelinevis',
+  name : 'timelinevis',
 
-  type: 'output',
+  type : 'output',
 
-  factory: function(el, width, height) {
+  factory : function(el, width, height) {
 
     var container = document.getElementById(el.id);
-    var timeline = new vis.Timeline(container, [], {});
+    var data = new vis.DataSet(); // http://visjs.org/docs/data/dataset.html
+    var options = {
+      editable : true
+    };
+    var timeline = new vis.Timeline(container, data, options);
 
     return {
 
       renderValue: function(x) {
-
-        var items = x.items;
-        var options = {};
-        timeline.setOptions(options);
-        timeline.setItems(items);
+        data.add(x.items);
         timeline.fit({ animation : false });
       },
 
-      resize: function(width, height) {
+      resize : function(width, height) {
         // the timeline widget knows how to resize itself automatically
       },
 
-      timeline: timeline
-
+      timeline : timeline,
+      data : data
     };
   }
 });

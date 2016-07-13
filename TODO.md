@@ -14,4 +14,6 @@ timeline images (vis-delete image), any other resources?
 how to change zoom level on desktop?
 
 
+timeline imrpove doc: say that i can get all items in the timeline with field "itemsData"
 
+no method to programatically add an item? I can add a time (vertical bar), but to add an item it looks like i need to first get the current items and append to the array and then setItems?
