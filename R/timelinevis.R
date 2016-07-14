@@ -5,16 +5,19 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #'
 #' <Add Description>
 #'
+#' height is ignored
+#'
 #' @import htmlwidgets
 #'
 #' @export
-timelinevis <- function(items, width = NULL, height = NULL, elementId = NULL) {
+timelinevis <- function(data, showZoom = TRUE, width = NULL, height = NULL, elementId = NULL) {
 
-  items <- dataframeToD3(items)
+  items <- dataframeToD3(data)
 
   # forward options using x
   x = list(
-    items = items
+    items = items,
+    showZoom = showZoom
   )
 
   # create widget
@@ -54,6 +57,28 @@ timelinevisOutput <- function(outputId, width = '100%', height = 'auto') {
 renderTimelinevis <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, timelinevisOutput, env, quoted = TRUE)
+}
+
+# Add custom HTML to wrap the widget to allow for a zoom in/out menu
+timelinevis_html <- function(id, style, class, ...){
+  htmltools::tags$div(
+    id = id, class = class, style = style,
+    htmltools::tags$div(
+      class = "btn-group zoom-menu",
+      htmltools::tags$button(
+        type = "button",
+        class = "btn btn-default btn-lg zoom-in",
+        shiny::icon("search-plus", class = "zoom-icon fa-fw"),
+        shiny::span(class = "zoom-text", "+")
+      ),
+      htmltools::tags$button(
+        type = "button",
+        class = "btn btn-default btn-lg zoom-out",
+        shiny::icon("search-minus", class = "zoom-icon fa-fw"),
+        shiny::span(class = "zoom-text", "-")
+      )
+    )
+  )
 }
 
 dataframeToD3 <- function(df) {

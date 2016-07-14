@@ -18,14 +18,41 @@ HTMLWidgets.widget({
     return {
 
       renderValue: function(x) {
+        // alias this
+        var that = this;
+
         data.add(x.items);
         timeline.fit({ animation : false });
 
-        if (HTMLWidgets.shinyMode) {}
+        // Show and initialize the zoom buttons
+        if (x.showZoom) {
+          var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
+          zoomMenu.className += " show-zoom";
+          if (HTMLWidgets.shinyMode) {
+            zoomMenu.className += " shiny-mode";
+          } else {
+            zoomMenu.className += " no-shiny-mode";
+          }
+          zoomMenu.getElementsByClassName("zoom-in")[0].onclick = function(ev) { that.zoom(-0.2); };
+          zoomMenu.getElementsByClassName("zoom-out")[0].onclick = function(ev) { that.zoom(0.2); };
+        }
+
+
       },
 
       resize : function(width, height) {
         // the timeline widget knows how to resize itself automatically
+      },
+
+      zoom : function(percentage) {
+        console.log(percentage);
+        var range = timeline.getWindow();
+        var interval = range.end - range.start;
+
+        timeline.setWindow({
+          start : range.start.valueOf() - interval * percentage,
+          end :   range.end.valueOf()   + interval * percentage
+        });
       },
 
       timeline : timeline,

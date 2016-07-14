@@ -7,9 +7,9 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$aaa <- renderTimelinevis(timelinevis(myitems))
-  output$bbb <- renderTimelinevis(timelinevis(myitems2))
+  output$bbb <- renderTimelinevis(timelinevis(myitems2, showZoom = FALSE))
 
   #updateTimelinevis("aaa")
 }
 
-shinyApp(ui = ui, server = server)
+runApp(shinyApp(ui = ui, server = server), port = 4468)
