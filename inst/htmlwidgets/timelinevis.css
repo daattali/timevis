@@ -13,7 +13,7 @@
   position: absolute;
   right: 5px;
   top: 5px;
-  z-index: 5;
+  z-index: 15;
 }
 .timelinevis.html-widget .zoom-menu.show-zoom {
   display: block;
