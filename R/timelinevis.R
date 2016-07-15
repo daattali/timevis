@@ -12,6 +12,7 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #' @export
 timelinevis <- function(
   data, showZoom = TRUE,
+  listen = NULL,
   width = NULL, height = NULL, elementId = NULL,
   ...) {
 
@@ -21,6 +22,7 @@ timelinevis <- function(
   x = list(
     items = items,
     showZoom = showZoom,
+    listen = listen,
     height = height
   )
 
@@ -91,4 +93,44 @@ timelinevis_html <- function(id, style, class, ...){
 
 dataframeToD3 <- function(df) {
   apply(df, 1, function(row) as.list(row[!is.na(row)]))
+}
+
+addItem <- function() {
+
+}
+
+removeItem <- function() {
+
+}
+
+addCustomTime <- function() {
+
+}
+
+fitWindow <- function() {
+
+}
+
+centerTime <- function() {
+
+}
+
+removeCustomTime <- function() {
+
+}
+
+setItems <- function() {
+
+}
+
+setOptions <- function() {
+
+}
+
+setSelection <- function() {
+
+}
+
+setWindow <- function() {
+
 }

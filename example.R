@@ -7,9 +7,27 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$aaa <- renderTimelinevis(timelinevis(
-    myitems
+    myitems,
+    editable = TRUE,
+    multiselect=TRUE,
+    listen = c("selected","window", "data")
   ))
-  output$bbb <- renderTimelinevis(timelinevis(myitems2,showZoom = FALSE))
+  output$bbb <- renderTimelinevis(timelinevis(myitems2,showZoom = FALSE,
+                                              listen=c("a","bb")))
+
+  observe({
+    cat(input$aaa_selected, "\n")
+  })
+
+  observe({
+    cat(input$aaa_window,"\n")
+  })
+
+
+  observe({
+
+    cat(str(input$aaa_data),"\n")
+  })
 
   #updateTimelinevis("aaa")
 }
