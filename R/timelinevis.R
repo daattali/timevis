@@ -5,20 +5,26 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #'
 #' <Add Description>
 #'
-#' height is ignored
+#' ... any function argument must be wrapped in htmlwidgets::JS()
 #'
 #' @import htmlwidgets
 #'
 #' @export
-timelinevis <- function(data, showZoom = TRUE, width = NULL, height = NULL, elementId = NULL) {
+timelinevis <- function(
+  data, showZoom = TRUE,
+  width = NULL, height = NULL, elementId = NULL,
+  ...) {
 
   items <- dataframeToD3(data)
 
   # forward options using x
   x = list(
     items = items,
-    showZoom = showZoom
+    showZoom = showZoom,
+    height = height
   )
+
+  x <- c(x, list(...))
 
   # create widget
   htmlwidgets::createWidget(
@@ -35,6 +41,8 @@ timelinevis <- function(data, showZoom = TRUE, width = NULL, height = NULL, elem
 #'
 #' Output and render functions for using timelinevis within Shiny
 #' applications and interactive Rmd documents.
+#'
+#' TODO height ignored, pass it to timeline()
 #'
 #' @param outputId output variable to read from
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},

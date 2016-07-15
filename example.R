@@ -6,8 +6,10 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-  output$aaa <- renderTimelinevis(timelinevis(myitems))
-  output$bbb <- renderTimelinevis(timelinevis(myitems2, showZoom = FALSE))
+  output$aaa <- renderTimelinevis(timelinevis(
+    myitems
+  ))
+  output$bbb <- renderTimelinevis(timelinevis(myitems2,showZoom = FALSE))
 
   #updateTimelinevis("aaa")
 }

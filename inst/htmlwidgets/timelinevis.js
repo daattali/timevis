@@ -10,10 +10,7 @@ HTMLWidgets.widget({
 
     var container = document.getElementById(el.id);
     var data = new vis.DataSet(); // http://visjs.org/docs/data/dataset.html
-    var options = {
-      editable : true
-    };
-    var timeline = new vis.Timeline(container, data, options);
+    var timeline = new vis.Timeline(container, data, {});
 
     return {
 
@@ -37,7 +34,10 @@ HTMLWidgets.widget({
           zoomMenu.getElementsByClassName("zoom-out")[0].onclick = function(ev) { that.zoom(0.2); };
         }
 
-
+        delete x['items'];
+        delete x['showZoom'];
+console.log(x);
+        timeline.setOptions(x);
       },
 
       resize : function(width, height) {
