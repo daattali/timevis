@@ -1,4 +1,5 @@
 library(shiny)
+library(timelinevis)
 
 ui <- fluidPage(
   timelinevisOutput("aaa"),

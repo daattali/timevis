@@ -30,6 +30,9 @@ HTMLWidgets.widget({
         // alias this
         var that = this;
 
+        // attach the timeline object to the DOM
+        container.timeline = timeline;
+
         // set the data items
         timeline.itemsData.add(x.items);
         timeline.fit({ animation : false });
@@ -50,34 +53,36 @@ HTMLWidgets.widget({
         }
 
         // set listeners to events the user wants to know about
-        if (typeof x.listen === "string") {
-          x.listen = [x.listen];
-        }
-        if (containsObject("selected", x.listen)) {
-          timeline.on('select', function (properties) {
-            Shiny.onInputChange(
-              elementId + "_selected",
-              properties.items
-            );
-          });
-        }
-        if (containsObject("window", x.listen)) {
-          timeline.on('rangechanged', function (properties) {
-            var timelineWindow = timeline.getWindow();
-            Shiny.onInputChange(
-              elementId + "_window",
-              [timelineWindow.start, timelineWindow.end]
-            );
-          });
-        }
-        if (containsObject("data", x.listen)) {
-          // TODO due to a bug in shiny, this isn't sending the correct data
-          timeline.itemsData.on('*', function (event, properties, senderId) {
-            Shiny.onInputChange(
-              elementId + "_data",
-              timeline.itemsData.get()
-            );
-          });
+        if (HTMLWidgets.shinyMode){
+          if (typeof x.listen === "string") {
+            x.listen = [x.listen];
+          }
+          if (containsObject("selected", x.listen)) {
+            timeline.on('select', function (properties) {
+              Shiny.onInputChange(
+                elementId + "_selected",
+                properties.items
+              );
+            });
+          }
+          if (containsObject("window", x.listen)) {
+            timeline.on('rangechanged', function (properties) {
+              var timelineWindow = timeline.getWindow();
+              Shiny.onInputChange(
+                elementId + "_window",
+                [timelineWindow.start, timelineWindow.end]
+              );
+            });
+          }
+          if (containsObject("data", x.listen)) {
+            // TODO due to a bug in shiny, this isn't sending the correct data
+            timeline.itemsData.on('*', function (event, properties, senderId) {
+              Shiny.onInputChange(
+                elementId + "_data" + ":timelinevisDF",
+                timeline.itemsData.get()
+              );
+            });
+          }
         }
 
         // set the custom configuration options
@@ -102,9 +107,11 @@ HTMLWidgets.widget({
           start : range.start.valueOf() - interval * percentage,
           end :   range.end.valueOf()   + interval * percentage
         });
-      },
-
-      timeline : timeline
+      }
     };
   }
 });
+
+if (HTMLWidgets.shinyMode){
+  //Shiny.addCustomMessageHandler();
+}

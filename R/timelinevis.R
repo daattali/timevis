@@ -107,7 +107,7 @@ addCustomTime <- function() {
 
 }
 
-fitWindow <- function() {
+fitWindow <- function(options) {
 
 }
 
@@ -133,4 +133,10 @@ setSelection <- function() {
 
 setWindow <- function() {
 
+}
+
+.onLoad <- function(libname, pkgname) {
+  shiny::registerInputHandler("timelinevisDF", function(data, ...) {
+    jsonlite::fromJSON(jsonlite::toJSON(data, auto_unbox = TRUE))
+  })
 }
