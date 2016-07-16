@@ -95,44 +95,72 @@ dataframeToD3 <- function(df) {
   apply(df, 1, function(row) as.list(row[!is.na(row)]))
 }
 
-addItem <- function() {
-
+addItem <- function(id, data) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:addItem", message)
 }
 
-removeItem <- function() {
-
+addItems <- function(id, data) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  message[['data']] <- dataframeToD3(message[['data']])
+  session$sendCustomMessage("timelinevis:addItems", message)
 }
 
-addCustomTime <- function() {
-
+removeItem <- function(id, itemId) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:removeItem", message)
 }
 
-fitWindow <- function(options) {
-
+addCustomTime <- function(id, time, itemId) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:addCustomTime", message)
 }
 
-centerTime <- function() {
-
+removeCustomTime <- function(id, itemId) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:removeCustomTime", message)
 }
 
-removeCustomTime <- function() {
-
+fitWindow <- function(id, options) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:fitWindow", message)
 }
 
-setItems <- function() {
-
+centerTime <- function(id, time, options) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:centerTime", message)
 }
 
-setOptions <- function() {
-
+setItems <- function(id, data) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  message[['data']] <- dataframeToD3(message[['data']])
+  session$sendCustomMessage("timelinevis:setItems", message)
 }
 
-setSelection <- function() {
-
+setOptions <- function(id, options) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:setOptions", message)
 }
 
-setWindow <- function() {
+setSelection <- function(id, itemId, options) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:setSelection", message)
+}
 
+setWindow <- function(id, start, end, options) {
+  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
+  session <- shiny::getDefaultReactiveDomain()
+  session$sendCustomMessage("timelinevis:setWindow", message)
 }
 
 .onLoad <- function(libname, pkgname) {

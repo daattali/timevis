@@ -75,7 +75,6 @@ HTMLWidgets.widget({
             });
           }
           if (containsObject("data", x.listen)) {
-            // TODO due to a bug in shiny, this isn't sending the correct data
             timeline.itemsData.on('*', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_data" + ":timelinevisDF",
@@ -112,6 +111,85 @@ HTMLWidgets.widget({
   }
 });
 
+// Attach message handlers if in shiny mode (these correspond to API)
 if (HTMLWidgets.shinyMode){
-  //Shiny.addCustomMessageHandler();
+
+  Shiny.addCustomMessageHandler("timelinevis:addItem", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.itemsData.add(message.data);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:addItems", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.itemsData.add(message.data);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:removeItem", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.itemsData.remove(message.itemId);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:addCustomTime", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.addCustomTime(message.time, message.itemId);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:removeCustomTime", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.removeCustomTime(message.itemId);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:fitWindow", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.fit(message.options);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:centerTime", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.moveTo(message.time, message.options);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:setItems", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.itemsData.clear();
+      el.timeline.itemsData.add(message.data);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:setOptions", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.setOptions(message.options);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:setSelection", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.setSelection(message.itemId, message.options);
+    }
+  });
+
+  Shiny.addCustomMessageHandler("timelinevis:setWindow", function(message) {
+    var el = document.getElementById(message.id);
+    if (el) {
+      el.timeline.setWindow(message.start, message.end, message.options);
+    }
+  });
+
 }
