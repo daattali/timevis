@@ -16,6 +16,10 @@ timelinevis <- function(
   width = NULL, height = NULL, elementId = NULL,
   ...) {
 
+  if (missing(data)) {
+    data <- data.frame()
+  }
+
   items <- dataframeToD3(data)
 
   # forward options using x
@@ -28,6 +32,11 @@ timelinevis <- function(
 
   x <- c(x, list(...))
 
+  deps <- list(
+    rmarkdown::html_dependency_jquery(),
+    rmarkdown::html_dependency_bootstrap("default")
+  )
+
   # create widget
   htmlwidgets::createWidget(
     name = 'timelinevis',
@@ -35,7 +44,8 @@ timelinevis <- function(
     width = width,
     height = height,
     package = 'timelinevis',
-    elementId = elementId
+    elementId = elementId,
+    dependencies = deps
   )
 }
 
@@ -78,14 +88,12 @@ timelinevis_html <- function(id, style, class, ...){
       htmltools::tags$button(
         type = "button",
         class = "btn btn-default btn-lg zoom-in",
-        shiny::icon("search-plus", class = "zoom-icon fa-fw"),
-        shiny::span(class = "zoom-text", "+")
+        "+"
       ),
       htmltools::tags$button(
         type = "button",
         class = "btn btn-default btn-lg zoom-out",
-        shiny::icon("search-minus", class = "zoom-icon fa-fw"),
-        shiny::span(class = "zoom-text", "-")
+        "-"
       )
     )
   )

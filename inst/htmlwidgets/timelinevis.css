@@ -18,17 +18,8 @@
 .timelinevis.html-widget .zoom-menu.show-zoom {
   display: block;
 }
-.timelinevis.html-widget .zoom-menu.shiny-mode .btn {
-  padding: 2px;
+.timelinevis.html-widget .zoom-menu .btn {
+  padding: 2px 7px;
   background: #FDFDFD;
   box-shadow: 0 0 2px #ddd;
-}
-.timelinevis.html-widget .zoom-menu.shiny-mode .zoom-text {
-  display: none;
-}
-.timelinevis.html-widget .zoom-menu.no-shiny-mode .btn {
-  margin: 0;
-}
-.timelinevis.html-widget .zoom-menu.no-shiny-mode .zoom-icon {
-  display: none;
 }
