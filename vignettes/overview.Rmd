@@ -1,0 +1,20 @@
+---
+title: "Package timelinevis"
+author: "Dean Attali"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Package timelinevis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+  ```{r setup, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
+```
+
+# timelinevis
+
+[![Build Status](https://travis-ci.org/daattali/timelinevis.svg?branch=master)](https://travis-ci.org/daattali/timelinevis)
+[![CRAN version](http://www.r-pkg.org/badges/version/timelinevis)](https://cran.r-project.org/package=timelinevis)
+

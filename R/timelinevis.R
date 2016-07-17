@@ -100,6 +100,9 @@ timelinevis_html <- function(id, style, class, ...){
 }
 
 dataframeToD3 <- function(df) {
+  if (missing(df)) {
+    return(list())
+  }
   apply(df, 1, function(row) as.list(row[!is.na(row)]))
 }
 
