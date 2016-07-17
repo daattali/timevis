@@ -2,6 +2,7 @@ library(shiny)
 library(timelinevis)
 
 ui <- fluidPage(
+
   timelinevisOutput("aaa"),actionButton("vv","vv"),actionButton("nnn","nnn"),
   timelinevisOutput("bbb", width = "50%")
 )
@@ -9,12 +10,12 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   output$aaa <- renderTimelinevis(timelinevis(
     myitems,
-    editable = TRUE,
-    multiselect=TRUE,
     listen = c("selected","window", "data")
   ))
-  output$bbb <- renderTimelinevis(timelinevis(myitems2,showZoom = FALSE,
-                                              listen=c("a","bb")))
+  output$bbb <- renderTimelinevis(timelinevis(
+    myitems2,showZoom = FALSE,
+    options = list(editable=TRUE,clickToUse=T),
+    listen=c("a","bb")))
 observeEvent(input$vv, {
   addItem("aaa", list(id = "6", title="fff",content="AAAA", start="2013-04-08"))
   addItems("aaa", data.frame(id=8:9,content=c("vvvv","zzxc"),start=c("2013-05-10","2013-03-03")))

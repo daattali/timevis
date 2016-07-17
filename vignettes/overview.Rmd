@@ -13,7 +13,7 @@ vignette: >
 knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 ```
 
-# timelinevis
+# timelinevis - Create a timeline visualization in R
 
 [![Build Status](https://travis-ci.org/daattali/timelinevis.svg?branch=master)](https://travis-ci.org/daattali/timelinevis)
 [![CRAN version](http://www.r-pkg.org/badges/version/timelinevis)](https://cran.r-project.org/package=timelinevis)

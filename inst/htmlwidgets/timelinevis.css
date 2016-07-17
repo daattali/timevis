@@ -19,7 +19,9 @@
   display: block;
 }
 .timelinevis.html-widget .zoom-menu .btn {
-  padding: 2px 7px;
+  padding: 0;
+  width: 30px;
+  height: 30px;
   background: #FDFDFD;
   box-shadow: 0 0 2px #ddd;
 }

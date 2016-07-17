@@ -1,6 +1,7 @@
 /*****************************************************************************/
 /* Dean Attali 2016                                                          */
-/* timelinevis - a timeline visualization for R using htmlwidgets and vis.js */
+/* timelinevis                                                               */
+/* Create timeline visualizations in R using htmlwidgets and vis.js          */
 /*****************************************************************************/
 
 // Check if an array contains an element
@@ -47,13 +48,8 @@ HTMLWidgets.widget({
         if (x.showZoom) {
           var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
           zoomMenu.className += " show-zoom";
-          if (HTMLWidgets.shinyMode) {
-            zoomMenu.className += " shiny-mode";
-          } else {
-            zoomMenu.className += " no-shiny-mode";
-          }
           zoomMenu.getElementsByClassName("zoom-in")[0]
-            .onclick =function(ev) { that.zoom(-0.2); };
+            .onclick = function(ev) { that.zoom(-0.2); };
           zoomMenu.getElementsByClassName("zoom-out")[0]
             .onclick = function(ev) { that.zoom(0.2); };
         }
@@ -91,13 +87,14 @@ HTMLWidgets.widget({
         }
 
         // set the custom configuration options
-        delete x['items'];
-        delete x['showZoom'];
-        delete x['listen'];
-        if (x['height'] === null) {
-          delete x['height'];
+        if (Array === x.options.constructor) {
+          x['options'] = {};
         }
-        timeline.setOptions(x);
+        if (x['height'] !== null &&
+            typeof x['options']['height'] === "undefined") {
+          x['options']['height'] = x['height'];
+        }
+        timeline.setOptions(x.options);
       },
 
       resize : function(width, height) {

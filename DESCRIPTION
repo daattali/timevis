@@ -1,18 +1,24 @@
 Package: timelinevis
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
+Title: Create Timeline Visualizations in R
+Version: 0.1
 Authors@R: person("Dean", "Attali", email = "daattali@gmail.com",
     role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Create rich and fully interactive timeline visualizations.
+    Timelines can be included in Shiny apps and R markdown documents, or viewed
+    from the R console and RStudio Viewer. Includes an extensive API to
+    manipulate a timeline after creation, and supports getting data out of the
+    visualization into R. Based on the 'vis.js' Timeline module and the
+    'htmlwidgets' R package.
 URL: https://github.com/daattali/timelinevis
 BugReports: https://github.com/daattali/timelinevis/issues
 Depends:
     R (>= 3.1.0)
 Imports:
     htmltools (>= 0.2.6),
-    shiny,
-    htmlwidgets,
-    rmarkdown
+    htmlwidgets (>= 0.6),
+    jsonlite,
+    rmarkdown,
+    shiny
 Suggests:
     knitr (>= 1.7),
     testthat (>= 0.9.1),
