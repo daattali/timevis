@@ -6,8 +6,28 @@
 \alias{timelinevis-package}
 \title{Create a timeline visualization}
 \usage{
-timelinevis(data, showZoom = TRUE, listen = NULL, width = NULL,
-  height = NULL, elementId = NULL, ...)
+timelinevis(data, showZoom = TRUE, listen, options, width = NULL,
+  height = NULL, elementId = NULL)
+}
+\arguments{
+\item{options}{Any extra initialization options
+any function argument must be wrapped in htmlwidgets::JS()
+http://visjs.org/docs/timeline/#Configuration_Options}
+
+\item{width}{Fixed width for timeline (in css units). Ignored when used in a
+Shiny app -- use the \code{width} parameter in \code{timelinevisOutput}.
+It is recommended to not use this parameter since the widget knows how to
+adjust its width automatically.}
+
+\item{height}{Fixed height for timeline (in css units). It is recommended to
+not use this parameter since the widget knows how to adjust its height
+automatically.}
+
+\item{elementId}{Use an explicit element ID for the widget (rather than an
+automatically generated one). Ignored when used in a Shiny app.}
+}
+\value{
+A timeline visualization \code{htmlwidgets} object
 }
 \description{
 \code{timelinevis} lets you create rich and fully interactive timeline visualizations.
@@ -21,7 +41,12 @@ View a \href{http://daattali.com/shiny/timelinevis-demo/}{demo Shiny app}
 or see the full \href{https://github.com/daattali/timelinevis}{README} on
 GitHub.
 }
-\details{
-... any function argument must be wrapped in htmlwidgets::JS()
+\examples{
+timelinevis()
+timelinevis()
+
+}
+\seealso{
+\href{http://daattali.com/shiny/timelinevis-demo/}{Demo Shiny app}
 }
 

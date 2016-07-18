@@ -17,8 +17,6 @@ containsObject = function(obj, list) {
   return false;
 }
 
-// http://visjs.org/docs/timeline/
-
 HTMLWidgets.widget({
 
   name : 'timelinevis',
@@ -43,6 +41,7 @@ HTMLWidgets.widget({
         // set the data items
         timeline.itemsData.add(x.items);
         timeline.fit({ animation : false });
+        that.zoom(0.2, false);
 
         // Show and initialize the zoom buttons
         if (x.showZoom) {
@@ -102,15 +101,22 @@ HTMLWidgets.widget({
       },
 
       // zoom the timeline in/out
-      zoom : function(percentage) {
+      zoom : function(percentage, animation) {
+        if (typeof animation === "undefined") {
+          animation = true;
+        }
         var range = timeline.getWindow();
         var interval = range.end - range.start;
 
         timeline.setWindow({
-          start : range.start.valueOf() - interval * percentage,
-          end :   range.end.valueOf()   + interval * percentage
+          start   : range.start.valueOf() - interval * percentage,
+          end     : range.end.valueOf()   + interval * percentage,
+          animation : animation
         });
-      }
+      },
+
+      // export the timeline object for others to use if they want to
+      timeline : timeline
     };
   }
 });

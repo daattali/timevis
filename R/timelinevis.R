@@ -14,15 +14,22 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #' or see the full \href{https://github.com/daattali/timelinevis}{README} on
 #' GitHub.
 #'
-#' @param data
-#' @param showZoom
-#' @param listen
-#' @param options Any extra initialization options
-#' any function argument must be wrapped in htmlwidgets::JS()
-#' http://visjs.org/docs/timeline/#Configuration_Options
+#' @param data A data.frame containing the timeline items. 10 variables, NA
+#' if an item doesn't have one TODO
+#' @param showZoom If \code{TRUE} (default) then include "Zoom In"/"Zoom Out"
+#' buttons on the widget.
+#' @param listen TODO selected window data
+#' See the examples section below to see example usage.
+#' @param options A named list containing any extra configuration options to
+#' customize the timeline. All available options can be found in the
+#' \href{http://visjs.org/docs/timeline/#Configuration_Options}{official
+#' Timeline documentation}. Note that any options that define a JavaScript
+#' function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
+#' examples section below to see example usage.
 #' @param width Fixed width for timeline (in css units). Ignored when used in a
-#' Shiny app -- use the \code{width} parameter in \code{timelinevisOutput}.
-#' It is recommended to not use this parameter since the widget knows how to
+#' Shiny app -- use the \code{width} parameter in
+#' \code{\link[timelinevis]{timelinevisOutput}}.
+#' It is not recommended to use this parameter because the widget knows how to
 #' adjust its width automatically.
 #' @param height Fixed height for timeline (in css units). It is recommended to
 #' not use this parameter since the widget knows how to adjust its height
@@ -33,8 +40,60 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #' @return A timeline visualization \code{htmlwidgets} object
 #'
 #' @examples
+#' # For complete examples, see http://daattali.com/shiny/timelinevis-demo/
+#'
+#' # Most basic
 #' timelinevis()
-#' timelinevis()
+#'
+#' # Minimal data
+#' timelinevis(
+#'   data.frame(id = 1:2,
+#'              content = c("one", "two"),
+#'              start = c("2016-01-10", "2016-01-12"))
+#' )
+#'
+#' # Hide the zoom buttons, allow items to be editable (add/remove/modify)
+#' timelinevis(
+#'   data.frame(id = 1:2,
+#'              content = c("one", "two"),
+#'              start = c("2016-01-10", "2016-01-12")),
+#'   showZoom = FALSE,
+#'   options = list(editable = TRUE, height = "400px")
+#' )
+#'
+#' # Items can be a single point or a range, and can contain HTML
+#' timelinevis(
+#'   data.frame(id = 1:2,
+#'              content = c("one", "two<br><h3>HTML is supported</h3>"),
+#'              start = c("2016-01-10", "2016-01-18"),
+#'              end = c("2016-01-14", NA))
+#' )
+#'
+#' # Alternative look for each item
+#' timelinevis(
+#'   data.frame(id = 1:2,
+#'              content = c("one", "two"),
+#'              start = c("2016-01-10", "2016-01-18"),
+#'              end = c("2016-01-14", NA),
+#'              type = c("background", "point"))
+#' )
+#'
+#' # Using a function in the configuration options
+#' timelinevis(
+#'   data.frame(id = 1,
+#'              content = "double click anywhere<br>in the timeline<br>to add an item",
+#'              start = "2016-01-01"),
+#'   options = list(
+#'     editable = TRUE,
+#'     onAdd = htmlwidgets::JS('function(item, callback) {
+#'       alert("An item was added");
+#'       callback(item);
+#'     }')
+#'   )
+#' )
+#'
+#' # Using the 'listen' parameter to get data from the widget into Shiny
+#' TODO
 #'
 #' @seealso \href{http://daattali.com/shiny/timelinevis-demo/}{Demo Shiny app}
 #' @export
@@ -103,12 +162,12 @@ timelinevis <- function(data, showZoom = TRUE, listen, options,
 #' Output and render functions for using timelinevis within Shiny
 #' applications and interactive Rmd documents.
 #'
-#' TODO height ignored, pass it to timeline()
-#'
 #' @param outputId output variable to read from
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
-#'   string and have \code{'px'} appended.
+#'   string and have \code{'px'} appended. \code{height} will probably not
+#'   have an effect; instead, use the \code{height} parameter in
+#'   \code{\link[timelinevis]{timelinevis}}.
 #' @param expr An expression that generates a timelinevis
 #' @param env The environment in which to evaluate \code{expr}.
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
@@ -148,85 +207,4 @@ timelinevis_html <- function(id, style, class, ...){
       )
     )
   )
-}
-
-dataframeToD3 <- function(df) {
-  if (missing(df)) {
-    return(list())
-  }
-  apply(df, 1, function(row) as.list(row[!is.na(row)]))
-}
-
-addItem <- function(id, data) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:addItem", message)
-}
-
-addItems <- function(id, data) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  message[['data']] <- dataframeToD3(message[['data']])
-  session$sendCustomMessage("timelinevis:addItems", message)
-}
-
-removeItem <- function(id, itemId) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:removeItem", message)
-}
-
-addCustomTime <- function(id, time, itemId) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:addCustomTime", message)
-}
-
-removeCustomTime <- function(id, itemId) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:removeCustomTime", message)
-}
-
-fitWindow <- function(id, options) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:fitWindow", message)
-}
-
-centerTime <- function(id, time, options) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:centerTime", message)
-}
-
-setItems <- function(id, data) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  message[['data']] <- dataframeToD3(message[['data']])
-  session$sendCustomMessage("timelinevis:setItems", message)
-}
-
-setOptions <- function(id, options) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:setOptions", message)
-}
-
-setSelection <- function(id, itemId, options) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:setSelection", message)
-}
-
-setWindow <- function(id, start, end, options) {
-  message <- Filter(function(x) !is.symbol(x), as.list(environment()))
-  session <- shiny::getDefaultReactiveDomain()
-  session$sendCustomMessage("timelinevis:setWindow", message)
-}
-
-.onLoad <- function(libname, pkgname) {
-  shiny::registerInputHandler("timelinevisDF", function(data, ...) {
-    jsonlite::fromJSON(jsonlite::toJSON(data, auto_unbox = TRUE))
-  })
 }
