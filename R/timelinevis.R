@@ -1,4 +1,4 @@
-myitems <- data.frame(id=1:3,title=c(NA,"SFAD",NA),type=c("point","background","point"), content=c("item1","item 2", "item c"), group=c(1,2,1),className = c(NA, "aa", NA), start=c("2013-04-05", "2014-05-27", "2013-01-14"),end=c(NA, "2015-04-04", NA), stringsAsFactors = FALSE)
+myitems <- data.frame(id=1:3,editable=c(FALSE, FALSE, TRUE),title=c(NA,"SFAD","vv"),type=c("point","background","point"), content=c("item1","item 2", "item c"), group=c(1,2,1),className = c(NA, "aa", NA), start=c("2013-04-05", "2014-05-27", "2013-01-14"),end=c(NA, "2015-04-04", NA), stringsAsFactors = FALSE)
 myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2", "item c"), group=c(1,2,1),className = c(NA, "aa", NA), start=c("2016-07-11", "2016-07-13", "2016-07-14"),end=c(NA, "2016-07-15", NA), stringsAsFactors = FALSE)
 
 #' Create a timeline visualization
@@ -14,8 +14,38 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #' or see the full \href{https://github.com/daattali/timelinevis}{README} on
 #' GitHub.
 #'
-#' @param data A data.frame containing the timeline items. 10 variables, NA
-#' if an item doesn't have one TODO
+#' @param data A dataframe containing the timeline items. Each item on the
+#' timeline is represented by a row in the dataframe. \code{start} and
+#' \code{content} are required for each item, while the rest of the variables
+#' are optional (if you include a variable that is only used for some rows,
+#' you can use \code{NA} for the other rows). The supported variables are:
+#' \itemize{
+#'   \item{\code{\strong{start}}} - (required) The start date of the item, for
+#'   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
+#'   \item{\code{\strong{content}}} - (required) The contents of the item. This
+#'   can be plain text or HTML code.
+#'   \item{\code{\strong{end}}} - The end date of the item. The end date is
+#'   optional. If end date is provided, the item is displayed as a range. If
+#'   not, the item is displayed as a single point on the timeline.
+#'   \item{\code{\strong{id}}} - An id for the item. Using an id is not required
+#'   but highly recommended. An id is needed when removing or selecting items
+#'   (using \code{\link[timelinevis]{removeItem}} or
+#'   \code{\link[timelinevis]{setSelection}}).
+#'   \item{\code{\strong{type}}} - The type of the item. Can be 'box' (default),
+#'   'point', 'range', or 'background'. Types 'box' and 'point' need only a
+#'   start date, types 'range' and 'background' need both a start and end date.
+#'   \item{\code{\strong{title}}} - Add a title for the item, displayed when
+#'   hovering the mouse over the item. The title can only contain plain text.
+#'   \item{\code{\strong{editable}}} - if \code{TRUE}, the item can be
+#'   manipulated with the mouse. Overrides the global \code{editable}
+#'   configuration option if it is set. An editable item can be removed or
+#'   have its start/end dates modified by clicking on it.
+#'   remove it or
+#'   \item{\code{\strong{className}}} - A className can be used to give items an
+#'   individual CSS style.
+#'   \item{\code{\strong{style}}} - A CSS text string to apply custom styling
+#'   for an individual item, for example \code{color: red;}.
+#' }
 #' @param showZoom If \code{TRUE} (default) then include "Zoom In"/"Zoom Out"
 #' buttons on the widget.
 #' @param listen TODO selected window data
@@ -42,17 +72,17 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #' @examples
 #' # For complete examples, see http://daattali.com/shiny/timelinevis-demo/
 #'
-#' # Most basic
+#' ### Most basic
 #' timelinevis()
 #'
-#' # Minimal data
+#' ### Minimal data
 #' timelinevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
 #'              start = c("2016-01-10", "2016-01-12"))
 #' )
 #'
-#' # Hide the zoom buttons, allow items to be editable (add/remove/modify)
+#' ### Hide the zoom buttons, allow items to be editable (add/remove/modify)
 #' timelinevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
@@ -61,7 +91,7 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #'   options = list(editable = TRUE, height = "400px")
 #' )
 #'
-#' # Items can be a single point or a range, and can contain HTML
+#' ### Items can be a single point or a range, and can contain HTML
 #' timelinevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two<br><h3>HTML is supported</h3>"),
@@ -69,7 +99,7 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #'              end = c("2016-01-14", NA))
 #' )
 #'
-#' # Alternative look for each item
+#' ### Alternative look for each item
 #' timelinevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
@@ -78,7 +108,7 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #'              type = c("background", "point"))
 #' )
 #'
-#' # Using a function in the configuration options
+#' ### Using a function in the configuration options
 #' timelinevis(
 #'   data.frame(id = 1,
 #'              content = "double click anywhere<br>in the timeline<br>to add an item",
@@ -92,7 +122,7 @@ myitems2 <- data.frame(id=1:3,title=c(NA,"SFAD",NA), content=c("item1","item 2",
 #'   )
 #' )
 #'
-#' # Using the 'listen' parameter to get data from the widget into Shiny
+#' ### Using the 'listen' parameter to get data from the widget into Shiny
 #' TODO
 #'
 #' @seealso \href{http://daattali.com/shiny/timelinevis-demo/}{Demo Shiny app}
@@ -128,7 +158,7 @@ timelinevis <- function(data, showZoom = TRUE, listen, options,
          call. = FALSE)
   }
 
-  items <- dataframeToD3(data)
+  items <- data
 
   # forward options using x
   x = list(

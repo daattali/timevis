@@ -18,7 +18,6 @@ addItem <- function(id, data) {
 addItems <- function(id, data) {
   message <- Filter(function(x) !is.symbol(x), as.list(environment()))
   session <- shiny::getDefaultReactiveDomain()
-  message[['data']] <- dataframeToD3(message[['data']])
   session$sendCustomMessage("timelinevis:addItems", message)
 }
 
@@ -61,7 +60,6 @@ centerTime <- function(id, time, options) {
 setItems <- function(id, data) {
   message <- Filter(function(x) !is.symbol(x), as.list(environment()))
   session <- shiny::getDefaultReactiveDomain()
-  message[['data']] <- dataframeToD3(message[['data']])
   session$sendCustomMessage("timelinevis:setItems", message)
 }
 

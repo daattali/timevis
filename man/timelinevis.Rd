@@ -10,13 +10,56 @@ timelinevis(data, showZoom = TRUE, listen, options, width = NULL,
   height = NULL, elementId = NULL)
 }
 \arguments{
-\item{options}{Any extra initialization options
-any function argument must be wrapped in htmlwidgets::JS()
-http://visjs.org/docs/timeline/#Configuration_Options}
+\item{data}{A dataframe containing the timeline items. Each item on the
+timeline is represented by a row in the dataframe. \code{start} and
+\code{content} are required for each item, while the rest of the variables
+are optional (if you include a variable that is only used for some rows,
+you can use \code{NA} for the other rows). The supported variables are:
+\itemize{
+  \item{\code{\strong{start}}} - (required) The start date of the item, for
+  example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
+  \item{\code{\strong{content}}} - (required) The contents of the item. This
+  can be plain text or HTML code.
+  \item{\code{\strong{end}}} - The end date of the item. The end date is
+  optional. If end date is provided, the item is displayed as a range. If
+  not, the item is displayed as a single point on the timeline.
+  \item{\code{\strong{id}}} - An id for the item. Using an id is not required
+  but highly recommended. An id is needed when removing or selecting items
+  (using \code{\link[timelinevis]{removeItem}} or
+  \code{\link[timelinevis]{setSelection}}).
+  \item{\code{\strong{type}}} - The type of the item. Can be 'box' (default),
+  'point', 'range', or 'background'. Types 'box' and 'point' need only a
+  start date, types 'range' and 'background' need both a start and end date.
+  \item{\code{\strong{title}}} - Add a title for the item, displayed when
+  hovering the mouse over the item. The title can only contain plain text.
+  \item{\code{\strong{editable}}} - if \code{TRUE}, the item can be
+  manipulated with the mouse. Overrides the global \code{editable}
+  configuration option if it is set. An editable item can be removed or
+  have its start/end dates modified by clicking on it.
+  remove it or
+  \item{\code{\strong{className}}} - A className can be used to give items an
+  individual CSS style.
+  \item{\code{\strong{style}}} - A CSS text string to apply custom styling
+  for an individual item, for example \code{color: red;}.
+}}
+
+\item{showZoom}{If \code{TRUE} (default) then include "Zoom In"/"Zoom Out"
+buttons on the widget.}
+
+\item{listen}{TODO selected window data
+See the examples section below to see example usage.}
+
+\item{options}{A named list containing any extra configuration options to
+customize the timeline. All available options can be found in the
+\href{http://visjs.org/docs/timeline/#Configuration_Options}{official
+Timeline documentation}. Note that any options that define a JavaScript
+function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
+examples section below to see example usage.}
 
 \item{width}{Fixed width for timeline (in css units). Ignored when used in a
-Shiny app -- use the \code{width} parameter in \code{timelinevisOutput}.
-It is recommended to not use this parameter since the widget knows how to
+Shiny app -- use the \code{width} parameter in
+\code{\link[timelinevis]{timelinevisOutput}}.
+It is not recommended to use this parameter because the widget knows how to
 adjust its width automatically.}
 
 \item{height}{Fixed height for timeline (in css units). It is recommended to
@@ -42,8 +85,60 @@ or see the full \href{https://github.com/daattali/timelinevis}{README} on
 GitHub.
 }
 \examples{
+# For complete examples, see http://daattali.com/shiny/timelinevis-demo/
+
+### Most basic
 timelinevis()
-timelinevis()
+
+### Minimal data
+timelinevis(
+  data.frame(id = 1:2,
+             content = c("one", "two"),
+             start = c("2016-01-10", "2016-01-12"))
+)
+
+### Hide the zoom buttons, allow items to be editable (add/remove/modify)
+timelinevis(
+  data.frame(id = 1:2,
+             content = c("one", "two"),
+             start = c("2016-01-10", "2016-01-12")),
+  showZoom = FALSE,
+  options = list(editable = TRUE, height = "400px")
+)
+
+### Items can be a single point or a range, and can contain HTML
+timelinevis(
+  data.frame(id = 1:2,
+             content = c("one", "two<br><h3>HTML is supported</h3>"),
+             start = c("2016-01-10", "2016-01-18"),
+             end = c("2016-01-14", NA))
+)
+
+### Alternative look for each item
+timelinevis(
+  data.frame(id = 1:2,
+             content = c("one", "two"),
+             start = c("2016-01-10", "2016-01-18"),
+             end = c("2016-01-14", NA),
+             type = c("background", "point"))
+)
+
+### Using a function in the configuration options
+timelinevis(
+  data.frame(id = 1,
+             content = "double click anywhere<br>in the timeline<br>to add an item",
+             start = "2016-01-01"),
+  options = list(
+    editable = TRUE,
+    onAdd = htmlwidgets::JS('function(item, callback) {
+      alert("An item was added");
+      callback(item);
+    }')
+  )
+)
+
+### Using the 'listen' parameter to get data from the widget into Shiny
+TODO
 
 }
 \seealso{

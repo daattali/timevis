@@ -39,7 +39,8 @@ HTMLWidgets.widget({
         container.timeline = timeline;
 
         // set the data items
-        timeline.itemsData.add(x.items);
+        var items = HTMLWidgets.dataframeToD3(x.items);
+        timeline.itemsData.add(items);
         timeline.fit({ animation : false });
         that.zoom(0.2, false);
 
@@ -136,7 +137,8 @@ if (HTMLWidgets.shinyMode){
     "timelinevis:addItems", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
-        el.timeline.itemsData.add(message.data);
+        var items = HTMLWidgets.dataframeToD3(message.data);
+        el.timeline.itemsData.add(items);
       }
   });
 
@@ -185,7 +187,8 @@ if (HTMLWidgets.shinyMode){
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.itemsData.clear();
-        el.timeline.itemsData.add(message.data);
+        var items = HTMLWidgets.dataframeToD3(message.data);
+        el.timeline.itemsData.add(items);
       }
   });
 
