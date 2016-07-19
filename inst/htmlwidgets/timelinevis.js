@@ -4,19 +4,6 @@
 /* Create timeline visualizations in R using htmlwidgets and vis.js          */
 /*****************************************************************************/
 
-// Check if an array contains an element
-containsObject = function(obj, list) {
-  if (list === null) return false;
-  var i;
-  for (i = 0; i < list.length; i++) {
-    if (list[i] === obj) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 HTMLWidgets.widget({
 
   name : 'timelinevis',
@@ -39,8 +26,7 @@ HTMLWidgets.widget({
         container.timeline = timeline;
 
         // set the data items
-        var items = HTMLWidgets.dataframeToD3(x.items);
-        timeline.itemsData.add(items);
+        timeline.itemsData.add(x.items);
         timeline.fit({ animation : false });
         that.zoom(0.2, false);
 
@@ -56,33 +42,42 @@ HTMLWidgets.widget({
 
         // set listeners to events the user wants to know about
         if (HTMLWidgets.shinyMode){
-          if (typeof x.listen === "string") {
-            x.listen = [x.listen];
-          }
-          if (containsObject("selected", x.listen)) {
+          if (x.getSelected) {
             timeline.on('select', function (properties) {
               Shiny.onInputChange(
                 elementId + "_selected",
                 properties.items
               );
             });
+            // Also send the initial data when the widget starts
+            Shiny.onInputChange(
+              elementId + "_selected",
+              timeline.getSelection()
+            );
           }
-          if (containsObject("window", x.listen)) {
+          if (x.getWindow) {
             timeline.on('rangechanged', function (properties) {
-              var timelineWindow = timeline.getWindow();
               Shiny.onInputChange(
                 elementId + "_window",
-                [timelineWindow.start, timelineWindow.end]
+                [timeline.getWindow().start, timeline.getWindow().end]
               );
             });
+            Shiny.onInputChange(
+              elementId + "_window",
+              [timeline.getWindow().start, timeline.getWindow().end]
+            );
           }
-          if (containsObject("data", x.listen)) {
+          if (x.getData) {
             timeline.itemsData.on('*', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_data" + ":timelinevisDF",
                 timeline.itemsData.get()
               );
             });
+            Shiny.onInputChange(
+              elementId + "_data" + ":timelinevisDF",
+              timeline.itemsData.get()
+            );
           }
         }
 
@@ -137,7 +132,7 @@ if (HTMLWidgets.shinyMode){
     "timelinevis:addItems", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
-        var items = HTMLWidgets.dataframeToD3(message.data);
+        var items = message.data;
         el.timeline.itemsData.add(items);
       }
   });
@@ -187,7 +182,7 @@ if (HTMLWidgets.shinyMode){
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.itemsData.clear();
-        var items = HTMLWidgets.dataframeToD3(message.data);
+        var items = message.data;
         el.timeline.itemsData.add(items);
       }
   });

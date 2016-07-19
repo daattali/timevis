@@ -18,3 +18,6 @@ knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 [![Build Status](https://travis-ci.org/daattali/timelinevis.svg?branch=master)](https://travis-ci.org/daattali/timelinevis)
 [![CRAN version](http://www.r-pkg.org/badges/version/timelinevis)](https://cran.r-project.org/package=timelinevis)
 
+TODO: readme
+
+TODO: shiny example app

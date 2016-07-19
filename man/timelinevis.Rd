@@ -6,8 +6,9 @@
 \alias{timelinevis-package}
 \title{Create a timeline visualization}
 \usage{
-timelinevis(data, showZoom = TRUE, listen, options, width = NULL,
-  height = NULL, elementId = NULL)
+timelinevis(data, showZoom = TRUE, getSelected = FALSE, getData = FALSE,
+  getWindow = FALSE, options, width = NULL, height = NULL,
+  elementId = NULL)
 }
 \arguments{
 \item{data}{A dataframe containing the timeline items. Each item on the
@@ -26,7 +27,8 @@ you can use \code{NA} for the other rows). The supported variables are:
   \item{\code{\strong{id}}} - An id for the item. Using an id is not required
   but highly recommended. An id is needed when removing or selecting items
   (using \code{\link[timelinevis]{removeItem}} or
-  \code{\link[timelinevis]{setSelection}}).
+  \code{\link[timelinevis]{setSelection}}) or when requesting to return
+  selected items (using \code{\link[timelinevis]{getSelected}}).
   \item{\code{\strong{type}}} - The type of the item. Can be 'box' (default),
   'point', 'range', or 'background'. Types 'box' and 'point' need only a
   start date, types 'range' and 'background' need both a start and end date.
@@ -43,11 +45,29 @@ you can use \code{NA} for the other rows). The supported variables are:
   for an individual item, for example \code{color: red;}.
 }}
 
-\item{showZoom}{If \code{TRUE} (default) then include "Zoom In"/"Zoom Out"
+\item{showZoom}{If \code{TRUE} (default), then include "Zoom In"/"Zoom Out"
 buttons on the widget.}
 
-\item{listen}{TODO selected window data
-See the examples section below to see example usage.}
+\item{getSelected}{If \code{TRUE}, then the selected items will
+be accessible as a Shiny input. The input returns the ids of the selected
+items and will be updated every time a new
+item is selected by the user. The input name will be the timeline's id
+appended by "_selected". For example, if the timeline \code{outputId}
+is "mytimeline", then use \code{input$mytimeline_selected}.}
+
+\item{getData}{If \code{TRUE}, then the items data will be accessible as a
+Shiny input. The input returns a dataframe and will be updated every time
+an item is modified, added, or removed. The input name will be the timeline's
+id appended by "_data". For example, if the timeline \code{outputId} is
+"mytimeline", then use \code{input$mytimeline_data}.}
+
+\item{getWindow}{If \code{TRUE}, then the current visible window will be
+accessible as a Shiny input. The input returns a 2-element vector containing
+the minimum and maximum dates currently visible in the timeline. The input
+will be updated every time the window is updated (by zooming or moving).
+The input name will be the timeline's id appended by "_window". For example,
+if the timeline \code{outputId} is "mytimeline", then use
+\code{input$mytimeline_window}.}
 
 \item{options}{A named list containing any extra configuration options to
 customize the timeline. All available options can be found in the
@@ -85,7 +105,7 @@ or see the full \href{https://github.com/daattali/timelinevis}{README} on
 GitHub.
 }
 \examples{
-# For complete examples, see http://daattali.com/shiny/timelinevis-demo/
+# For more examples, see http://daattali.com/shiny/timelinevis-demo/
 
 ### Most basic
 timelinevis()
@@ -137,8 +157,57 @@ timelinevis(
   )
 )
 
-### Using the 'listen' parameter to get data from the widget into Shiny
-TODO
+### Having read-only and editable items together
+timelinevis(
+  data.frame(id = 1:2,
+             content = c("editable", "read-only"),
+             start = c("2016-01-01", "2016-01-18"),
+             editable = c(TRUE, FALSE),
+             style = c(NA, "background: red; color: white;"))
+)
+
+
+### Getting data out of the timeline into Shiny
+if (interactive()) {
+library(shiny)
+
+data <- data.frame(
+  id = 1:3,
+  start = c("2015-04-04", "2015-04-05 11:00:00", "2015-04-06 15:00:00"),
+  end = c("2015-04-08", NA, NA),
+  content = c("<h2>Vacation!!!</h2>", "Acupuncture", "Massage"),
+  style = c("color: red;", NA, NA)
+)
+
+ui <- fluidPage(
+  timelinevisOutput("appts"),
+  div("Selected items:", textOutput("selected", inline = TRUE)),
+  div("Visible window:", textOutput("window", inline = TRUE)),
+  tableOutput("table")
+)
+
+server <- function(input, output) {
+  output$appts <- renderTimelinevis(
+    timelinevis(
+      data, getSelected = TRUE, getData = TRUE, getWindow = TRUE,
+      options = list(editable = TRUE, multiselect = TRUE, align = "center")
+    )
+  )
+
+  output$selected <- renderText(
+    paste(input$appts_selected, collapse = " ")
+  )
+
+  output$window <- renderText(
+    paste(input$appts_window[1], "to", input$appts_window[2])
+  )
+
+  output$table <- renderTable(
+    input$appts_data
+  )
+}
+shinyApp(ui, server)
+}
 
 }
 \seealso{

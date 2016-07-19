@@ -30,4 +30,62 @@ is useful if you want to save an expression in a variable.}
 Output and render functions for using timelinevis within Shiny
 applications and interactive Rmd documents.
 }
+\examples{
+if (interactive()) {
+library(shiny)
+
+### Most basic example
+shinyApp(
+  ui = fluidPage(timelinevisOutput("timeline")),
+  server = function(input, output) {
+    output$timeline <- renderTimelinevis(
+      timelinevis()
+    )
+  }
+)
+
+
+### More advanced example
+data <- data.frame(
+  id = 1:3,
+  start = c("2015-04-04", "2015-04-05 11:00:00", "2015-04-06 15:00:00"),
+  end = c("2015-04-08", NA, NA),
+  content = c("<h2>Vacation!!!</h2>", "Acupuncture", "Massage"),
+  style = c("color: red;", NA, NA)
+)
+
+ui <- fluidPage(
+  timelinevisOutput("appts"),
+  div("Selected items:", textOutput("selected", inline = TRUE)),
+  div("Visible window:", textOutput("window", inline = TRUE)),
+  tableOutput("table")
+)
+
+server <- function(input, output) {
+  output$appts <- renderTimelinevis(
+    timelinevis(
+      data, getSelected = TRUE, getData = TRUE, getWindow = TRUE,
+      options = list(editable = TRUE, multiselect = TRUE, align = "center")
+    )
+  )
+
+  output$selected <- renderText(
+    paste(input$appts_selected, collapse = " ")
+  )
+
+  output$window <- renderText(
+    paste(input$appts_window[1], "to", input$appts_window[2])
+  )
+
+  output$table <- renderTable(
+    input$appts_data
+  )
+}
+shinyApp(ui, server)
+}
+
+}
+\seealso{
+\code{\link[timelinevis]{timelinevis}}.
+}
 
