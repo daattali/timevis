@@ -34,9 +34,9 @@ HTMLWidgets.widget({
           var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
           zoomMenu.className += " show-zoom";
           zoomMenu.getElementsByClassName("zoom-in")[0]
-            .onclick = function(ev) { that.zoom(-0.2); };
+            .onclick = function(ev) { that.zoomIn(x.zoomFactor); };
           zoomMenu.getElementsByClassName("zoom-out")[0]
-            .onclick = function(ev) { that.zoom(0.2); };
+            .onclick = function(ev) { that.zoomOut(x.zoomFactor); };
         }
 
         // set listeners to events the user wants to know about
@@ -96,16 +96,41 @@ HTMLWidgets.widget({
       },
 
       // zoom the timeline in/out
-      zoom : function(percentage, animation) {
+      // I had to work out the math on paper so that zooming in and then out
+      // will exactly negate each other
+      zoomIn : function(percentage, animation) {
         if (typeof animation === "undefined") {
           animation = true;
         }
         var range = timeline.getWindow();
-        var interval = range.end - range.start;
+        var start = range.start.valueOf();
+        var end = range.end.valueOf();
+        var interval = end - start;
+        var newInterval = interval / (1 + percentage);
+        var distance = (interval - newInterval) / 2;
+        var newStart = start + distance;
+        var newEnd = end - distance;
 
         timeline.setWindow({
-          start   : range.start.valueOf() - interval * percentage,
-          end     : range.end.valueOf()   + interval * percentage,
+          start   : newStart,
+          end     : newEnd,
+          animation : animation
+        });
+      },
+      zoomOut : function(percentage, animation) {
+        if (typeof animation === "undefined") {
+          animation = true;
+        }
+        var range = timeline.getWindow();
+        var start = range.start.valueOf();
+        var end = range.end.valueOf();
+        var interval = end - start;
+        var newStart = start - interval * percentage / 2;
+        var newEnd = end + interval * percentage / 2;
+
+        timeline.setWindow({
+          start   : newStart,
+          end     : newEnd,
           animation : animation
         });
       },

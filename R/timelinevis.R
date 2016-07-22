@@ -46,6 +46,12 @@
 #' }
 #' @param showZoom If \code{TRUE} (default), then include "Zoom In"/"Zoom Out"
 #' buttons on the widget.
+#' @param zoomFactor How much to zoom when zooming out. A zoom factor of 0.5
+#' means that when zooming out the timeline will show 50% more more content. For
+#' example, if the timeline currently shows 20 days, then after zooming out with
+#' a \code{zoomFactor} of 0.5, the timeline will show 30 days, and zooming out
+#' again will show 45 days. Similarly, zooming out from 20 days with a
+#' \code{zoomFactor} of 1 will results in showing 40 days.
 #' @param getSelected If \code{TRUE}, then the selected items will
 #' be accessible as a Shiny input. The input returns the ids of the selected
 #' items and will be updated every time a new
@@ -195,9 +201,9 @@
 #'
 #' @seealso \href{http://daattali.com/shiny/timelinevis-demo/}{Demo Shiny app}
 #' @export
-timelinevis <- function(data, showZoom = TRUE, getSelected = FALSE,
-                        getData = FALSE, getWindow = FALSE, options,
-                        width = NULL, height = NULL, elementId = NULL) {
+timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
+                        getSelected = FALSE, getData = FALSE, getWindow = FALSE,
+                        options, width = NULL, height = NULL, elementId = NULL) {
 
   # Validate the input data
   if (missing(data)) {
@@ -214,6 +220,10 @@ timelinevis <- function(data, showZoom = TRUE, getSelected = FALSE,
   }
   if (!is.bool(showZoom)) {
     stop("timelinevis: 'showZoom' must be either 'TRUE' or 'FALSE'",
+         call. = FALSE)
+  }
+  if (!is.numeric(zoomFactor) || length(zoomFactor) > 1 || zoomFactor <= 0) {
+    stop("timelinevis: 'zoomFactor' must be a positive number",
          call. = FALSE)
   }
   if (!is.bool(getSelected)) {
@@ -242,7 +252,7 @@ timelinevis <- function(data, showZoom = TRUE, getSelected = FALSE,
   x = list(
     items = items,
     showZoom = showZoom,
-    #zoomBy = 0.2, TODO
+    zoomFactor = zoomFactor,
     getSelected = getSelected,
     getData = getData,
     getWindow = getWindow,

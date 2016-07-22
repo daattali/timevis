@@ -6,9 +6,9 @@
 \alias{timelinevis-package}
 \title{Create a timeline visualization}
 \usage{
-timelinevis(data, showZoom = TRUE, getSelected = FALSE, getData = FALSE,
-  getWindow = FALSE, options, width = NULL, height = NULL,
-  elementId = NULL)
+timelinevis(data, showZoom = TRUE, zoomFactor = 0.5, getSelected = FALSE,
+  getData = FALSE, getWindow = FALSE, options, width = NULL,
+  height = NULL, elementId = NULL)
 }
 \arguments{
 \item{data}{A dataframe containing the timeline items. Each item on the
@@ -47,6 +47,13 @@ you can use \code{NA} for the other rows). The supported variables are:
 
 \item{showZoom}{If \code{TRUE} (default), then include "Zoom In"/"Zoom Out"
 buttons on the widget.}
+
+\item{zoomFactor}{How much to zoom when zooming out. A zoom factor of 0.5
+means that when zooming out the timeline will show 50% more more content. For
+example, if the timeline currently shows 20 days, then after zooming out with
+a \code{zoomFactor} of 0.5, the timeline will show 30 days, and zooming out
+again will show 45 days. Similarly, zooming out from 20 days with a
+\code{zoomFactor} of 1 will results in showing 40 days.}
 
 \item{getSelected}{If \code{TRUE}, then the selected items will
 be accessible as a Shiny input. The input returns the ids of the selected

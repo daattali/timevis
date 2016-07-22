@@ -14,11 +14,11 @@ function(input, output, session) {
   output$timelineCustom <- renderTimelinevis({
     config <- list(
       editable = TRUE,
-      align = "right",
+      align = "center",
       orientation = "top",
       snap = NULL,
       margin = list(item = 30, axis = 50)
     )
-    timelinevis(dataBasic, options = config)
+    timelinevis(dataBasic, zoomFactor = 1, options = config)
   })
 }
