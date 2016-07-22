@@ -130,8 +130,13 @@
 #'   options = list(
 #'     editable = TRUE,
 #'     onAdd = htmlwidgets::JS('function(item, callback) {
-#'       alert("An item was added");
-#'       callback(item);
+#'       var value = prompt("Enter item content", "New item");
+#'       if (value) {
+#'         item.content = value;
+#'         callback(item);
+#'       } else {
+#'         callback(null);
+#'       }
 #'     }')
 #'   )
 #' )
@@ -237,6 +242,7 @@ timelinevis <- function(data, showZoom = TRUE, getSelected = FALSE,
   x = list(
     items = items,
     showZoom = showZoom,
+    #zoomBy = 0.2, TODO
     getSelected = getSelected,
     getData = getData,
     getWindow = getWindow,

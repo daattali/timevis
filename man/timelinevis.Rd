@@ -151,8 +151,13 @@ timelinevis(
   options = list(
     editable = TRUE,
     onAdd = htmlwidgets::JS('function(item, callback) {
-      alert("An item was added");
-      callback(item);
+      var value = prompt("Enter item content", "New item");
+      if (value) {
+        item.content = value;
+        callback(item);
+      } else {
+        callback(null);
+      }
     }')
   )
 )

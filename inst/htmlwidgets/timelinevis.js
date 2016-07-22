@@ -28,7 +28,6 @@ HTMLWidgets.widget({
         // set the data items
         timeline.itemsData.add(x.items);
         timeline.fit({ animation : false });
-        that.zoom(0.2, false);
 
         // Show and initialize the zoom buttons
         if (x.showZoom) {
