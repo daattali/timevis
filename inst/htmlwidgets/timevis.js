@@ -1,12 +1,12 @@
-/*****************************************************************************/
-/* Dean Attali 2016                                                          */
-/* timelinevis                                                               */
-/* Create timeline visualizations in R using htmlwidgets and vis.js          */
-/*****************************************************************************/
+/*********************************************************************/
+/* Dean Attali 2016                                                  */
+/* timevis                                                           */
+/* Create timeline visualizations in R using htmlwidgets and vis.js  */
+/*********************************************************************/
 
 HTMLWidgets.widget({
 
-  name : 'timelinevis',
+  name : 'timevis',
 
   type : 'output',
 
@@ -69,12 +69,12 @@ HTMLWidgets.widget({
           if (x.getData) {
             timeline.itemsData.on('*', function (event, properties, senderId) {
               Shiny.onInputChange(
-                elementId + "_data" + ":timelinevisDF",
+                elementId + "_data" + ":timevisDF",
                 timeline.itemsData.get()
               );
             });
             Shiny.onInputChange(
-              elementId + "_data" + ":timelinevisDF",
+              elementId + "_data" + ":timevisDF",
               timeline.itemsData.get()
             );
           }
@@ -163,7 +163,7 @@ HTMLWidgets.widget({
 if (HTMLWidgets.shinyMode){
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:addItem", function(message) {
+    "timevis:addItem", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.itemsData.add(message.data);
@@ -171,7 +171,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:addItems", function(message) {
+    "timevis:addItems", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         var items = message.data;
@@ -180,7 +180,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:removeItem", function(message) {
+    "timevis:removeItem", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.itemsData.remove(message.itemId);
@@ -188,7 +188,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:addCustomTime", function(message) {
+    "timevis:addCustomTime", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.addCustomTime(message.time, message.itemId);
@@ -196,7 +196,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:removeCustomTime", function(message) {
+    "timevis:removeCustomTime", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.removeCustomTime(message.itemId);
@@ -204,7 +204,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:fitWindow", function(message) {
+    "timevis:fitWindow", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.fit(message.options);
@@ -212,7 +212,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:centerTime", function(message) {
+    "timevis:centerTime", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.moveTo(message.time, message.options);
@@ -220,7 +220,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:centerItem", function(message) {
+    "timevis:centerItem", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.focus(message.itemId, message.options);
@@ -228,7 +228,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:setItems", function(message) {
+    "timevis:setItems", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.itemsData.clear();
@@ -238,7 +238,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:setOptions", function(message) {
+    "timevis:setOptions", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.setOptions(message.options);
@@ -246,7 +246,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:setSelection", function(message) {
+    "timevis:setSelection", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.setSelection(message.itemId, message.options);
@@ -254,7 +254,7 @@ if (HTMLWidgets.shinyMode){
   });
 
   Shiny.addCustomMessageHandler(
-    "timelinevis:setWindow", function(message) {
+    "timevis:setWindow", function(message) {
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.setWindow(message.start, message.end, message.options);

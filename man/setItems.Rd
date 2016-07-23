@@ -19,12 +19,12 @@ if (interactive()) {
 library(shiny)
 shinyApp(
   ui = fluidPage(
-    timelinevisOutput("timeline"),
+    timevisOutput("timeline"),
     actionButton("btn", "Change the data to yesterday")
   ),
   server = function(input, output) {
-    output$timeline <- renderTimelinevis(
-      timelinevis(data.frame(start = Sys.Date(), content = "Today"))
+    output$timeline <- renderTimevis(
+      timevis(data.frame(start = Sys.Date(), content = "Today"))
     )
     observeEvent(input$btn, {
       setItems("timeline",

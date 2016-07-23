@@ -1,22 +1,22 @@
 ---
-title: "Package timelinevis"
+title: "Package timevis"
 author: "Dean Attali"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Package timelinevis}
+  %\VignetteIndexEntry{Package timevis}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
 
-  ```{r setup, echo = FALSE, message = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 ```
 
-# timelinevis - Create a timeline visualization in R
+# timevis - Create a timeline visualization in R
 
-[![Build Status](https://travis-ci.org/daattali/timelinevis.svg?branch=master)](https://travis-ci.org/daattali/timelinevis)
-[![CRAN version](http://www.r-pkg.org/badges/version/timelinevis)](https://cran.r-project.org/package=timelinevis)
+[![Build Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
+[![CRAN version](http://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
 TODO: readme
 

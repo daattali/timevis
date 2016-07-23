@@ -19,12 +19,12 @@ if (interactive()) {
 library(shiny)
 shinyApp(
   ui = fluidPage(
-    timelinevisOutput("timeline"),
+    timevisOutput("timeline"),
     actionButton("btn", "Add item today")
   ),
   server = function(input, output) {
-    output$timeline <- renderTimelinevis(
-      timelinevis()
+    output$timeline <- renderTimevis(
+      timevis()
     )
     observeEvent(input$btn, {
       addItem("timeline", list(start = Sys.Date(), content = "Today"))

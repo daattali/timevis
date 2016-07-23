@@ -25,12 +25,12 @@ if (interactive()) {
 library(shiny)
 shinyApp(
   ui = fluidPage(
-    timelinevisOutput("timeline"),
+    timevisOutput("timeline"),
     actionButton("btn", "Center around 24 hours ago")
   ),
   server = function(input, output) {
-    output$timeline <- renderTimelinevis(
-      timelinevis()
+    output$timeline <- renderTimevis(
+      timevis()
     )
     observeEvent(input$btn, {
       centerTime("timeline", Sys.Date())

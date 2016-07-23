@@ -1,14 +1,14 @@
 #' Create a timeline visualization
 #'
-#' \code{timelinevis} lets you create rich and fully interactive timeline visualizations.
+#' \code{timevis} lets you create rich and fully interactive timeline visualizations.
 #' Timelines can be included in Shiny apps and R markdown documents, or viewed
 #' from the R console and RStudio Viewer. Includes an extensive API to
 #' manipulate a timeline after creation, and supports getting data out of the
 #' visualization into R. Based on the \href{http://visjs.org/}{'vis.js'} Timeline
 #' module and the \href{http://www.htmlwidgets.org/}{'htmlwidgets'} R package.
 #' \cr\cr
-#' View a \href{http://daattali.com/shiny/timelinevis-demo/}{demo Shiny app}
-#' or see the full \href{https://github.com/daattali/timelinevis}{README} on
+#' View a \href{http://daattali.com/shiny/timevis-demo/}{demo Shiny app}
+#' or see the full \href{https://github.com/daattali/timevis}{README} on
 #' GitHub.
 #'
 #' @param data A dataframe containing the timeline items. Each item on the
@@ -26,9 +26,9 @@
 #'   not, the item is displayed as a single point on the timeline.
 #'   \item{\code{\strong{id}}} - An id for the item. Using an id is not required
 #'   but highly recommended. An id is needed when removing or selecting items
-#'   (using \code{\link[timelinevis]{removeItem}} or
-#'   \code{\link[timelinevis]{setSelection}}) or when requesting to return
-#'   selected items (using \code{\link[timelinevis]{getSelected}}).
+#'   (using \code{\link[timevis]{removeItem}} or
+#'   \code{\link[timevis]{setSelection}}) or when requesting to return
+#'   selected items (using \code{\link[timevis]{getSelected}}).
 #'   \item{\code{\strong{type}}} - The type of the item. Can be 'box' (default),
 #'   'point', 'range', or 'background'. Types 'box' and 'point' need only a
 #'   start date, types 'range' and 'background' need both a start and end date.
@@ -84,7 +84,7 @@
 #' examples section below to see example usage.
 #' @param width Fixed width for timeline (in css units). Ignored when used in a
 #' Shiny app -- use the \code{width} parameter in
-#' \code{\link[timelinevis]{timelinevisOutput}}.
+#' \code{\link[timevis]{timevisOutput}}.
 #' It is not recommended to use this parameter because the widget knows how to
 #' adjust its width automatically.
 #' @param height Fixed height for timeline (in css units). It is recommended to
@@ -96,20 +96,20 @@
 #' @return A timeline visualization \code{htmlwidgets} object
 #'
 #' @examples
-#' # For more examples, see http://daattali.com/shiny/timelinevis-demo/
+#' # For more examples, see http://daattali.com/shiny/timevis-demo/
 #'
 #' ### Most basic
-#' timelinevis()
+#' timevis()
 #'
 #' ### Minimal data
-#' timelinevis(
+#' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
 #'              start = c("2016-01-10", "2016-01-12"))
 #' )
 #'
 #' ### Hide the zoom buttons, allow items to be editable (add/remove/modify)
-#' timelinevis(
+#' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
 #'              start = c("2016-01-10", "2016-01-12")),
@@ -118,7 +118,7 @@
 #' )
 #'
 #' ### Items can be a single point or a range, and can contain HTML
-#' timelinevis(
+#' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two<br><h3>HTML is supported</h3>"),
 #'              start = c("2016-01-10", "2016-01-18"),
@@ -126,7 +126,7 @@
 #' )
 #'
 #' ### Alternative look for each item
-#' timelinevis(
+#' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
 #'              start = c("2016-01-10", "2016-01-18"),
@@ -135,7 +135,7 @@
 #' )
 #'
 #' ### Using a function in the configuration options
-#' timelinevis(
+#' timevis(
 #'   data.frame(id = 1,
 #'              content = "double click anywhere<br>in the timeline<br>to add an item",
 #'              start = "2016-01-01"),
@@ -149,7 +149,7 @@
 #' )
 #'
 #' ### Having read-only and editable items together
-#' timelinevis(
+#' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("editable", "read-only"),
 #'              start = c("2016-01-01", "2016-01-18"),
@@ -171,15 +171,15 @@
 #' )
 #'
 #' ui <- fluidPage(
-#'   timelinevisOutput("appts"),
+#'   timevisOutput("appts"),
 #'   div("Selected items:", textOutput("selected", inline = TRUE)),
 #'   div("Visible window:", textOutput("window", inline = TRUE)),
 #'   tableOutput("table")
 #' )
 #'
 #' server <- function(input, output) {
-#'   output$appts <- renderTimelinevis(
-#'     timelinevis(
+#'   output$appts <- renderTimevis(
+#'     timevis(
 #'       data, getSelected = TRUE, getData = TRUE, getWindow = TRUE,
 #'       options = list(editable = TRUE, multiselect = TRUE, align = "center")
 #'     )
@@ -200,9 +200,9 @@
 #' shinyApp(ui, server)
 #' }
 #'
-#' @seealso \href{http://daattali.com/shiny/timelinevis-demo/}{Demo Shiny app}
+#' @seealso \href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 #' @export
-timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
+timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
                         getSelected = FALSE, getData = FALSE, getIds = FALSE,
                         getWindow = FALSE, options, width = NULL, height = NULL,
                         elementId = NULL) {
@@ -212,43 +212,43 @@ timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
     data <- data.frame()
   }
   if (!is.data.frame(data)) {
-    stop("timelinevis: 'data' must be a data.frame",
+    stop("timevis: 'data' must be a data.frame",
          call. = FALSE)
   }
   if (nrow(data) > 0 &&
       (!"start" %in% colnames(data) || anyNA(data[['start']]))) {
-    stop("timelinevis: 'data' must contain a 'start' date for each item",
+    stop("timevis: 'data' must contain a 'start' date for each item",
          call. = FALSE)
   }
   if (!is.bool(showZoom)) {
-    stop("timelinevis: 'showZoom' must be either 'TRUE' or 'FALSE'",
+    stop("timevis: 'showZoom' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
   }
   if (!is.numeric(zoomFactor) || length(zoomFactor) > 1 || zoomFactor <= 0) {
-    stop("timelinevis: 'zoomFactor' must be a positive number",
+    stop("timevis: 'zoomFactor' must be a positive number",
          call. = FALSE)
   }
   if (!is.bool(getSelected)) {
-    stop("timelinevis: 'getSelected' must be either 'TRUE' or 'FALSE'",
+    stop("timevis: 'getSelected' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
   }
   if (!is.bool(getData)) {
-    stop("timelinevis: 'getData' must be either 'TRUE' or 'FALSE'",
+    stop("timevis: 'getData' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
   }
   if (!is.bool(getIds)) {
-    stop("timelinevis: 'getIds' must be either 'TRUE' or 'FALSE'",
+    stop("timevis: 'getIds' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
   }
   if (!is.bool(getWindow)) {
-    stop("timelinevis: 'getWindow' must be either 'TRUE' or 'FALSE'",
+    stop("timevis: 'getWindow' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
   }
   if (missing(options) || is.null(options)) {
     options <- list()
   }
   if (!is.list(options)) {
-    stop("timelinevis: 'options' must be a named list",
+    stop("timevis: 'options' must be a named list",
          call. = FALSE)
   }
 
@@ -275,19 +275,19 @@ timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'timelinevis',
+    name = 'timevis',
     x,
     width = width,
     height = height,
-    package = 'timelinevis',
+    package = 'timevis',
     elementId = elementId,
     dependencies = deps
   )
 }
 
-#' Shiny bindings for timelinevis
+#' Shiny bindings for timevis
 #'
-#' Output and render functions for using timelinevis within Shiny
+#' Output and render functions for using timevis within Shiny
 #' applications and interactive Rmd documents.
 #'
 #' @param outputId output variable to read from
@@ -295,14 +295,14 @@ timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended. \code{height} will probably not
 #'   have an effect; instead, use the \code{height} parameter in
-#'   \code{\link[timelinevis]{timelinevis}}.
-#' @param expr An expression that generates a timelinevis
+#'   \code{\link[timevis]{timevis}}.
+#' @param expr An expression that generates a timevis
 #' @param env The environment in which to evaluate \code{expr}.
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
 #'
-#' @name timelinevis-shiny
-#' @seealso \code{\link[timelinevis]{timelinevis}}.
+#' @name timevis-shiny
+#' @seealso \code{\link[timevis]{timevis}}.
 #'
 #' @examples
 #' if (interactive()) {
@@ -310,10 +310,10 @@ timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
 #'
 #' ### Most basic example
 #' shinyApp(
-#'   ui = fluidPage(timelinevisOutput("timeline")),
+#'   ui = fluidPage(timevisOutput("timeline")),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis()
+#'     output$timeline <- renderTimevis(
+#'       timevis()
 #'     )
 #'   }
 #' )
@@ -329,15 +329,15 @@ timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
 #' )
 #'
 #' ui <- fluidPage(
-#'   timelinevisOutput("appts"),
+#'   timevisOutput("appts"),
 #'   div("Selected items:", textOutput("selected", inline = TRUE)),
 #'   div("Visible window:", textOutput("window", inline = TRUE)),
 #'   tableOutput("table")
 #' )
 #'
 #' server <- function(input, output) {
-#'   output$appts <- renderTimelinevis(
-#'     timelinevis(
+#'   output$appts <- renderTimevis(
+#'     timevis(
 #'       data, getSelected = TRUE, getData = TRUE, getWindow = TRUE,
 #'       options = list(editable = TRUE, multiselect = TRUE, align = "center")
 #'     )
@@ -359,19 +359,19 @@ timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
 #' }
 #'
 #' @export
-timelinevisOutput <- function(outputId, width = '100%', height = 'auto') {
-  htmlwidgets::shinyWidgetOutput(outputId, 'timelinevis', width, height, package = 'timelinevis')
+timevisOutput <- function(outputId, width = '100%', height = 'auto') {
+  htmlwidgets::shinyWidgetOutput(outputId, 'timevis', width, height, package = 'timevis')
 }
 
-#' @rdname timelinevis-shiny
+#' @rdname timevis-shiny
 #' @export
-renderTimelinevis <- function(expr, env = parent.frame(), quoted = FALSE) {
+renderTimevis <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, timelinevisOutput, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, timevisOutput, env, quoted = TRUE)
 }
 
 # Add custom HTML to wrap the widget to allow for a zoom in/out menu
-timelinevis_html <- function(id, style, class, ...){
+timevis_html <- function(id, style, class, ...){
   htmltools::tags$div(
     id = id, class = class, style = style,
     htmltools::tags$div(

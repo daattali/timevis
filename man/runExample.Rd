@@ -2,13 +2,13 @@
 % Please edit documentation in R/runExample.R
 \name{runExample}
 \alias{runExample}
-\title{Run examples of using timelinevis in a Shiny app}
+\title{Run examples of using timevis in a Shiny app}
 \usage{
 runExample()
 }
 \description{
 This example is also
-\href{http://daattali.com/shiny/timelinevis-demo/}{available online}.
+\href{http://daattali.com/shiny/timevis-demo/}{available online}.
 }
 \examples{
 if (interactive()) {

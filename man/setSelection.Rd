@@ -26,12 +26,12 @@ if (interactive()) {
 library(shiny)
 shinyApp(
   ui = fluidPage(
-    timelinevisOutput("timeline"),
+    timevisOutput("timeline"),
     actionButton("btn", "Select item 2")
   ),
   server = function(input, output) {
-    output$timeline <- renderTimelinevis(
-      timelinevis(
+    output$timeline <- renderTimevis(
+      timevis(
         data.frame(id = 1:3, start = Sys.Date(), content = 1:3)
       )
     )

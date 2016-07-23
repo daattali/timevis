@@ -1,4 +1,4 @@
-library(timelinevis)
+library(timevis)
 
 source("sampleData.R")
 
@@ -8,15 +8,15 @@ randomID <- function() {
 }
 
 function(input, output, session) {
-  output$timelineBasic <- renderTimelinevis({
-    timelinevis(dataBasic)
+  output$timelineBasic <- renderTimevis({
+    timevis(dataBasic)
   })
 
-  output$timelineWC <- renderTimelinevis({
-    timelinevis(dataWC)
+  output$timelineWC <- renderTimevis({
+    timevis(dataWC)
   })
 
-  output$timelineCustom <- renderTimelinevis({
+  output$timelineCustom <- renderTimevis({
     config <- list(
       editable = TRUE,
       align = "center",
@@ -24,15 +24,15 @@ function(input, output, session) {
       snap = NULL,
       margin = list(item = 30, axis = 50)
     )
-    timelinevis(dataBasic, zoomFactor = 1, options = config)
+    timevis(dataBasic, zoomFactor = 1, options = config)
   })
 
-  output$timelineInteractive <- renderTimelinevis({
+  output$timelineInteractive <- renderTimevis({
     config <- list(
       editable = TRUE,
       multiselect = TRUE
     )
-    timelinevis(dataBasic, getSelected = TRUE, getData = TRUE, getIds = TRUE,
+    timevis(dataBasic, getSelected = TRUE, getData = TRUE, getIds = TRUE,
                 getWindow = TRUE, options = config)
   })
 
@@ -46,11 +46,11 @@ function(input, output, session) {
     input$timelineInteractive_data
   )
   output$selectIdsOutput <- renderUI({
-    selectInput("selectIds", NULL, input$timelineInteractive_ids,
+    selectInput("selectIds", "Select items:", input$timelineInteractive_ids,
                 multiple = TRUE)
   })
   output$removeIdsOutput <- renderUI({
-    selectInput("removeIds", NULL, input$timelineInteractive_ids)
+    selectInput("removeIds", "Remove item", input$timelineInteractive_ids)
   })
 
   observeEvent(input$fit, {

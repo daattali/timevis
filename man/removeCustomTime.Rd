@@ -19,13 +19,13 @@ if (interactive()) {
 library(shiny)
 shinyApp(
   ui = fluidPage(
-    timelinevisOutput("timeline"),
+    timevisOutput("timeline"),
     actionButton("btn0", "Add custom time"),
     actionButton("btn", "Remove custom time bar")
   ),
   server = function(input, output) {
-    output$timeline <- renderTimelinevis(
-      timelinevis()
+    output$timeline <- renderTimevis(
+      timevis()
     )
     observeEvent(input$btn0, {
       addCustomTime("timeline", Sys.Date() - 1, "yesterday")

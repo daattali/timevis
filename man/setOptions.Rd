@@ -11,7 +11,7 @@ setOptions(id, options)
 
 \item{options}{A named list containing updated configuration options to use.
 See the \code{options} parameter of the
-\code{\link[timelinevis]{timelinevis}} function to see more details.}
+\code{\link[timevis]{timevis}} function to see more details.}
 }
 \description{
 Update the configuration options of a timeline
@@ -21,12 +21,12 @@ if (interactive()) {
 library(shiny)
 shinyApp(
   ui = fluidPage(
-    timelinevisOutput("timeline"),
+    timevisOutput("timeline"),
     actionButton("btn", "Show current time and allow items to be editable")
   ),
   server = function(input, output) {
-    output$timeline <- renderTimelinevis(
-      timelinevis(
+    output$timeline <- renderTimevis(
+      timevis(
         data.frame(start = Sys.Date(), content = "Today"),
         options = list(showCurrentTime = FALSE, orientation = "top")
       )

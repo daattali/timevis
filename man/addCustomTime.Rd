@@ -21,12 +21,12 @@ if (interactive()) {
 library(shiny)
 shinyApp(
   ui = fluidPage(
-    timelinevisOutput("timeline"),
+    timevisOutput("timeline"),
     actionButton("btn", "Add time bar 24 hours ago")
   ),
   server = function(input, output) {
-    output$timeline <- renderTimelinevis(
-      timelinevis()
+    output$timeline <- renderTimevis(
+      timevis()
     )
     observeEvent(input$btn, {
       addCustomTime("timeline", Sys.Date() - 1, "yesterday")

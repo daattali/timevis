@@ -1,7 +1,7 @@
-#' Run examples of using timelinevis in a Shiny app
+#' Run examples of using timevis in a Shiny app
 #'
 #' This example is also
-#' \href{http://daattali.com/shiny/timelinevis-demo/}{available online}.
+#' \href{http://daattali.com/shiny/timevis-demo/}{available online}.
 #'
 #' @examples
 #' if (interactive()) {
@@ -9,9 +9,9 @@
 #' }
 #' @export
 runExample <- function() {
-  appDir <- system.file("example", package = "timelinevis")
+  appDir <- system.file("example", package = "timevis")
   if (appDir == "") {
-    stop("Could not find example directory. Try re-installing `timelinevis`.",
+    stop("Could not find example directory. Try re-installing `timevis`.",
          call. = FALSE)
   }
 

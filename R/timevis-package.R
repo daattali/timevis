@@ -1,3 +1,3 @@
 #' @docType package
-#' @name timelinevis
+#' @name timevis
 NULL

@@ -1,4 +1,4 @@
 library(testthat)
-library(timelinevis)
+library(timevis)
 
 test_check("dataframeToD3")

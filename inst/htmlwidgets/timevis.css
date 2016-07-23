@@ -1,24 +1,24 @@
-.timelinevis.html-widget {
+.timevis.html-widget {
   margin-bottom: 20px;
   position: relative;
 }
-.timelinevis.html-widget .vis-background .vis-minor.vis-odd {
+.timevis.html-widget .vis-background .vis-minor.vis-odd {
   background: #fdfdfd;
 }
-.timelinevis.html-widget .vis-major {
+.timevis.html-widget .vis-major {
   font-weight: bold;
 }
-.timelinevis.html-widget .zoom-menu {
+.timevis.html-widget .zoom-menu {
   display: none;
   position: absolute;
   right: 5px;
   top: 5px;
   z-index: 15;
 }
-.timelinevis.html-widget .zoom-menu.show-zoom {
+.timevis.html-widget .zoom-menu.show-zoom {
   display: block;
 }
-.timelinevis.html-widget .zoom-menu .btn {
+.timevis.html-widget .zoom-menu .btn {
   padding: 0;
   width: 30px;
   height: 30px;

@@ -2,7 +2,7 @@
   # register a handler to decode the timeline data passed from JS to R
   # because the default way of decoding it in shiny flattens a data.frame
   # to a vector
-  shiny::registerInputHandler("timelinevisDF", function(data, ...) {
+  shiny::registerInputHandler("timevisDF", function(data, ...) {
     jsonlite::fromJSON(jsonlite::toJSON(data, auto_unbox = TRUE))
   })
 }

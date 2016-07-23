@@ -4,7 +4,7 @@ callJS <- function(method) {
   session <- shiny::getDefaultReactiveDomain()
 
   # call the JS function
-  method <- paste0("timelinevis:", method)
+  method <- paste0("timevis:", method)
   session$sendCustomMessage(method, message)
 }
 
@@ -16,12 +16,12 @@ callJS <- function(method) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Add item today")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis()
+#'     output$timeline <- renderTimevis(
+#'       timevis()
 #'     )
 #'     observeEvent(input$btn, {
 #'       addItem("timeline", list(start = Sys.Date(), content = "Today"))
@@ -43,12 +43,12 @@ addItem <- function(id, data) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Add items today and yesterday")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis()
+#'     output$timeline <- renderTimevis(
+#'       timevis()
 #'     )
 #'     observeEvent(input$btn, {
 #'       addItems("timeline",
@@ -73,12 +73,12 @@ addItems <- function(id, data) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Remove item 2")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis(data.frame(
+#'     output$timeline <- renderTimevis(
+#'       timevis(data.frame(
 #'         id = 1:2, start = Sys.Date(), content = c("1", "2"))
 #'       )
 #'     )
@@ -103,12 +103,12 @@ removeItem <- function(id, itemId) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Add time bar 24 hours ago")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis()
+#'     output$timeline <- renderTimevis(
+#'       timevis()
 #'     )
 #'     observeEvent(input$btn, {
 #'       addCustomTime("timeline", Sys.Date() - 1, "yesterday")
@@ -130,13 +130,13 @@ addCustomTime <- function(id, time, itemId) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn0", "Add custom time"),
 #'     actionButton("btn", "Remove custom time bar")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis()
+#'     output$timeline <- renderTimevis(
+#'       timevis()
 #'     )
 #'     observeEvent(input$btn0, {
 #'       addCustomTime("timeline", Sys.Date() - 1, "yesterday")
@@ -165,12 +165,12 @@ removeCustomTime <- function(id, itemId) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Fit all items")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis(data.frame(
+#'     output$timeline <- renderTimevis(
+#'       timevis(data.frame(
 #'         id = 1:2, start = c(Sys.Date(), Sys.Date() - 1), content = c("1", "2")
 #'       ))
 #'     )
@@ -199,12 +199,12 @@ fitWindow <- function(id, options) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Center around 24 hours ago")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis()
+#'     output$timeline <- renderTimevis(
+#'       timevis()
 #'     )
 #'     observeEvent(input$btn, {
 #'       centerTime("timeline", Sys.Date())
@@ -231,12 +231,12 @@ centerTime <- function(id, time, options) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Center around item 1")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis(
+#'     output$timeline <- renderTimevis(
+#'       timevis(
 #'         data.frame(id = 1:3,
 #'           start = c(Sys.Date() - 1, Sys.Date(), Sys.Date() + 1),
 #'           content = c("Item 1", "Item 2", "Item 3"))
@@ -262,12 +262,12 @@ centerItem <- function(id, itemId, options) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Change the data to yesterday")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis(data.frame(start = Sys.Date(), content = "Today"))
+#'     output$timeline <- renderTimevis(
+#'       timevis(data.frame(start = Sys.Date(), content = "Today"))
 #'     )
 #'     observeEvent(input$btn, {
 #'       setItems("timeline",
@@ -287,18 +287,18 @@ setItems <- function(id, data) {
 #' @param id Timeline id
 #' @param options A named list containing updated configuration options to use.
 #' See the \code{options} parameter of the
-#' \code{\link[timelinevis]{timelinevis}} function to see more details.
+#' \code{\link[timevis]{timevis}} function to see more details.
 #' @examples
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Show current time and allow items to be editable")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis(
+#'     output$timeline <- renderTimevis(
+#'       timevis(
 #'         data.frame(start = Sys.Date(), content = "Today"),
 #'         options = list(showCurrentTime = FALSE, orientation = "top")
 #'       )
@@ -329,12 +329,12 @@ setOptions <- function(id, options) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Select item 2")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis(
+#'     output$timeline <- renderTimevis(
+#'       timevis(
 #'         data.frame(id = 1:3, start = Sys.Date(), content = 1:3)
 #'       )
 #'     )
@@ -364,12 +364,12 @@ setSelection <- function(id, itemId, options) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
-#'     timelinevisOutput("timeline"),
+#'     timevisOutput("timeline"),
 #'     actionButton("btn", "Set window to show between yesterday to tomorrow")
 #'   ),
 #'   server = function(input, output) {
-#'     output$timeline <- renderTimelinevis(
-#'       timelinevis()
+#'     output$timeline <- renderTimevis(
+#'       timevis()
 #'     )
 #'     observeEvent(input$btn, {
 #'       setWindow("timeline", Sys.Date() - 1, Sys.Date() + 1)

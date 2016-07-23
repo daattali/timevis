@@ -8,4 +8,4 @@ dependencies:
   - name: timeline
     version: 0.0.0.9000
     src: htmlwidgets
-    stylesheet: timelinevis.css
+    stylesheet: timevis.css
