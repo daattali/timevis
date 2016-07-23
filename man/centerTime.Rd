@@ -2,7 +2,7 @@
 % Please edit documentation in R/api.R
 \name{centerTime}
 \alias{centerTime}
-\title{Move the window such that given time is centered on screen.}
+\title{Move the window such that the given time is centered}
 \usage{
 centerTime(id, time, options)
 }
@@ -18,7 +18,7 @@ the "moveTo" method in the
 Timeline documentation}}
 }
 \description{
-Move the window such that given time is centered on screen.
+Move the window such that the given time is centered
 }
 \examples{
 if (interactive()) {

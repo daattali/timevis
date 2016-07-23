@@ -78,6 +78,24 @@ HTMLWidgets.widget({
               timeline.itemsData.get()
             );
           }
+          if (x.getIds) {
+            timeline.itemsData.on('add', function (event, properties, senderId) {
+              Shiny.onInputChange(
+                elementId + "_ids",
+                timeline.itemsData.getIds()
+              );
+            });
+            timeline.itemsData.on('remove', function (event, properties, senderId) {
+              Shiny.onInputChange(
+                elementId + "_ids",
+                timeline.itemsData.getIds()
+              );
+            });
+            Shiny.onInputChange(
+              elementId + "_ids",
+              timeline.itemsData.getIds()
+            );
+          }
         }
 
         // set the custom configuration options
@@ -198,6 +216,14 @@ if (HTMLWidgets.shinyMode){
       var el = document.getElementById(message.id);
       if (el) {
         el.timeline.moveTo(message.time, message.options);
+      }
+  });
+
+  Shiny.addCustomMessageHandler(
+    "timelinevis:centerItem", function(message) {
+      var el = document.getElementById(message.id);
+      if (el) {
+        el.timeline.focus(message.itemId, message.options);
       }
   });
 

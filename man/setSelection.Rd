@@ -2,7 +2,7 @@
 % Please edit documentation in R/api.R
 \name{setSelection}
 \alias{setSelection}
-\title{Select one or multiple itemS on a timeline}
+\title{Select one or multiple items on a timeline}
 \usage{
 setSelection(id, itemId, options)
 }
@@ -19,7 +19,7 @@ the "setSelection" method in the
 Timeline documentation}}
 }
 \description{
-Select one or multiple itemS on a timeline
+Select one or multiple items on a timeline
 }
 \examples{
 if (interactive()) {

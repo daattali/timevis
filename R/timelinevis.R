@@ -63,6 +63,12 @@
 #' an item is modified, added, or removed. The input name will be the timeline's
 #' id appended by "_data". For example, if the timeline \code{outputId} is
 #' "mytimeline", then use \code{input$mytimeline_data}.
+#' @param getIds If \code{TRUE}, then the IDs of the data items will be
+#' accessible as a Shiny input. The input returns a vector of IDs and will be
+#' updated every time an item is added or removed from the timeline. The input
+#' name will be the timeline's id appended by "_ids". For example, if the
+#' timeline \code{outputId} is "mytimeline", then use
+#' \code{input$mytimeline_ids}.
 #' @param getWindow If \code{TRUE}, then the current visible window will be
 #' accessible as a Shiny input. The input returns a 2-element vector containing
 #' the minimum and maximum dates currently visible in the timeline. The input
@@ -136,13 +142,8 @@
 #'   options = list(
 #'     editable = TRUE,
 #'     onAdd = htmlwidgets::JS('function(item, callback) {
-#'       var value = prompt("Enter item content", "New item");
-#'       if (value) {
-#'         item.content = value;
-#'         callback(item);
-#'       } else {
-#'         callback(null);
-#'       }
+#'       item.content = "Hello!<br/>" + item.content;
+#'       callback(item);
 #'     }')
 #'   )
 #' )
@@ -202,8 +203,9 @@
 #' @seealso \href{http://daattali.com/shiny/timelinevis-demo/}{Demo Shiny app}
 #' @export
 timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
-                        getSelected = FALSE, getData = FALSE, getWindow = FALSE,
-                        options, width = NULL, height = NULL, elementId = NULL) {
+                        getSelected = FALSE, getData = FALSE, getIds = FALSE,
+                        getWindow = FALSE, options, width = NULL, height = NULL,
+                        elementId = NULL) {
 
   # Validate the input data
   if (missing(data)) {
@@ -234,6 +236,10 @@ timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
     stop("timelinevis: 'getData' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
   }
+  if (!is.bool(getIds)) {
+    stop("timelinevis: 'getIds' must be either 'TRUE' or 'FALSE'",
+         call. = FALSE)
+  }
   if (!is.bool(getWindow)) {
     stop("timelinevis: 'getWindow' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
@@ -255,6 +261,7 @@ timelinevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
     zoomFactor = zoomFactor,
     getSelected = getSelected,
     getData = getData,
+    getIds = getIds,
     getWindow = getWindow,
     options = options,
     height = height

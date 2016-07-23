@@ -186,7 +186,7 @@ fitWindow <- function(id, options) {
   callJS(method)
 }
 
-#' Move the window such that given time is centered on screen.
+#' Move the window such that the given time is centered
 #' @param id Timeline id
 #' @param time The date/time to center around
 #' @param options Named list of options controlling the animation. Most common
@@ -215,6 +215,42 @@ fitWindow <- function(id, options) {
 #' @export
 centerTime <- function(id, time, options) {
   method <- "centerTime"
+  callJS(method)
+}
+
+#' Move the window such that given item or items are centered
+#' @param id Timeline id
+#' @param itemId A vector (or single value) of the item ids to center
+#' @param options Named list of options controlling mainly the animation.
+#' Most common option is \code{"animation" = TRUE/FALSE}. For a full list of
+#' options, see the "focus" method in the
+#' \href{http://visjs.org/docs/timeline/#Methods}{official
+#' Timeline documentation}
+#' @examples
+#' if (interactive()) {
+#' library(shiny)
+#' shinyApp(
+#'   ui = fluidPage(
+#'     timelinevisOutput("timeline"),
+#'     actionButton("btn", "Center around item 1")
+#'   ),
+#'   server = function(input, output) {
+#'     output$timeline <- renderTimelinevis(
+#'       timelinevis(
+#'         data.frame(id = 1:3,
+#'           start = c(Sys.Date() - 1, Sys.Date(), Sys.Date() + 1),
+#'           content = c("Item 1", "Item 2", "Item 3"))
+#'       )
+#'     )
+#'     observeEvent(input$btn, {
+#'       centerItem("timeline", 1)
+#'     })
+#'   }
+#' )
+#' }
+#' @export
+centerItem <- function(id, itemId, options) {
+  method <- "centerItem"
   callJS(method)
 }
 
@@ -279,7 +315,7 @@ setOptions <- function(id, options) {
   callJS(method)
 }
 
-#' Select one or multiple itemS on a timeline
+#' Select one or multiple items on a timeline
 #' @param id Timeline id
 #' @param itemId A vector (or single value) of the item ids to select
 #' @param options Named list of options controlling mainly the animation.

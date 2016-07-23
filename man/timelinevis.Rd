@@ -7,8 +7,8 @@
 \title{Create a timeline visualization}
 \usage{
 timelinevis(data, showZoom = TRUE, zoomFactor = 0.5, getSelected = FALSE,
-  getData = FALSE, getWindow = FALSE, options, width = NULL,
-  height = NULL, elementId = NULL)
+  getData = FALSE, getIds = FALSE, getWindow = FALSE, options,
+  width = NULL, height = NULL, elementId = NULL)
 }
 \arguments{
 \item{data}{A dataframe containing the timeline items. Each item on the
@@ -67,6 +67,13 @@ Shiny input. The input returns a dataframe and will be updated every time
 an item is modified, added, or removed. The input name will be the timeline's
 id appended by "_data". For example, if the timeline \code{outputId} is
 "mytimeline", then use \code{input$mytimeline_data}.}
+
+\item{getIds}{If \code{TRUE}, then the IDs of the data items will be
+accessible as a Shiny input. The input returns a vector of IDs and will be
+updated every time an item is added or removed from the timeline. The input
+name will be the timeline's id appended by "_ids". For example, if the
+timeline \code{outputId} is "mytimeline", then use
+\code{input$mytimeline_ids}.}
 
 \item{getWindow}{If \code{TRUE}, then the current visible window will be
 accessible as a Shiny input. The input returns a 2-element vector containing
@@ -158,13 +165,8 @@ timelinevis(
   options = list(
     editable = TRUE,
     onAdd = htmlwidgets::JS('function(item, callback) {
-      var value = prompt("Enter item content", "New item");
-      if (value) {
-        item.content = value;
-        callback(item);
-      } else {
-        callback(null);
-      }
+      item.content = "Hello!<br/>" + item.content;
+      callback(item);
     }')
   )
 )

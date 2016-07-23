@@ -2,14 +2,11 @@
 % Please edit documentation in R/runExample.R
 \name{runExample}
 \alias{runExample}
-\title{Run examples of using timelinevis in a Shiny app
-This example is also
-\href{http://daattali.com/shiny/timelinevis-demo/}{available online}.}
+\title{Run examples of using timelinevis in a Shiny app}
 \usage{
 runExample()
 }
 \description{
-Run examples of using timelinevis in a Shiny app
 This example is also
 \href{http://daattali.com/shiny/timelinevis-demo/}{available online}.
 }

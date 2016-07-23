@@ -3,6 +3,7 @@
 export(addCustomTime)
 export(addItem)
 export(addItems)
+export(centerItem)
 export(centerTime)
 export(fitWindow)
 export(removeCustomTime)
