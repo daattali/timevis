@@ -1,3 +1,7 @@
+body {
+  background: #fff;
+}
+
 #timelineCustom {
   font-family:  purisa, 'comic sans', cursive;
 }
@@ -51,26 +55,26 @@
   border-color: #F991A3;
 }
 
-#interactiveActions {
-  margin-top: 30px;
-}
-
 #interactiveActions .btn {
   margin-bottom: 10px;
   margin-right: 7px;
+  white-space: normal;
+}
+
+#timelinedata {
+  margin-bottom: 15px;
 }
 
 .optionsSection {
-  margin-top: 15px;
+  border: 1px solid #EEE;
+  border-radius: 3px;
+  background: #FAFAFA;
+  padding: 10px;
 }
 
-.optionsSection .form-group,
-.optionsSection .shiny-input-container {
-  margin-bottom: 0;
-  display: inline-block;
-  vertical-align: bottom;
-}
-
-.selectize-control {
-  margin-bottom: 0;
+.optionsSection h4 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 0;
 }

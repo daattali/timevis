@@ -7,6 +7,10 @@ randomID <- function() {
   paste(sample(c(letters, LETTERS, 0:9), 16, replace = TRUE), collapse = "")
 }
 
+prettyDate <- function(d) {
+  suppressWarnings(format(as.POSIXct(gsub("T", " ", d), "%Y-%m-%d %H:%M")))
+}
+
 function(input, output, session) {
   output$timelineBasic <- renderTimevis({
     timevis(dataBasic)
@@ -40,17 +44,24 @@ function(input, output, session) {
     paste(input$timelineInteractive_selected, collapse = " ")
   )
   output$window <- renderText(
-    paste(input$timelineInteractive_window[1], "to", input$timelineInteractive_window[2])
+    paste(prettyDate(input$timelineInteractive_window[1]),
+          "to",
+          prettyDate(input$timelineInteractive_window[2]))
   )
-  output$table <- renderTable(
-    input$timelineInteractive_data
-  )
+  output$table <- renderTable({
+    data <- input$timelineInteractive_data
+    data$start <- prettyDate(data$start)
+    if(!is.null(data$end)) {
+      data$end <- prettyDate(data$end)
+    }
+    data
+  })
   output$selectIdsOutput <- renderUI({
-    selectInput("selectIds", "Select items:", input$timelineInteractive_ids,
+    selectInput("selectIds", tags$h4("Select items:"), input$timelineInteractive_ids,
                 multiple = TRUE)
   })
   output$removeIdsOutput <- renderUI({
-    selectInput("removeIds", "Remove item", input$timelineInteractive_ids)
+    selectInput("removeIds", tags$h4("Remove item"), input$timelineInteractive_ids)
   })
 
   observeEvent(input$fit, {
