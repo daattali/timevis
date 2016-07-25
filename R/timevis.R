@@ -2,11 +2,11 @@
 #'
 #' \code{timevis} lets you create rich and fully interactive timeline visualizations.
 #' Timelines can be included in Shiny apps and R markdown documents, or viewed
-#' from the R console and RStudio Viewer. Includes an extensive API to
-#' manipulate a timeline after creation, and supports getting data out of the
-#' visualization into R. Based on the \href{http://visjs.org/}{'vis.js'} Timeline
-#' module and the \href{http://www.htmlwidgets.org/}{'htmlwidgets'} R package.
-#' \cr\cr
+#' from the R console and RStudio Viewer. \code{timevis} Includes an extensive
+#' API to manipulate a timeline after creation, and supports getting data out of
+#' the visualization into R. Based on the \href{http://visjs.org/}{'vis.js'}
+#' Timeline module and the \href{http://www.htmlwidgets.org/}{'htmlwidgets'} R
+#' package.\cr\cr
 #' View a \href{http://daattali.com/shiny/timevis-demo/}{demo Shiny app}
 #' or see the full \href{https://github.com/daattali/timevis}{README} on
 #' GitHub.
