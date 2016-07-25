@@ -31,3 +31,7 @@ Please fix and resubmit.
 Added author info to DESCRIPTION
 
 ### Reviewer comments
+
+2016-07-25 Duncan Murdoch
+
+Thanks, on CRAN now
