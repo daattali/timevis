@@ -8,11 +8,13 @@ fluidPage(
     div(id = "subtitle",
         "An R package for creating timeline visualizations"),
     div(id = "subsubtitle",
-        "Created by",
+        "By",
         tags$a(href = "http://deanattali.com/", "Dean Attali"),
         HTML("&bull;"),
-        "Package & example code",
-        tags$a(href = "https://github.com/daattali/timevis", "on GitHub")
+        "Package & examples",
+        tags$a(href = "https://github.com/daattali/timevis", "on GitHub"),
+        HTML("&bull;"),
+        tags$a(href = "http://daattali.com/shiny/", "More apps"), "by Dean"
     )
   ),
   tabsetPanel(
