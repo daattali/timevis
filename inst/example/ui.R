@@ -1,6 +1,7 @@
 library(timevis)
 
 fluidPage(
+  title = "timevis - An R package for creating timeline visualizations",
   div(id = "header",
     div(id = "title",
       "timevis"
