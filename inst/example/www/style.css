@@ -8,7 +8,7 @@ body {
   color: #fdfdfd;
   text-shadow: 0 0 1px #000;
   padding: 20px 0 80px;
-  background: url('background.jpg');
+  background: #0088cc url('background.jpg');
   border-bottom: 1px solid #ddd;
   margin: 0 -15px;
 }
@@ -64,6 +64,41 @@ body {
 
 .nav-tabs>li>a i.fa {
   margin-right: 2px;
+}
+
+.tab-content>.tab-pane {
+  padding-top: 40px;
+}
+
+#samplecode {
+  margin: 50px -15px 0;
+  padding: 20px 25px;
+  border-top: 1px solid #ddd;
+  background: #fcfcfc;
+}
+
+#samplecode pre {
+  font-size: 1em;
+  background: #fff;
+}
+
+#samplecode .codeformat {
+  font-size: 1.3em;
+  margin-bottom: 5px;
+}
+
+.sourcecode {
+  text-align: center;
+  font-size: 1.2em;
+  border-top: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin: 0 -15px;
+  padding-top: 10px;
+  background: #f8f8f8;
+}
+
+.sourcecode:hover {
+  background: #f0f0f0;
 }
 
 #timelineCustom {
@@ -139,6 +174,7 @@ body {
   border-radius: 3px;
   background: #FCFCFC;
   padding: 10px;
+  margin-bottom: 20px;
 }
 
 .optionsSection h4 {
