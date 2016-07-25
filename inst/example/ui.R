@@ -1,30 +1,42 @@
 library(timevis)
 
 fluidPage(
-  "Demos of timevis",
+  div(id = "header",
+    div(id = "title",
+      "timevis"
+    ),
+    div(id = "subtitle",
+        "An R package for creating timeline visualizations"),
+    div(id = "subsubtitle",
+        "Created by",
+        tags$a(href = "http://deanattali.com/", "Dean Attali"),
+        HTML("&bull;"),
+        "Package & example code",
+        tags$a(href = "https://github.com/daattali/timevis", "on GitHub")
+    )
+  ),
   tabsetPanel(
-
     tabPanel(
-      "Basic timeline",
+      div(icon("calendar"), "Basic timeline"),
       br(),
       tags$link(href = "style.css", rel = "stylesheet"),
       timevisOutput("timelineBasic")
     ),
 
     tabPanel(
-      "Custom style and parameters",
+      div(icon("cog"), "Custom style and parameters"),
       br(),
       timevisOutput("timelineCustom")
     ),
 
     tabPanel(
-      "World Cup 2014",
+      div(icon("trophy"), "World Cup 2014"),
       br(),
       timevisOutput("timelineWC")
     ),
 
     tabPanel(
-      "Fully interactive",
+      div(icon("sliders"), "Fully interactive"),
       br(),
       fluidRow(
         column(8,
