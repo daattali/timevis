@@ -1,4 +1,3 @@
 library(testthat)
-library(timevis)
 
-test_check("dataframeToD3")
+test_check("timevis")

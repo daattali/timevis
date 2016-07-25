@@ -17,31 +17,31 @@ timeline is represented by a row in the dataframe. \code{start} and
 are optional (if you include a variable that is only used for some rows,
 you can use \code{NA} for the other rows). The supported variables are:
 \itemize{
-  \item{\code{\strong{start}}} - (required) The start date of the item, for
+  \item{\strong{\code{start}}} - (required) The start date of the item, for
   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
-  \item{\code{\strong{content}}} - (required) The contents of the item. This
+  \item{\strong{\code{content}}} - (required) The contents of the item. This
   can be plain text or HTML code.
-  \item{\code{\strong{end}}} - The end date of the item. The end date is
+  \item{\strong{\code{end}}} - The end date of the item. The end date is
   optional. If end date is provided, the item is displayed as a range. If
   not, the item is displayed as a single point on the timeline.
-  \item{\code{\strong{id}}} - An id for the item. Using an id is not required
+  \item{\strong{\code{id}}} - An id for the item. Using an id is not required
   but highly recommended. An id is needed when removing or selecting items
   (using \code{\link[timevis]{removeItem}} or
   \code{\link[timevis]{setSelection}}) or when requesting to return
-  selected items (using \code{\link[timevis]{getSelected}}).
-  \item{\code{\strong{type}}} - The type of the item. Can be 'box' (default),
+  selected items (using \code{getSelected}).
+  \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
   'point', 'range', or 'background'. Types 'box' and 'point' need only a
   start date, types 'range' and 'background' need both a start and end date.
-  \item{\code{\strong{title}}} - Add a title for the item, displayed when
+  \item{\strong{\code{title}}} - Add a title for the item, displayed when
   hovering the mouse over the item. The title can only contain plain text.
-  \item{\code{\strong{editable}}} - if \code{TRUE}, the item can be
+  \item{\strong{\code{editable}}} - if \code{TRUE}, the item can be
   manipulated with the mouse. Overrides the global \code{editable}
   configuration option if it is set. An editable item can be removed or
   have its start/end dates modified by clicking on it.
   remove it or
-  \item{\code{\strong{className}}} - A className can be used to give items an
+  \item{\strong{\code{className}}} - A className can be used to give items an
   individual CSS style.
-  \item{\code{\strong{style}}} - A CSS text string to apply custom styling
+  \item{\strong{\code{style}}} - A CSS text string to apply custom styling
   for an individual item, for example \code{color: red;}.
 }}
 
