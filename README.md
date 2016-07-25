@@ -102,9 +102,10 @@ There are several types of data that are available, such as retriving
 the IDs of the currently selected items, or getting the data in the
 timeline (as a dataframe). These data will be available as input
 variables. For more information, read about the `getSelected`,
-`getWindow`, `getData`, and `getIds` parameters of `timevis()`. You can
-view examples of many of the features supported by checking out the
-[demo Shiny app](http://daattali.com/shiny/timevis-demo/). If you want
-to see how those examples were created, the full code for the examples
-is inside
+`getWindow`, `getData`, and `getIds` parameters of `timevis()`.
+
+You can view examples of many of the features supported by checking out
+the [demo Shiny app](http://daattali.com/shiny/timevis-demo/). If you
+want to see how those examples were created, the full code for the
+examples is inside
 [inst/example](https://github.com/daattali/timevis/tree/master/inst/example).

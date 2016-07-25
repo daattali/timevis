@@ -91,5 +91,6 @@ You can add a timeline to a Shiny app by adding `timevisOutput()` to the UI and 
 
 There are many functions that allow programmatic manipulation of a timeline. For example, `addItem()` programmatically adds a new item, `centerItem()` moves the timeline so that the given item is centered, `setWindow()` sets the start and end dates of the timeline, and more functions are available.
 
-It is also possible to retrieve data from a timeline in a Shiny app. There are several types of data that are available, such as retriving the IDs of the currently selected items, or getting the data in the timeline (as a dataframe). These data will be available as input variables. For more information, read about the `getSelected`, `getWindow`, `getData`, and `getIds` parameters of `timevis()`. 
+It is also possible to retrieve data from a timeline in a Shiny app. There are several types of data that are available, such as retriving the IDs of the currently selected items, or getting the data in the timeline (as a dataframe). These data will be available as input variables. For more information, read about the `getSelected`, `getWindow`, `getData`, and `getIds` parameters of `timevis()`.
+
 You can view examples of many of the features supported by checking out the [demo Shiny app](http://daattali.com/shiny/timevis-demo/). If you want to see how those examples were created, the full code for the examples is inside [inst/example](https://github.com/daattali/timevis/tree/master/inst/example).
