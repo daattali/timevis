@@ -2,6 +2,7 @@ library(timevis)
 
 fluidPage(
   title = "timevis - An R package for creating timeline visualizations",
+  tags$link(href = "style.css", rel = "stylesheet"),
   div(id = "header",
     div(id = "title",
       "timevis"
@@ -22,7 +23,6 @@ fluidPage(
     tabPanel(
       div(icon("calendar"), "Basic timeline"),
       br(),
-      tags$link(href = "style.css", rel = "stylesheet"),
       timevisOutput("timelineBasic")
     ),
 
