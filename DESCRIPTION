@@ -1,6 +1,6 @@
 Package: timevis
 Title: Create Interactive Timeline Visualizations in R
-Version: 0.1
+Version: 0.1.1
 Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = "R interface"),
