@@ -14,7 +14,7 @@ HTMLWidgets.widget({
 
     var elementId = el.id;
     var container = document.getElementById(elementId);
-    var timeline = new vis.Timeline(container, [], {});
+    var timeline = null;
 
     return {
 
@@ -22,10 +22,16 @@ HTMLWidgets.widget({
         // alias this
         var that = this;
 
-        // attach the timeline object to the DOM
-        container.timeline = timeline;
+        // First time the renderTimevis function is called, initialize
+        if (timeline === null) {
+          timeline = new vis.Timeline(container, [], {});
+
+          // attach the timeline object to the DOM
+          container.timeline = timeline;
+        }
 
         // set the data items
+        timeline.itemsData.clear();
         timeline.itemsData.add(x.items);
         timeline.fit({ animation : false });
 
