@@ -75,19 +75,18 @@
 #' When a timeline widget is created in a Shiny app, there are four pieces of
 #' information that are always accessible as Shiny inputs. These inputs have
 #' special names based on the timeline's id. Suppose that a timeline is created
-#' with an \code{outputId} of "mytime", then the following four input variables
-#' will be available and get updated whenever the user interacts with the
-#' timeline:
+#' with an \code{outputId} of \strong{"mytime"}, then the following four input
+#' variables will be available:
 #' \itemize{
-#'   \item{\strong{\code{input$mytime_data}}} - will return a data.frame with
+#'   \item{\strong{\code{input$mytime_data}}} - will return a data.frame containing
 #'   the data of the items in the timeline. The input is updated every time
 #'   an item is modified, added, or removed.
 #'   \item{\strong{\code{input$mytime_ids}}} - will return the IDs (a vector) of
 #'   all the items in the timeline. The input is updated every time an item
 #'   is added or removed from the timeline.
 #'   \item{\strong{\code{input$mytime_selected}}} - will return the IDs (a vector)
-#'   of the selected items in the timeline. The input is updated every time a
-#'   new item is selected by the user. Note that this will not get updated if
+#'   of the selected items in the timeline. The input is updated every time an
+#'   item is selected or unselected by the user. Note that this will not get updated if
 #'   an item is selected programmatically using
 #'   \code{\link[timevis]{setSelection}}.
 #'   \item{\strong{\code{input$mytime_window}}} - will return a 2-element vector

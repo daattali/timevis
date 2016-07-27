@@ -102,20 +102,19 @@ It is also possible to retrieve data from a timeline in a Shiny app.
 When a timeline widget is created in a Shiny app, there are four pieces
 of information that are always accessible as Shiny inputs. These inputs
 have special names based on the timeline's id. Suppose that a timeline
-is created with an `outputId of` "mytime", then the following four input
-variables will be available and get updated whenever the user interacts
-with the timeline:
+is created with an `outputId` of **"mytime"**, then the following four
+input variables will be available:
 
--   **input$mytime\_data** - will return a data.frame with the data of
-    the items in the timeline. The input is updated every time an item
-    is modified, added, or removed.
+-   **input$mytime\_data** - will return a data.frame containing the
+    data of the items in the timeline. The input is updated every time
+    an item is modified, added, or removed.
 -   **input$mytime\_ids** - will return the IDs (a vector) of all the
     items in the timeline. The input is updated every time an item is
     added or removed from the timeline.
 -   **input$mytime\_selected** - will return the IDs (a vector) of the
-    selected items in the timeline. The input is updated every time a
-    new item is selected by the user. Note that this will not get
-    updated if an item is selected programmatically using the
+    selected items in the timeline. The input is updated every time an
+    item is selected or unselected by the user. Note that this will not
+    get updated if an item is selected programmatically using the
     API functions.
 -   **input$mytime\_window** - will return a 2-element vector containing
     the minimum and maximum dates currently visible in the timeline. The

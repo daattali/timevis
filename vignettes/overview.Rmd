@@ -92,11 +92,11 @@ You can add a timeline to a Shiny app by adding `timevisOutput()` to the UI and 
 There are many functions that allow programmatic manipulation of a timeline. For example, `addItem()` programmatically adds a new item, `centerItem()` moves the timeline so that the given item is centered, `setWindow()` sets the start and end dates of the timeline, and more functions are available. Note that all these
 functions take the timeline's ID as their first argument.
 
-It is also possible to retrieve data from a timeline in a Shiny app. When a timeline widget is created in a Shiny app, there are four pieces of information that are always accessible as Shiny inputs. These inputs have special names based on the timeline's id. Suppose that a timeline is created with an `outputId of` "mytime", then the following four input variables will be available and get updated whenever the user interacts with the timeline:
+It is also possible to retrieve data from a timeline in a Shiny app. When a timeline widget is created in a Shiny app, there are four pieces of information that are always accessible as Shiny inputs. These inputs have special names based on the timeline's id. Suppose that a timeline is created with an `outputId` of **"mytime"**, then the following four input variables will be available:
 
-- **input$mytime_data** - will return a data.frame with the data of the items in the timeline. The input is updated every time an item is modified, added, or removed.
+- **input$mytime_data** - will return a data.frame containing the data of the items in the timeline. The input is updated every time an item is modified, added, or removed.
 - **input$mytime_ids** - will return the IDs (a vector) of all the items in the timeline. The input is updated every time an item is added or removed from the timeline.
-- **input$mytime_selected** - will return the IDs (a vector) of the selected items in the timeline. The input is updated every time a new item is selected by the user. Note that this will not get updated if an item is selected programmatically using the API functions.
+- **input$mytime_selected** - will return the IDs (a vector) of the selected items in the timeline. The input is updated every time an item is selected or unselected by the user. Note that this will not get updated if an item is selected programmatically using the API functions.
 - **input$mytime_window** - will return a 2-element vector containing the minimum and maximum dates currently visible in the timeline. The input is updated every time the viewable window of dates is updated (by zooming or moving the window).
 
 You can view examples of many of the features supported by checking out the [demo Shiny app](http://daattali.com/shiny/timevis-demo/). If you want to see how those examples were created, the full code for the examples is inside [inst/example](https://github.com/daattali/timevis/tree/master/inst/example).
