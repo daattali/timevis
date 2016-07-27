@@ -57,7 +57,7 @@ fluidPage(
           column(
             6,
             div(class = "codeformat",
-              "In R console or interactive R markdown documents"),
+              "In R console or R markdown documents"),
             tags$pre(codeConsole)
           ),
           column(

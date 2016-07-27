@@ -1,3 +1,9 @@
+# timevis 0.1.3
+
+2016-07-27
+
+- timevis can now be included inside regular R markdown documents
+
 # timevis 0.1.2
 
 2016-07-26
