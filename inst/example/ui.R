@@ -48,6 +48,7 @@ fluidPage(
     )
   ),
   tabsetPanel(
+    id = "mainnav",
     tabPanel(
       div(icon("calendar"), "Basic timeline"),
       timevisOutput("timelineBasic"),
@@ -76,7 +77,7 @@ fluidPage(
     ),
 
     tabPanel(
-      div(icon("cog"), "Custom style and parameters"),
+      div(icon("cog"), "Custom style"),
       timevisOutput("timelineCustom"),
       div(class = "sourcecode",
           "The exact code for all the timelines in this app is",

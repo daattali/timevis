@@ -3,6 +3,7 @@
 2016-07-27
 
 - timevis can now be included inside regular R markdown documents
+- add a lot of responsive CSS to make the app look well in smaller screens
 
 # timevis 0.1.2
 
