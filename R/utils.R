@@ -14,7 +14,7 @@ is.bool <- function(x) {
 
 # Convert a data.frame to a list of lists (the data format that D3 uses)
 dataframeToD3 <- function(df) {
-  if (missing(df)) {
+  if (missing(df) || is.null(df)) {
     return(list())
   }
   apply(df, 1, function(row) as.list(row[!is.na(row)]))

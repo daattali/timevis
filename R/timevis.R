@@ -203,7 +203,7 @@
 #'
 #' @seealso \href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 #' @export
-timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
+timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                     options, width = NULL, height = NULL, elementId = NULL) {
 
   # Validate the input data
@@ -217,6 +217,15 @@ timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   if (nrow(data) > 0 &&
       (!"start" %in% colnames(data) || anyNA(data[['start']]))) {
     stop("timevis: 'data' must contain a 'start' date for each item",
+         call. = FALSE)
+  }
+  if (!missing(groups) && !is.data.frame(groups)) {
+    stop("timevis: 'groups' must be a data.frame",
+         call. = FALSE)
+  }
+  if (!missing(groups) && nrow(groups) > 0 &&
+      (!"id" %in% colnames(groups) || !"content" %in% colnames(groups) )) {
+    stop("timevis: 'groups' must contain a 'content' and 'id' variables",
          call. = FALSE)
   }
   if (!is.bool(showZoom)) {
@@ -240,10 +249,16 @@ timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   }
 
   items <- dataframeToD3(data)
+  if (missing(groups)) {
+    groups <- NULL
+  } else {
+    groups <- dataframeToD3(groups)
+  }
 
   # forward options using x
   x = list(
     items = items,
+    groups = groups,
     showZoom = showZoom,
     zoomFactor = zoomFactor,
     fit = fit,

@@ -95,9 +95,10 @@ HTMLWidgets.widget({
           }
         }
 
-        // set the data items
+        // set the data items and groups
         timeline.itemsData.clear();
         timeline.itemsData.add(x.items);
+        timeline.setGroups(x.groups);
 
         // fit the items on the timeline
         if (x.fit) {
@@ -248,6 +249,16 @@ if (HTMLWidgets.shinyMode){
         el.timeline.itemsData.clear();
         var items = message.data;
         el.timeline.itemsData.add(items);
+      }
+  });
+
+  Shiny.addCustomMessageHandler(
+    "timevis:setGroups", function(message) {
+      var el = document.getElementById(message.id);
+      if (el) {
+        el.timeline.groupsData.clear();
+        var items = message.data;
+        el.timeline.groupsData.add(items);
       }
   });
 

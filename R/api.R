@@ -283,6 +283,39 @@ setItems <- function(id, data) {
   callJS(method)
 }
 
+#' Set the groups of a timeline
+#' @param id Timeline id
+#' @param data A dataframe containing the groups data to use.
+#' @examples
+#' if (interactive()) {
+#' library(shiny)
+#' shinyApp(
+#'   ui = fluidPage(
+#'     timevisOutput("timeline"),
+#'     actionButton("btn", "Change group names")
+#'   ),
+#'   server = function(input, output) {
+#'     output$timeline <- renderTimevis(
+#'       timevis(data = data.frame(start = c(Sys.Date(), Sys.Date() + 1),
+#'                          content = c("one", "two"),
+#'                          group = 1:2),
+#'               groups = data.frame(id = 1:2, content = c("G1", "G2")))
+#'
+#'     )
+#'     observeEvent(input$btn, {
+#'       setGroups("timeline",
+#'                data.frame(id = 1:2, content = c("Group 1", "Group 2")))
+#'     })
+#'   }
+#' )
+#' }
+#' @export
+setGroups <- function(id, data) {
+  method <- "setGroups"
+  data <- dataframeToD3(data)
+  callJS(method)
+}
+
 #' Update the configuration options of a timeline
 #' @param id Timeline id
 #' @param options A named list containing updated configuration options to use.

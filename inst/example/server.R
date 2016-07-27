@@ -12,6 +12,10 @@ function(input, output, session) {
     timevis(dataWC)
   })
 
+  output$timelineGroups <- renderTimevis({
+    timevis(data = dataGroups, groups = groups, options = list(editable = TRUE))
+  })
+
   output$timelineCustom <- renderTimevis({
     config <- list(
       editable = TRUE,

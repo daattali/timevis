@@ -70,6 +70,10 @@ body {
   padding-top: 40px;
 }
 
+.vis-item .vis-item-overflow {
+  overflow: visible;
+}
+
 #samplecode {
   margin: 50px -15px 0;
   padding: 20px 25px;

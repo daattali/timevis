@@ -6,8 +6,8 @@
 \alias{timevis-package}
 \title{Create a timeline visualization}
 \usage{
-timevis(data, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE, options,
-  width = NULL, height = NULL, elementId = NULL)
+timevis(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
+  options, width = NULL, height = NULL, elementId = NULL)
 }
 \arguments{
 \item{data}{A dataframe containing the timeline items. Each item on the

@@ -50,3 +50,29 @@ dataWC <- data.frame(
     templateWC("final", "Germany", "Argentina", 1, 0)
   )
 )
+
+# Data for groups example
+dataGroups <- data.frame(
+  id = 1:11,
+  content = c("Open", "Open",
+              "Open", "Open", "Half price entry",
+              "Staff meeting", "Open", "Adults only", "Open", "Hot tub closes",
+              "Siesta"),
+  start = c("2016-05-01 07:30:00", "2016-05-01 14:00:00",
+            "2016-05-01 06:00:00", "2016-05-01 14:00:00", "2016-05-01 08:00:00",
+            "2016-05-01 08:00:00", "2016-05-01 08:30:00", "2016-05-01 14:00:00",
+            "2016-05-01 16:00:00", "2016-05-01 19:30:00",
+            "2016-05-01 12:00:00"),
+  end   = c("2016-05-01 12:00:00", "2016-05-01 20:00:00",
+            "2016-05-01 12:00:00", "2016-05-01 22:00:00", "2016-05-01 10:00:00",
+            "2016-05-01 08:30:00", "2016-05-01 12:00:00", "2016-05-01 16:00:00",
+            "2016-05-01 20:00:00", NA,
+            "2016-05-01 14:00:00"),
+  group = c(rep("lib", 2), rep("gym", 3), rep("pool", 5), NA),
+  type = c(rep("range", 9), "point", "background")
+)
+
+groups <- data.frame(
+  id = c("lib", "gym", "pool"),
+  content = c("Library", "Gym", "Pool")
+)

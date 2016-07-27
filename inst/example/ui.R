@@ -96,6 +96,16 @@ fluidPage(
     ),
 
     tabPanel(
+      div(icon("bars"), "Groups"),
+      timevisOutput("timelineGroups"),
+      div(class = "sourcecode",
+          "The exact code for all the timelines in this app is",
+          tags$a(href = "https://github.com/daattali/timevis/tree/master/inst/example",
+                 "on GitHub")
+      )
+    ),
+
+    tabPanel(
       div(icon("sliders"), "Fully interactive"),
       fluidRow(
         column(
