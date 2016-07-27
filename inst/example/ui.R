@@ -41,7 +41,7 @@ fluidPage(
         "By",
         tags$a(href = "http://deanattali.com/", "Dean Attali"),
         HTML("&bull;"),
-        "Package & examples",
+        "Available",
         tags$a(href = "https://github.com/daattali/timevis", "on GitHub"),
         HTML("&bull;"),
         tags$a(href = "http://daattali.com/shiny/", "More apps"), "by Dean"

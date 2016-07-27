@@ -28,8 +28,7 @@ function(input, output, session) {
       editable = TRUE,
       multiselect = TRUE
     )
-    timevis(dataBasic, getSelected = TRUE, getData = TRUE, getIds = TRUE,
-                getWindow = TRUE, options = config)
+    timevis(dataBasic, options = config)
   })
 
   output$selected <- renderText(

@@ -15,7 +15,7 @@
   top: 5px;
   z-index: 15;
 }
-.timevis.html-widget .zoom-menu.show-zoom {
+.timevis.html-widget .zoom-menu[data-show-zoom] {
   display: block;
 }
 .timevis.html-widget .zoom-menu .btn {

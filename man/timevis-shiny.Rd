@@ -64,7 +64,7 @@ ui <- fluidPage(
 server <- function(input, output) {
   output$appts <- renderTimevis(
     timevis(
-      data, getSelected = TRUE, getData = TRUE, getWindow = TRUE,
+      data,
       options = list(editable = TRUE, multiselect = TRUE, align = "center")
     )
   )

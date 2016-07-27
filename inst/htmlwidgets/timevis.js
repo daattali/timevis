@@ -14,7 +14,8 @@ HTMLWidgets.widget({
 
     var elementId = el.id;
     var container = document.getElementById(elementId);
-    var timeline = null;
+    var timeline = new vis.Timeline(container, [], {});
+    var initialized = false;
 
     return {
 
@@ -22,45 +23,35 @@ HTMLWidgets.widget({
         // alias this
         var that = this;
 
-        // First time the renderTimevis function is called, initialize
-        if (timeline === null) {
-          timeline = new vis.Timeline(container, [], {});
+        if (!initialized) {
+          initialized = true;
 
           // attach the timeline object to the DOM
           container.timeline = timeline;
-        }
 
-        // set the data items
-        timeline.itemsData.clear();
-        timeline.itemsData.add(x.items);
-        timeline.fit({ animation : false });
-
-        // Show and initialize the zoom buttons
-        if (x.showZoom) {
+          // Set up the zoom button click listeners
           var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
-          zoomMenu.className += " show-zoom";
           zoomMenu.getElementsByClassName("zoom-in")[0]
             .onclick = function(ev) { that.zoomIn(x.zoomFactor); };
           zoomMenu.getElementsByClassName("zoom-out")[0]
             .onclick = function(ev) { that.zoomOut(x.zoomFactor); };
-        }
 
-        // set listeners to events the user wants to know about
-        if (HTMLWidgets.shinyMode){
-          if (x.getSelected) {
+          // set listeners to events and pass data back to Shiny
+          if (HTMLWidgets.shinyMode) {
+
+            // Items have been manually selected
             timeline.on('select', function (properties) {
               Shiny.onInputChange(
                 elementId + "_selected",
                 properties.items
               );
             });
-            // Also send the initial data when the widget starts
             Shiny.onInputChange(
               elementId + "_selected",
               timeline.getSelection()
             );
-          }
-          if (x.getWindow) {
+
+            // The range of the window has changes (by dragging or zooming)
             timeline.on('rangechanged', function (properties) {
               Shiny.onInputChange(
                 elementId + "_window",
@@ -71,8 +62,8 @@ HTMLWidgets.widget({
               elementId + "_window",
               [timeline.getWindow().start, timeline.getWindow().end]
             );
-          }
-          if (x.getData) {
+
+            // The data in the timeline has changed
             timeline.itemsData.on('*', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_data" + ":timevisDF",
@@ -83,8 +74,8 @@ HTMLWidgets.widget({
               elementId + "_data" + ":timevisDF",
               timeline.itemsData.get()
             );
-          }
-          if (x.getIds) {
+
+            // An item was added or removed, send back the list of IDs
             timeline.itemsData.on('add', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_ids",
@@ -102,6 +93,23 @@ HTMLWidgets.widget({
               timeline.itemsData.getIds()
             );
           }
+        }
+
+        // set the data items
+        timeline.itemsData.clear();
+        timeline.itemsData.add(x.items);
+
+        // fit the items on the timeline
+        if (x.fit) {
+          timeline.fit({ animation : false });
+        }
+
+        // Show or hide the zoom button
+        var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
+        if (x.showZoom) {
+          zoomMenu.setAttribute("data-show-zoom", true);
+        } else {
+          zoomMenu.removeAttribute("data-show-zoom");
         }
 
         // set the custom configuration options

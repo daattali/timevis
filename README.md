@@ -95,14 +95,32 @@ There are many functions that allow programmatic manipulation of a
 timeline. For example, `addItem()` programmatically adds a new item,
 `centerItem()` moves the timeline so that the given item is centered,
 `setWindow()` sets the start and end dates of the timeline, and more
-functions are available.
+functions are available. Note that all these functions take the
+timeline's ID as their first argument.
 
 It is also possible to retrieve data from a timeline in a Shiny app.
-There are several types of data that are available, such as retriving
-the IDs of the currently selected items, or getting the data in the
-timeline (as a dataframe). These data will be available as input
-variables. For more information, read about the `getSelected`,
-`getWindow`, `getData`, and `getIds` parameters of `timevis()`.
+When a timeline widget is created in a Shiny app, there are four pieces
+of information that are always accessible as Shiny inputs. These inputs
+have special names based on the timeline's id. Suppose that a timeline
+is created with an `outputId of` "mytime", then the following four input
+variables will be available and get updated whenever the user interacts
+with the timeline:
+
+-   **input$mytime\_data** - will return a data.frame with the data of
+    the items in the timeline. The input is updated every time an item
+    is modified, added, or removed.
+-   **input$mytime\_ids** - will return the IDs (a vector) of all the
+    items in the timeline. The input is updated every time an item is
+    added or removed from the timeline.
+-   **input$mytime\_selected** - will return the IDs (a vector) of the
+    selected items in the timeline. The input is updated every time a
+    new item is selected by the user. Note that this will not get
+    updated if an item is selected programmatically using the
+    API functions.
+-   **input$mytime\_window** - will return a 2-element vector containing
+    the minimum and maximum dates currently visible in the timeline. The
+    input is updated every time the viewable window of dates is updated
+    (by zooming or moving the window).
 
 You can view examples of many of the features supported by checking out
 the [demo Shiny app](http://daattali.com/shiny/timevis-demo/). If you

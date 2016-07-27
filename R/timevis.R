@@ -27,8 +27,7 @@
 #'   \item{\strong{\code{id}}} - An id for the item. Using an id is not required
 #'   but highly recommended. An id is needed when removing or selecting items
 #'   (using \code{\link[timevis]{removeItem}} or
-#'   \code{\link[timevis]{setSelection}}) or when requesting to return
-#'   selected items (using \code{getSelected}).
+#'   \code{\link[timevis]{setSelection}}).
 #'   \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
 #'   'point', 'range', or 'background'. Types 'box' and 'point' need only a
 #'   start date, types 'range' and 'background' need both a start and end date.
@@ -52,30 +51,9 @@
 #' a \code{zoomFactor} of 0.5, the timeline will show 30 days, and zooming out
 #' again will show 45 days. Similarly, zooming out from 20 days with a
 #' \code{zoomFactor} of 1 will results in showing 40 days.
-#' @param getSelected If \code{TRUE}, then the selected items will
-#' be accessible as a Shiny input. The input returns the ids of the selected
-#' items and will be updated every time a new
-#' item is selected by the user. The input name will be the timeline's id
-#' appended by "_selected". For example, if the timeline \code{outputId}
-#' is "mytimeline", then use \code{input$mytimeline_selected}.
-#' @param getData If \code{TRUE}, then the items data will be accessible as a
-#' Shiny input. The input returns a dataframe and will be updated every time
-#' an item is modified, added, or removed. The input name will be the timeline's
-#' id appended by "_data". For example, if the timeline \code{outputId} is
-#' "mytimeline", then use \code{input$mytimeline_data}.
-#' @param getIds If \code{TRUE}, then the IDs of the data items will be
-#' accessible as a Shiny input. The input returns a vector of IDs and will be
-#' updated every time an item is added or removed from the timeline. The input
-#' name will be the timeline's id appended by "_ids". For example, if the
-#' timeline \code{outputId} is "mytimeline", then use
-#' \code{input$mytimeline_ids}.
-#' @param getWindow If \code{TRUE}, then the current visible window will be
-#' accessible as a Shiny input. The input returns a 2-element vector containing
-#' the minimum and maximum dates currently visible in the timeline. The input
-#' will be updated every time the window is updated (by zooming or moving).
-#' The input name will be the timeline's id appended by "_window". For example,
-#' if the timeline \code{outputId} is "mytimeline", then use
-#' \code{input$mytimeline_window}.
+#' @param fit If \code{TRUE}, then fit all the data on the timeline when the
+#' timeline initializes. Otherwise, the timeline will be set to show the
+#' current date.
 #' @param options A named list containing any extra configuration options to
 #' customize the timeline. All available options can be found in the
 #' \href{http://visjs.org/docs/timeline/#Configuration_Options}{official
@@ -92,9 +70,33 @@
 #' automatically.
 #' @param elementId Use an explicit element ID for the widget (rather than an
 #' automatically generated one). Ignored when used in a Shiny app.
-#'
 #' @return A timeline visualization \code{htmlwidgets} object
-#'
+#' @section Getting data out of a timeline in Shiny:
+#' When a timeline widget is created in a Shiny app, there are four pieces of
+#' information that are always accessible as Shiny inputs. These inputs have
+#' special names based on the timeline's id. Suppose that a timeline is created
+#' with an \code{outputId} of "mytime", then the following four input variables
+#' will be available and get updated whenever the user interacts with the
+#' timeline:
+#' \itemize{
+#'   \item{\strong{\code{input$mytime_data}}} - will return a data.frame with
+#'   the data of the items in the timeline. The input is updated every time
+#'   an item is modified, added, or removed.
+#'   \item{\strong{\code{input$mytime_ids}}} - will return the IDs (a vector) of
+#'   all the items in the timeline. The input is updated every time an item
+#'   is added or removed from the timeline.
+#'   \item{\strong{\code{input$mytime_selected}}} - will return the IDs (a vector)
+#'   of the selected items in the timeline. The input is updated every time a
+#'   new item is selected by the user. Note that this will not get updated if
+#'   an item is selected programmatically using
+#'   \code{\link[timevis]{setSelection}}.
+#'   \item{\strong{\code{input$mytime_window}}} - will return a 2-element vector
+#'   containing the minimum and maximum dates currently visible in the timeline.
+#'   The input is updated every time the viewable window of dates is updated
+#'   (by zooming or moving the window).
+#' }
+#' All four inputs will return a value upon initialization of the timeline and
+#' every time the corresponding value is updated.
 #' @examples
 #' # For more examples, see http://daattali.com/shiny/timevis-demo/
 #'
@@ -180,7 +182,7 @@
 #' server <- function(input, output) {
 #'   output$appts <- renderTimevis(
 #'     timevis(
-#'       data, getSelected = TRUE, getData = TRUE, getWindow = TRUE,
+#'       data,
 #'       options = list(editable = TRUE, multiselect = TRUE, align = "center")
 #'     )
 #'   )
@@ -202,10 +204,8 @@
 #'
 #' @seealso \href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 #' @export
-timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
-                        getSelected = FALSE, getData = FALSE, getIds = FALSE,
-                        getWindow = FALSE, options, width = NULL, height = NULL,
-                        elementId = NULL) {
+timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
+                    options, width = NULL, height = NULL, elementId = NULL) {
 
   # Validate the input data
   if (missing(data)) {
@@ -228,20 +228,8 @@ timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
     stop("timevis: 'zoomFactor' must be a positive number",
          call. = FALSE)
   }
-  if (!is.bool(getSelected)) {
-    stop("timevis: 'getSelected' must be either 'TRUE' or 'FALSE'",
-         call. = FALSE)
-  }
-  if (!is.bool(getData)) {
-    stop("timevis: 'getData' must be either 'TRUE' or 'FALSE'",
-         call. = FALSE)
-  }
-  if (!is.bool(getIds)) {
-    stop("timevis: 'getIds' must be either 'TRUE' or 'FALSE'",
-         call. = FALSE)
-  }
-  if (!is.bool(getWindow)) {
-    stop("timevis: 'getWindow' must be either 'TRUE' or 'FALSE'",
+  if (!is.bool(fit)) {
+    stop("timevis: 'fit' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
   }
   if (missing(options) || is.null(options)) {
@@ -259,10 +247,7 @@ timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
     items = items,
     showZoom = showZoom,
     zoomFactor = zoomFactor,
-    getSelected = getSelected,
-    getData = getData,
-    getIds = getIds,
-    getWindow = getWindow,
+    fit = fit,
     options = options,
     height = height
   )
@@ -338,7 +323,7 @@ timevis <- function(data, showZoom = TRUE, zoomFactor = 0.5,
 #' server <- function(input, output) {
 #'   output$appts <- renderTimevis(
 #'     timevis(
-#'       data, getSelected = TRUE, getData = TRUE, getWindow = TRUE,
+#'       data,
 #'       options = list(editable = TRUE, multiselect = TRUE, align = "center")
 #'     )
 #'   )
