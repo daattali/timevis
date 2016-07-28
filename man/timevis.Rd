@@ -71,7 +71,7 @@ GitHub.
 \section{Data format}{
 
 The \code{data} parameter supplies the input dataframe that describes the
-items in the timeline. The following variables are supported
+items in the timeline. The following variables are supported:
 \itemize{
   \item{\strong{\code{start}}} - (required) The start date of the item, for
   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
@@ -110,8 +110,8 @@ items in the timeline. The following variables are supported
 item, while the rest of the variables are optional. If you include a variable
 that is only used for some rows, you can use \code{NA} for the rows where
 it's not used. The items data of a timeline can either be set by supplying
-the \code{data} argument to \code{timevis()}, or by calling the
-\code{\link[timevis]{setItems()}} function.
+the \code{data} argument to \code{timevis}, or by calling the
+\code{\link[timevis]{setItems}} function.
 }
 
 \section{Groups}{
@@ -141,8 +141,8 @@ rooms, or other resources next to each other.
 while the rest of the variables are optional. If you include a variable that
 is only used for some rows, you can use \code{NA} for the rows where it's
 not used. The groups data of a timeline can either be set by supplying the
-\code{groups} argument to \code{timevis()}, or by calling the
-\code{\link[timevis]{setGroups()}} function.
+\code{groups} argument to \code{timevis}, or by calling the
+\code{\link[timevis]{setGroups}} function.
 }
 
 \section{Getting data out of a timeline in Shiny}{

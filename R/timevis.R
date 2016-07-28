@@ -87,8 +87,8 @@
 #' item, while the rest of the variables are optional. If you include a variable
 #' that is only used for some rows, you can use \code{NA} for the rows where
 #' it's not used. The items data of a timeline can either be set by supplying
-#' the \code{data} argument to \code{timevis()}, or by calling the
-#' \code{\link[timevis]{setItems()}} function.
+#' the \code{data} argument to \code{timevis}, or by calling the
+#' \code{\link[timevis]{setItems}} function.
 #' @section Groups:
 #' The \code{groups} parameter must be provided if the data items have groups
 #' (if any of the items have a \code{group} variable). When using groups, all
@@ -115,8 +115,8 @@
 #' while the rest of the variables are optional. If you include a variable that
 #' is only used for some rows, you can use \code{NA} for the rows where it's
 #' not used. The groups data of a timeline can either be set by supplying the
-#' \code{groups} argument to \code{timevis()}, or by calling the
-#' \code{\link[timevis]{setGroups()}} function.
+#' \code{groups} argument to \code{timevis}, or by calling the
+#' \code{\link[timevis]{setGroups}} function.
 #' @section Getting data out of a timeline in Shiny:
 #' When a timeline widget is created in a Shiny app, there are four pieces of
 #' information that are always accessible as Shiny inputs. These inputs have
