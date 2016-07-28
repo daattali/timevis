@@ -89,7 +89,7 @@ items by selecting them.
 
 ### Groups
 
-You can use the groups feature group together multiple items inside
+You can use the groups feature to group together multiple items into
 different "buckets". When using groups, all items with the same group
 are placed on one line. A vertical axis is displayed showing the group
 names. Grouping items can be useful for a wide range of applications,

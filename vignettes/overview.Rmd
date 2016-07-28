@@ -87,7 +87,7 @@ If you set the `editable = TRUE` option, then the user will be able to add new i
 
 ### Groups
 
-You can use the groups feature group together multiple items inside different "buckets". When using groups, all items with the same group are placed on one line. A vertical axis is displayed showing the group names. Grouping items can be useful for a wide range of applications, for example when showing availability of multiple people, rooms, or other resources next to each other. You can also think of groups as "adding a Y axis", if that helps.
+You can use the groups feature to group together multiple items into different "buckets". When using groups, all items with the same group are placed on one line. A vertical axis is displayed showing the group names. Grouping items can be useful for a wide range of applications, for example when showing availability of multiple people, rooms, or other resources next to each other. You can also think of groups as "adding a Y axis", if that helps.
 
 Here is an example of a timeline that has three groups: "Library", "Gym", and "Pool":
 
