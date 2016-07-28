@@ -67,7 +67,7 @@ timevis(data)
 
 ![Basic timeline](../inst/img/basic.png)
 
-Every item must have a `content` and a `start` variable. If the item is a range rather than a single point in time, you can supply an `end` as well. `id` is only required if you want to access or manipulate an item. There are more variables that can be used in the data.frame -- they are all documented in the documentation for `?timevis()`.
+Every item must have a `content` and a `start` variable. If the item is a range rather than a single point in time, you can supply an `end` as well. `id` is only required if you want to access or manipulate an item. There are more variables that can be used in the data.frame -- they are all documented in the help file for `?timevis()` under the **Data format** section.
 
 The content of an item can even include HTML, which makes it easy to show any kind of data in a timeline, such as the matches of the 2014 World Cup:
 
@@ -84,6 +84,16 @@ By default, a timeline will show the current date as a red vertical line and wil
 The timeline lets the user interact with it seamlessly. You can click on the zoom in/out buttons or drag the timeline left/right in order to move to past/future dates.
 
 If you set the `editable = TRUE` option, then the user will be able to add new items by double clicking, modify items by dragging, and delete items by selecting them.
+
+### Groups
+
+You can use the groups feature group together multiple items inside different "buckets". When using groups, all items with the same group are placed on one line. A vertical axis is displayed showing the group names. Grouping items can be useful for a wide range of applications, for example when showing availability of multiple people, rooms, or other resources next to each other. You can also think of groups as "adding a Y axis", if that helps.
+
+Here is an example of a timeline that has three groups: "Library", "Gym", and "Pool":
+
+![Groups timeline](../inst/img/groups.png)
+
+In order to use groups, items in the data need to have group ids, and a separate dataframe containing the group information needs to be provided. More information about using groups and the groups dataframe is available in the help file for `?timevis()` under the **Groups** section.
 
 ### In a Shiny app
 

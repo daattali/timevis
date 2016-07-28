@@ -48,7 +48,8 @@
 #' @return A timeline visualization \code{htmlwidgets} object
 #' @section Data format:
 #' The \code{data} parameter supplies the input dataframe that describes the
-#' items in the timeline. The following variables are supported:
+#' items in the timeline. The following variables are supported for the items
+#' dataframe:
 #' \itemize{
 #'   \item{\strong{\code{start}}} - (required) The start date of the item, for
 #'   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
@@ -72,7 +73,7 @@
 #'   have its start/end dates modified by clicking on it.
 #'   \item{\strong{\code{group}}} - The id of a group. When a \code{group} is
 #'   provided, all items with the same group are placed on one line. A vertical
-#'   axis is displayed showing the groups. See more details in the
+#'   axis is displayed showing the group names. See more details in the
 #'   \strong{Groups} section below.
 #'   \item{\strong{\code{subgroup}}} - The id of a subgroup. Groups all items
 #'   within a group per subgroup, and positions them on the same height instead
@@ -93,9 +94,11 @@
 #' The \code{groups} parameter must be provided if the data items have groups
 #' (if any of the items have a \code{group} variable). When using groups, all
 #' items with the same group are placed on one line. A vertical axis is
-#' displayed showing the groups. Grouping items can be useful for a wide range
+#' displayed showing the group names. Grouping items can be useful for a wide range
 #' of applications, for example when showing availability of multiple people,
-#' rooms, or other resources next to each other.
+#' rooms, or other resources next to each other. You can also think of groups as
+#' "adding a Y axis", if that helps. The following variables are supported in
+#' the groups dataframe:
 #' \itemize{
 #'   \item{\strong{\code{id}}} - (required) An id for the group. The group will
 #'   display all items having a \code{group} variable which matches this id.
