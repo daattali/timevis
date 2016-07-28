@@ -13,36 +13,11 @@
 #'
 #' @param data A dataframe containing the timeline items. Each item on the
 #' timeline is represented by a row in the dataframe. \code{start} and
-#' \code{content} are required for each item, while the rest of the variables
-#' are optional (if you include a variable that is only used for some rows,
-#' you can use \code{NA} for the other rows). The supported variables are:
-#' \itemize{
-#'   \item{\strong{\code{start}}} - (required) The start date of the item, for
-#'   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
-#'   \item{\strong{\code{content}}} - (required) The contents of the item. This
-#'   can be plain text or HTML code.
-#'   \item{\strong{\code{end}}} - The end date of the item. The end date is
-#'   optional. If end date is provided, the item is displayed as a range. If
-#'   not, the item is displayed as a single point on the timeline.
-#'   \item{\strong{\code{id}}} - An id for the item. Using an id is not required
-#'   but highly recommended. An id is needed when removing or selecting items
-#'   (using \code{\link[timevis]{removeItem}} or
-#'   \code{\link[timevis]{setSelection}}).
-#'   \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
-#'   'point', 'range', or 'background'. Types 'box' and 'point' need only a
-#'   start date, types 'range' and 'background' need both a start and end date.
-#'   \item{\strong{\code{title}}} - Add a title for the item, displayed when
-#'   hovering the mouse over the item. The title can only contain plain text.
-#'   \item{\strong{\code{editable}}} - if \code{TRUE}, the item can be
-#'   manipulated with the mouse. Overrides the global \code{editable}
-#'   configuration option if it is set. An editable item can be removed or
-#'   have its start/end dates modified by clicking on it.
-#'   remove it or
-#'   \item{\strong{\code{className}}} - A className can be used to give items an
-#'   individual CSS style.
-#'   \item{\strong{\code{style}}} - A CSS text string to apply custom styling
-#'   for an individual item, for example \code{color: red;}.
-#' }
+#' \code{content} are required for each item, while several other variables
+#' are also supported. See the \strong{Data format} section below for more
+#' details.
+#' @param groups A dataframe containing the groups data (optional). See the
+#' \strong{Groups} section below for more details.
 #' @param showZoom If \code{TRUE} (default), then include "Zoom In"/"Zoom Out"
 #' buttons on the widget.
 #' @param zoomFactor How much to zoom when zooming out. A zoom factor of 0.5
@@ -71,6 +46,77 @@
 #' @param elementId Use an explicit element ID for the widget (rather than an
 #' automatically generated one). Ignored when used in a Shiny app.
 #' @return A timeline visualization \code{htmlwidgets} object
+#' @section Data format:
+#' The \code{data} parameter supplies the input dataframe that describes the
+#' items in the timeline. The following variables are supported:
+#' \itemize{
+#'   \item{\strong{\code{start}}} - (required) The start date of the item, for
+#'   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
+#'   \item{\strong{\code{content}}} - (required) The contents of the item. This
+#'   can be plain text or HTML code.
+#'   \item{\strong{\code{end}}} - The end date of the item. The end date is
+#'   optional. If end date is provided, the item is displayed as a range. If
+#'   not, the item is displayed as a single point on the timeline.
+#'   \item{\strong{\code{id}}} - An id for the item. Using an id is not required
+#'   but highly recommended. An id is needed when removing or selecting items
+#'   (using \code{\link[timevis]{removeItem}} or
+#'   \code{\link[timevis]{setSelection}}).
+#'   \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
+#'   'point', 'range', or 'background'. Types 'box' and 'point' need only a
+#'   start date, types 'range' and 'background' need both a start and end date.
+#'   \item{\strong{\code{title}}} - Add a title for the item, displayed when
+#'   hovering the mouse over the item. The title can only contain plain text.
+#'   \item{\strong{\code{editable}}} - If \code{TRUE}, the item can be
+#'   manipulated with the mouse. Overrides the global \code{editable}
+#'   configuration option if it is set. An editable item can be removed or
+#'   have its start/end dates modified by clicking on it.
+#'   \item{\strong{\code{group}}} - The id of a group. When a \code{group} is
+#'   provided, all items with the same group are placed on one line. A vertical
+#'   axis is displayed showing the groups. See more details in the
+#'   \strong{Groups} section below.
+#'   \item{\strong{\code{subgroup}}} - The id of a subgroup. Groups all items
+#'   within a group per subgroup, and positions them on the same height instead
+#'   of stacking them on top of each other. See more details in the
+#'   \strong{Groups} section below.
+#'   \item{\strong{\code{className}}} - A className can be used to give items an
+#'   individual CSS style.
+#'   \item{\strong{\code{style}}} - A CSS text string to apply custom styling
+#'   for an individual item, for example \code{color: red;}.
+#' }
+#' \code{start} and \code{content} are the only required variables for each
+#' item, while the rest of the variables are optional. If you include a variable
+#' that is only used for some rows, you can use \code{NA} for the rows where
+#' it's not used. The items data of a timeline can either be set by supplying
+#' the \code{data} argument to \code{timevis()}, or by calling the
+#' \code{\link[timevis]{setItems()}} function.
+#' @section Groups:
+#' The \code{groups} parameter must be provided if the data items have groups
+#' (if any of the items have a \code{group} variable). When using groups, all
+#' items with the same group are placed on one line. A vertical axis is
+#' displayed showing the groups. Grouping items can be useful for a wide range
+#' of applications, for example when showing availability of multiple people,
+#' rooms, or other resources next to each other.
+#' \itemize{
+#'   \item{\strong{\code{id}}} - (required) An id for the group. The group will
+#'   display all items having a \code{group} variable which matches this id.
+#'   \item{\strong{\code{content}}} - (required) The contents of the group. This
+#'   can be plain text or HTML code.
+#'   \item{\strong{\code{title}}} - Add a title for the group, displayed when
+#'   hovering the mouse over the group's label. The title can only contain
+#'   plain text.
+#'   \item{\strong{\code{subgroupOrder}}} - Order the subgroups by a field name.
+#'   By default, groups are ordered by first-come, first-show
+#'   \item{\strong{\code{className}}} - A className can be used to give groups
+#'   an individual CSS style.
+#'   \item{\strong{\code{style}}} - A CSS text string to apply custom styling
+#'   for an individual group label, for example \code{color: red;}.
+#' }
+#' \code{id} and \code{content} are the only required variables for each group,
+#' while the rest of the variables are optional. If you include a variable that
+#' is only used for some rows, you can use \code{NA} for the rows where it's
+#' not used. The groups data of a timeline can either be set by supplying the
+#' \code{groups} argument to \code{timevis()}, or by calling the
+#' \code{\link[timevis]{setGroups()}} function.
 #' @section Getting data out of a timeline in Shiny:
 #' When a timeline widget is created in a Shiny app, there are four pieces of
 #' information that are always accessible as Shiny inputs. These inputs have
@@ -157,6 +203,15 @@
 #'              editable = c(TRUE, FALSE),
 #'              style = c(NA, "background: red; color: white;"))
 #' )
+#'
+#'
+#' ### Using groups
+#' timevis(data = data.frame(
+#'   start = c(Sys.Date(), Sys.Date(), Sys.Date() + 1, Sys.Date() + 2),
+#'   content = c("one", "two", "three", "four"),
+#'   group = c(1, 2, 1, 2)),
+#'   groups = data.frame(id = 1:2, content = c("G1", "G2"))
+#'  )
 #'
 #'
 #' ### Getting data out of the timeline into Shiny

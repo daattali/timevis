@@ -296,9 +296,10 @@ setItems <- function(id, data) {
 #'   ),
 #'   server = function(input, output) {
 #'     output$timeline <- renderTimevis(
-#'       timevis(data = data.frame(start = c(Sys.Date(), Sys.Date() + 1),
-#'                          content = c("one", "two"),
-#'                          group = 1:2),
+#'       timevis(data = data.frame(
+#'                start = c(Sys.Date(), Sys.Date(), Sys.Date() + 1, Sys.Date() + 2),
+#'                          content = c("one", "two", "three", "four"),
+#'                          group = c(1, 2, 1, 2)),
 #'               groups = data.frame(id = 1:2, content = c("G1", "G2")))
 #'
 #'     )

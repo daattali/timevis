@@ -12,7 +12,7 @@
 - fix bug: When re-rendering a timeline, the old data are not removed (#3)
 - removed the `getData` `getWindow` `getIds` `getSelected` parameters and instead just return that info always (#4)
 - add `fit` param to `timevis()` that determines if to fit the items on the timeline by default or not
-- added support for groups (#1)
+- **BREAKING CHANGE** added support for groups (#1) (parameter order for `timevis()` has changed)
 
 # timevis 0.1.1
 
