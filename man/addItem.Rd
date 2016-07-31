@@ -15,6 +15,10 @@ addItem(id, data)
 Add a single item to a timeline
 }
 \examples{
+
+timevis() \%>\%
+  addItem(list(start = Sys.Date(), content = "Today"))
+
 if (interactive()) {
 library(shiny)
 shinyApp(

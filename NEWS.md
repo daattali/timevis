@@ -3,7 +3,8 @@
 2016-07-31
 
 - all the API functions can now work on timeline widgets that are not yet initialized, which means they can work in rmarkdown documents or in the console
-- all the API functions can now work with pipes (%>% pipelines)
+- all the API functions can now work with pipes (`%>%` pipelines)
+- the API functions can accept either an ID of a widget or a widget object. This is useful because now the API functions can either be called from the server of a Shiny app at any point, or they can be called directly using the widget when it is being initialized
 
 # timevis 0.1.3
 

@@ -148,17 +148,19 @@
 #' @examples
 #' # For more examples, see http://daattali.com/shiny/timevis-demo/
 #'
-#' ### Most basic
+#' #----------------------- Most basic
 #' timevis()
 #'
-#' ### Minimal data
+#' #----------------------- Minimal data
 #' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
 #'              start = c("2016-01-10", "2016-01-12"))
 #' )
 #'
-#' ### Hide the zoom buttons, allow items to be editable (add/remove/modify)
+#' #-----------------------
+#'
+#' #----------------------- Hide the zoom buttons, allow items to be editable (add/remove/modify)
 #' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
@@ -167,7 +169,7 @@
 #'   options = list(editable = TRUE, height = "400px")
 #' )
 #'
-#' ### Items can be a single point or a range, and can contain HTML
+#' #----------------------- Items can be a single point or a range, and can contain HTML
 #' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two<br><h3>HTML is supported</h3>"),
@@ -175,7 +177,7 @@
 #'              end = c("2016-01-14", NA))
 #' )
 #'
-#' ### Alternative look for each item
+#' #----------------------- Alternative look for each item
 #' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("one", "two"),
@@ -184,7 +186,7 @@
 #'              type = c("background", "point"))
 #' )
 #'
-#' ### Using a function in the configuration options
+#' #----------------------- Using a function in the configuration options
 #' timevis(
 #'   data.frame(id = 1,
 #'              content = "double click anywhere<br>in the timeline<br>to add an item",
@@ -198,7 +200,7 @@
 #'   )
 #' )
 #'
-#' ### Having read-only and editable items together
+#' #----------------------- Having read-only and editable items together
 #' timevis(
 #'   data.frame(id = 1:2,
 #'              content = c("editable", "read-only"),
@@ -208,7 +210,7 @@
 #' )
 #'
 #'
-#' ### Using groups
+#' #----------------------- Using groups
 #' timevis(data = data.frame(
 #'   start = c(Sys.Date(), Sys.Date(), Sys.Date() + 1, Sys.Date() + 2),
 #'   content = c("one", "two", "three", "four"),
@@ -217,7 +219,7 @@
 #'  )
 #'
 #'
-#' ### Getting data out of the timeline into Shiny
+#' #----------------------- Getting data out of the timeline into Shiny
 #' if (interactive()) {
 #' library(shiny)
 #'
@@ -369,7 +371,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
 #' if (interactive()) {
 #' library(shiny)
 #'
-#' ### Most basic example
+#' #----------------------- Most basic example
 #' shinyApp(
 #'   ui = fluidPage(timevisOutput("timeline")),
 #'   server = function(input, output) {
@@ -380,7 +382,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
 #' )
 #'
 #'
-#' ### More advanced example
+#' #----------------------- More advanced example
 #' data <- data.frame(
 #'   id = 1:3,
 #'   start = c("2015-04-04", "2015-04-05 11:00:00", "2015-04-06 15:00:00"),

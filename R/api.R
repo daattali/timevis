@@ -1,4 +1,4 @@
-callJS <- function(method) {
+callJS <- function() {
   # get the parameters from the function that have a value
   message <- Filter(function(x) !is.symbol(x), as.list(parent.frame(1)))
   session <- shiny::getDefaultReactiveDomain()
@@ -13,12 +13,16 @@ callJS <- function(method) {
     widget$x$api
     widget$x$api <- c(widget$x$api, list(message))
     return(widget)
-  } else {
-    # If an ID was passed, the widget already exists and we can simply call the
-    # appropriate JS function
-    method <- paste0("timevis:", method)
+  }
+  # If an ID was passed, the widget already exists and we can simply call the
+  # appropriate JS function
+  else if (is.character(message$id)) {
+    method <- paste0("timevis:", message$method)
     session$sendCustomMessage(method, message)
     return(message$id)
+  } else {
+    stop("The `id` argument must be either a timevis htmlwidget or an ID
+         of a timevis htmlwidget.", call. = FALSE)
   }
 }
 
@@ -26,6 +30,10 @@ callJS <- function(method) {
 #' @param id Timeline id
 #' @param data A named list containing the item data to add.
 #' @examples
+#'
+#' timevis() %>%
+#'   addItem(list(start = Sys.Date(), content = "Today"))
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -46,13 +54,18 @@ callJS <- function(method) {
 #' @export
 addItem <- function(id, data) {
   method <- "addItem"
-  callJS(method)
+  callJS()
 }
 
 #' Add multiple items to a timeline
 #' @param id Timeline id
 #' @param data A dataframe containing the items data to add.
 #' @examples
+#'
+#' timevis() %>%
+#'   addItems(data.frame(start = c(Sys.Date(), Sys.Date() - 1),
+#'            content = c("Today", "Yesterday")))
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -76,13 +89,17 @@ addItem <- function(id, data) {
 addItems <- function(id, data) {
   method <- "addItems"
   data <- dataframeToD3(data)
-  callJS(method)
+  callJS()
 }
 
 #' Remove an item from a timeline
 #' @param id Timeline id
 #' @param itemId The id of the item to remove
 #' @examples
+#'
+#' timevis(data.frame(id = 1:2, start = Sys.Date(), content = c("1", "2"))) %>%
+#'   removeItem(2)
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -105,7 +122,7 @@ addItems <- function(id, data) {
 #' @export
 removeItem <- function(id, itemId) {
   method <- "removeItem"
-  callJS(method)
+  callJS()
 }
 
 #' Add new vertical bar at a time point that can be dragged by the user
@@ -113,6 +130,10 @@ removeItem <- function(id, itemId) {
 #' @param time The date/time to add
 #' @param itemId The id of the custom time bar
 #' @examples
+#'
+#' timevis() %>%
+#'   addCustomTime(Sys.Date() - 1, "yesterday")
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -133,13 +154,19 @@ removeItem <- function(id, itemId) {
 #' @export
 addCustomTime <- function(id, time, itemId) {
   method <- "addCustomTime"
-  callJS(method)
+  callJS()
 }
 
 #' Remove a custom time previously added
 #' @param id Timeline id
 #' @param itemId The id of the custom time bar
 #' @examples
+#'
+#' timevis() %>%
+#'   addCustomTime(Sys.Date() - 1, "yesterday") %>%
+#'   addCustomTime(Sys.Date() + 1, "tomorrow") %>%
+#'   removeCustomTime("yesterday")
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -164,7 +191,7 @@ addCustomTime <- function(id, time, itemId) {
 #' @export
 removeCustomTime <- function(id, itemId) {
   method <- "removeCustomTime"
-  callJS(method)
+  callJS()
 }
 
 #' Adjust the visible window such that it fits all items
@@ -197,7 +224,7 @@ removeCustomTime <- function(id, itemId) {
 #' @export
 fitWindow <- function(id, options) {
   method <- "fitWindow"
-  callJS(method)
+  callJS()
 }
 
 #' Move the window such that the given time is centered
@@ -209,6 +236,10 @@ fitWindow <- function(id, options) {
 #' \href{http://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
+#'
+#' timevis() %>%
+#'   centerTime(Sys.Date() - 1)
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -221,7 +252,7 @@ fitWindow <- function(id, options) {
 #'       timevis()
 #'     )
 #'     observeEvent(input$btn, {
-#'       centerTime("timeline", Sys.Date())
+#'       centerTime("timeline", Sys.Date() - 1)
 #'     })
 #'   }
 #' )
@@ -229,7 +260,7 @@ fitWindow <- function(id, options) {
 #' @export
 centerTime <- function(id, time, options) {
   method <- "centerTime"
-  callJS(method)
+  callJS()
 }
 
 #' Move the window such that given item or items are centered
@@ -241,6 +272,14 @@ centerTime <- function(id, time, options) {
 #' \href{http://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
+#'
+#' timevis(data.frame(
+#'           id = 1:3,
+#'           start = c(Sys.Date() - 1, Sys.Date(), Sys.Date() + 1),
+#'           content = c("Item 1", "Item 2", "Item 3"))
+#' ) %>%
+#'   centerItem(1)
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -265,13 +304,17 @@ centerTime <- function(id, time, options) {
 #' @export
 centerItem <- function(id, itemId, options) {
   method <- "centerItem"
-  callJS(method)
+  callJS()
 }
 
 #' Set the items of a timeline
 #' @param id Timeline id
 #' @param data A dataframe containing the item data to use.
 #' @examples
+#'
+#' timevis(data.frame(start = Sys.Date(), content = "Today")) %>%
+#'   setItems(data.frame(start = Sys.Date() - 1, content = "yesterday"))
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -294,13 +337,23 @@ centerItem <- function(id, itemId, options) {
 setItems <- function(id, data) {
   method <- "setItems"
   data <- dataframeToD3(data)
-  callJS(method)
+  callJS()
 }
 
 #' Set the groups of a timeline
 #' @param id Timeline id
 #' @param data A dataframe containing the groups data to use.
 #' @examples
+#'
+#' timevis(data = data.frame(
+#'   start = c(Sys.Date(), Sys.Date(), Sys.Date() + 1, Sys.Date() + 2),
+#'   content = c("one", "two", "three", "four"),
+#'   group = c(1, 2, 1, 2)),
+#'   groups = data.frame(id = 1:2, content = c("G1", "G2"))
+#' ) %>%
+#'   setGroups(data.frame(id = 1:2, content = c("Group 1", "Group 2")))
+#'
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -328,7 +381,7 @@ setItems <- function(id, data) {
 setGroups <- function(id, data) {
   method <- "setGroups"
   data <- dataframeToD3(data)
-  callJS(method)
+  callJS()
 }
 
 #' Update the configuration options of a timeline
@@ -337,6 +390,13 @@ setGroups <- function(id, data) {
 #' See the \code{options} parameter of the
 #' \code{\link[timevis]{timevis}} function to see more details.
 #' @examples
+#'
+#' timevis(
+#'   data.frame(start = Sys.Date(), content = "Today"),
+#'   options = list(showCurrentTime = FALSE, orientation = "top")
+#' ) %>%
+#'   setOptions(list(editable = TRUE, showCurrentTime = TRUE))
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -360,7 +420,7 @@ setGroups <- function(id, data) {
 #' @export
 setOptions <- function(id, options) {
   method <- "setOptions"
-  callJS(method)
+  callJS()
 }
 
 #' Select one or multiple items on a timeline
@@ -373,6 +433,10 @@ setOptions <- function(id, options) {
 #' \href{http://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
+#'
+#' timevis(data.frame(id = 1:3, start = Sys.Date(), content = 1:3)) %>%
+#'   setSelection(2)
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -395,7 +459,7 @@ setOptions <- function(id, options) {
 #' @export
 setSelection <- function(id, itemId, options) {
   method <- "setSelection"
-  callJS(method)
+  callJS()
 }
 
 #' Set the current visible window
@@ -408,6 +472,10 @@ setSelection <- function(id, itemId, options) {
 #' \href{http://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
+#'
+#' timevis() %>%
+#'   setWindow(Sys.Date() - 1, Sys.Date() + 1)
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
@@ -428,5 +496,5 @@ setSelection <- function(id, itemId, options) {
 #' @export
 setWindow <- function(id, start, end, options) {
   method <- "setWindow"
-  callJS(method)
+  callJS()
 }

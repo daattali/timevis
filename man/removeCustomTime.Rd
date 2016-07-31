@@ -15,6 +15,12 @@ removeCustomTime(id, itemId)
 Remove a custom time previously added
 }
 \examples{
+
+timevis() \%>\%
+  addCustomTime(Sys.Date() - 1, "yesterday") \%>\%
+  addCustomTime(Sys.Date() + 1, "tomorrow") \%>\%
+  removeCustomTime("yesterday")
+
 if (interactive()) {
 library(shiny)
 shinyApp(

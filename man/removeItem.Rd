@@ -15,6 +15,10 @@ removeItem(id, itemId)
 Remove an item from a timeline
 }
 \examples{
+
+timevis(data.frame(id = 1:2, start = Sys.Date(), content = c("1", "2"))) \%>\%
+  removeItem(2)
+
 if (interactive()) {
 library(shiny)
 shinyApp(

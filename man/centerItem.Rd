@@ -21,6 +21,14 @@ Timeline documentation}}
 Move the window such that given item or items are centered
 }
 \examples{
+
+timevis(data.frame(
+          id = 1:3,
+          start = c(Sys.Date() - 1, Sys.Date(), Sys.Date() + 1),
+          content = c("Item 1", "Item 2", "Item 3"))
+) \%>\%
+  centerItem(1)
+
 if (interactive()) {
 library(shiny)
 shinyApp(
