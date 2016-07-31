@@ -3,9 +3,23 @@ callJS <- function(method) {
   message <- Filter(function(x) !is.symbol(x), as.list(parent.frame(1)))
   session <- shiny::getDefaultReactiveDomain()
 
-  # call the JS function
-  method <- paste0("timevis:", method)
-  session$sendCustomMessage(method, message)
+  # If a timevis widget was passed in, this is during a chain pipeline in the
+  # initialization of the widget, so keep track of the desired function call
+  # by adding it to a list of functions that should be performed when the widget
+  # is ready
+  if (is(message$id, "timevis")) {
+    widget <- message$id
+    message$id <- NULL
+    widget$x$api
+    widget$x$api <- c(widget$x$api, list(message))
+    return(widget)
+  } else {
+    # If an ID was passed, the widget already exists and we can simply call the
+    # appropriate JS function
+    method <- paste0("timevis:", method)
+    session$sendCustomMessage(method, message)
+    return(message$id)
+  }
 }
 
 #' Add a single item to a timeline

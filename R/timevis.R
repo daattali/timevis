@@ -324,6 +324,10 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     height = height
   )
 
+  # Allow a list of API functions to be called on the timevis after
+  # initialization
+  x$api <- list()
+
   # add dependencies so that the zoom buttons will work in non-Shiny mode
   deps <- list(
     rmarkdown::html_dependency_jquery(),

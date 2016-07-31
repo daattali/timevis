@@ -26,8 +26,9 @@ HTMLWidgets.widget({
         if (!initialized) {
           initialized = true;
 
-          // attach the timeline object to the DOM
+          // attach the timeline object and the widget to the DOM
           container.timeline = timeline;
+          container.widget = that;
 
           // Set up the zoom button click listeners
           var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
@@ -122,6 +123,19 @@ HTMLWidgets.widget({
           opts['options']['height'] = opts['height'];
         }
         timeline.setOptions(opts.options);
+
+        // Now that the timeline is initialized, call any outstanding API
+        // functions that the user wantd to run on the timeline before it was
+        // ready
+        var numApiCalls = opts['api'].length;
+        for (var i = 0; i < numApiCalls; i++) {
+          var call = opts['api'][i];
+          var method = call.method;
+          delete call['method'];
+          try {
+            that[method](call);
+          } catch(err) {}
+        }
       },
 
       resize : function(width, height) {
