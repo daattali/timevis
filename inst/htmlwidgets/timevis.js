@@ -19,7 +19,7 @@ HTMLWidgets.widget({
 
     return {
 
-      renderValue: function(x) {
+      renderValue: function(opts) {
         // alias this
         var that = this;
 
@@ -32,9 +32,9 @@ HTMLWidgets.widget({
           // Set up the zoom button click listeners
           var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
           zoomMenu.getElementsByClassName("zoom-in")[0]
-            .onclick = function(ev) { that.zoomIn(x.zoomFactor); };
+            .onclick = function(ev) { that.zoomIn(opts.zoomFactor); };
           zoomMenu.getElementsByClassName("zoom-out")[0]
-            .onclick = function(ev) { that.zoomOut(x.zoomFactor); };
+            .onclick = function(ev) { that.zoomOut(opts.zoomFactor); };
 
           // set listeners to events and pass data back to Shiny
           if (HTMLWidgets.shinyMode) {
@@ -97,31 +97,31 @@ HTMLWidgets.widget({
 
         // set the data items and groups
         timeline.itemsData.clear();
-        timeline.itemsData.add(x.items);
-        timeline.setGroups(x.groups);
+        timeline.itemsData.add(opts.items);
+        timeline.setGroups(opts.groups);
 
         // fit the items on the timeline
-        if (x.fit) {
+        if (opts.fit) {
           timeline.fit({ animation : false });
         }
 
         // Show or hide the zoom button
         var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
-        if (x.showZoom) {
+        if (opts.showZoom) {
           zoomMenu.setAttribute("data-show-zoom", true);
         } else {
           zoomMenu.removeAttribute("data-show-zoom");
         }
 
         // set the custom configuration options
-        if (Array === x.options.constructor) {
-          x['options'] = {};
+        if (Array === opts.options.constructor) {
+          opts['options'] = {};
         }
-        if (x['height'] !== null &&
-            typeof x['options']['height'] === "undefined") {
-          x['options']['height'] = x['height'];
+        if (opts['height'] !== null &&
+            typeof opts['options']['height'] === "undefined") {
+          opts['options']['height'] = opts['height'];
         }
-        timeline.setOptions(x.options);
+        timeline.setOptions(opts.options);
       },
 
       resize : function(width, height) {
