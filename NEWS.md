@@ -1,3 +1,10 @@
+# timevis 0.1.4
+
+2016-07-31
+
+- all the API functions can now work on timeline widgets that are not yet initialized, which means they can work in rmarkdown documents or in the console
+- all the API functions can now work with pipes (%>% pipelines)
+
 # timevis 0.1.3
 
 2016-07-27

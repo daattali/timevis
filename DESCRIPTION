@@ -1,6 +1,6 @@
 Package: timevis
 Title: Create Interactive Timeline Visualizations in R
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = "R interface"),
@@ -21,6 +21,7 @@ Imports:
     htmltools (>= 0.2.6),
     htmlwidgets (>= 0.6),
     jsonlite,
+    magrittr,
     rmarkdown,
     shiny
 Suggests:

@@ -19,3 +19,7 @@ dataframeToD3 <- function(df) {
   }
   apply(df, 1, function(row) as.list(row[!is.na(row)]))
 }
+
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
