@@ -34,7 +34,7 @@ data <- data.frame(
 )
 
 ui <- fluidPage(
-timevisOutput("timeline")
+  timevisOutput("timeline")
 )
 
 server <- function(input, output, session) {

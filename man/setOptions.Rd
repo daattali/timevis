@@ -7,7 +7,7 @@
 setOptions(id, options)
 }
 \arguments{
-\item{id}{Timeline id}
+\item{id}{Timeline id or a \code{timevis} object (the output from \code{timevis()})}
 
 \item{options}{A named list containing updated configuration options to use.
 See the \code{options} parameter of the

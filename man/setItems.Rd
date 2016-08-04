@@ -7,7 +7,7 @@
 setItems(id, data)
 }
 \arguments{
-\item{id}{Timeline id}
+\item{id}{Timeline id or a \code{timevis} object (the output from \code{timevis()})}
 
 \item{data}{A dataframe containing the item data to use.}
 }

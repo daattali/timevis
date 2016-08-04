@@ -2,19 +2,19 @@
 % Please edit documentation in R/api.R
 \name{addCustomTime}
 \alias{addCustomTime}
-\title{Add new vertical bar at a time point that can be dragged by the user}
+\title{Add a new vertical bar at a time point that can be dragged by the user}
 \usage{
 addCustomTime(id, time, itemId)
 }
 \arguments{
-\item{id}{Timeline id}
+\item{id}{Timeline id or a \code{timevis} object (the output from \code{timevis()})}
 
 \item{time}{The date/time to add}
 
 \item{itemId}{The id of the custom time bar}
 }
 \description{
-Add new vertical bar at a time point that can be dragged by the user
+Add a new vertical bar at a time point that can be dragged by the user
 }
 \examples{
 

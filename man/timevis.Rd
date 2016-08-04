@@ -178,43 +178,57 @@ every time the corresponding value is updated.
 \examples{
 # For more examples, see http://daattali.com/shiny/timevis-demo/
 
-### Most basic
+#----------------------- Most basic -----------------
 timevis()
 
-### Minimal data
+#----------------------- Minimal data -----------------
 timevis(
   data.frame(id = 1:2,
              content = c("one", "two"),
              start = c("2016-01-10", "2016-01-12"))
 )
 
-### Hide the zoom buttons, allow items to be editable (add/remove/modify)
+#----------------------- Hide the zoom buttons, allow items to be editable -----------------
 timevis(
   data.frame(id = 1:2,
              content = c("one", "two"),
              start = c("2016-01-10", "2016-01-12")),
   showZoom = FALSE,
-  options = list(editable = TRUE, height = "400px")
+  options = list(editable = TRUE, height = "200px")
 )
 
-### Items can be a single point or a range, and can contain HTML
+#----------------------- You can use \%>\% pipes to create timevis pipelines -----------------
+timevis() \%>\%
+  setItems(data.frame(
+    id = 1:2,
+    content = c("one", "two"),
+    start = c("2016-01-10", "2016-01-12")
+  )) \%>\%
+  setOptions(list(editable = TRUE)) \%>\%
+  addItem(list(id = 3, content = "three", start = "2016-01-11")) \%>\%
+  setSelection("3") \%>\%
+  fitWindow(list(animation = FALSE))
+
+#----------------------- Items can be a single point or a range, and can contain HTML -----------------
 timevis(
   data.frame(id = 1:2,
              content = c("one", "two<br><h3>HTML is supported</h3>"),
              start = c("2016-01-10", "2016-01-18"),
-             end = c("2016-01-14", NA))
+             end = c("2016-01-14", NA),
+             style = c(NA, "color: red;")
+  )
 )
 
-### Alternative look for each item
+#----------------------- Alternative look for each item -----------------
 timevis(
   data.frame(id = 1:2,
              content = c("one", "two"),
-             start = c("2016-01-10", "2016-01-18"),
-             end = c("2016-01-14", NA),
-             type = c("background", "point"))
+             start = c("2016-01-10", "2016-01-14"),
+             end = c(NA, "2016-01-18"),
+             type = c("point", "background"))
 )
 
-### Using a function in the configuration options
+#----------------------- Using a function in the configuration options -----------------
 timevis(
   data.frame(id = 1,
              content = "double click anywhere<br>in the timeline<br>to add an item",
@@ -228,17 +242,8 @@ timevis(
   )
 )
 
-### Having read-only and editable items together
-timevis(
-  data.frame(id = 1:2,
-             content = c("editable", "read-only"),
-             start = c("2016-01-01", "2016-01-18"),
-             editable = c(TRUE, FALSE),
-             style = c(NA, "background: red; color: white;"))
-)
 
-
-### Using groups
+#----------------------- Using groups -----------------
 timevis(data = data.frame(
   start = c(Sys.Date(), Sys.Date(), Sys.Date() + 1, Sys.Date() + 2),
   content = c("one", "two", "three", "four"),
@@ -247,7 +252,7 @@ timevis(data = data.frame(
  )
 
 
-### Getting data out of the timeline into Shiny
+#----------------------- Getting data out of the timeline into Shiny -----------------
 if (interactive()) {
 library(shiny)
 

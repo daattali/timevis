@@ -34,7 +34,7 @@ applications and interactive Rmd documents.
 if (interactive()) {
 library(shiny)
 
-### Most basic example
+#----------------------- Most basic example -----------------
 shinyApp(
   ui = fluidPage(timevisOutput("timeline")),
   server = function(input, output) {
@@ -45,7 +45,7 @@ shinyApp(
 )
 
 
-### More advanced example
+#----------------------- More advanced example -----------------
 data <- data.frame(
   id = 1:3,
   start = c("2015-04-04", "2015-04-05 11:00:00", "2015-04-06 15:00:00"),

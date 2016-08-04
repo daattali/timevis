@@ -7,7 +7,7 @@
 fitWindow(id, options)
 }
 \arguments{
-\item{id}{Timeline id}
+\item{id}{Timeline id or a \code{timevis} object (the output from \code{timevis()})}
 
 \item{options}{Named list of options controlling the animation. Most common
 option is \code{"animation" = TRUE/FALSE}. For a full list of options, see

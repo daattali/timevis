@@ -7,7 +7,7 @@
 centerTime(id, time, options)
 }
 \arguments{
-\item{id}{Timeline id}
+\item{id}{Timeline id or a \code{timevis} object (the output from \code{timevis()})}
 
 \item{time}{The date/time to center around}
 

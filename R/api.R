@@ -27,7 +27,7 @@ callJS <- function() {
 }
 
 #' Add a single item to a timeline
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param data A named list containing the item data to add.
 #' @examples
 #'
@@ -58,7 +58,7 @@ addItem <- function(id, data) {
 }
 
 #' Add multiple items to a timeline
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param data A dataframe containing the items data to add.
 #' @examples
 #'
@@ -93,7 +93,7 @@ addItems <- function(id, data) {
 }
 
 #' Remove an item from a timeline
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param itemId The id of the item to remove
 #' @examples
 #'
@@ -125,8 +125,8 @@ removeItem <- function(id, itemId) {
   callJS()
 }
 
-#' Add new vertical bar at a time point that can be dragged by the user
-#' @param id Timeline id
+#' Add a new vertical bar at a time point that can be dragged by the user
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param time The date/time to add
 #' @param itemId The id of the custom time bar
 #' @examples
@@ -158,7 +158,7 @@ addCustomTime <- function(id, time, itemId) {
 }
 
 #' Remove a custom time previously added
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param itemId The id of the custom time bar
 #' @examples
 #'
@@ -195,7 +195,7 @@ removeCustomTime <- function(id, itemId) {
 }
 
 #' Adjust the visible window such that it fits all items
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param options Named list of options controlling the animation. Most common
 #' option is \code{"animation" = TRUE/FALSE}. For a full list of options, see
 #' the "fit" method in the
@@ -228,7 +228,7 @@ fitWindow <- function(id, options) {
 }
 
 #' Move the window such that the given time is centered
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param time The date/time to center around
 #' @param options Named list of options controlling the animation. Most common
 #' option is \code{"animation" = TRUE/FALSE}. For a full list of options, see
@@ -264,7 +264,7 @@ centerTime <- function(id, time, options) {
 }
 
 #' Move the window such that given item or items are centered
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param itemId A vector (or single value) of the item ids to center
 #' @param options Named list of options controlling mainly the animation.
 #' Most common option is \code{"animation" = TRUE/FALSE}. For a full list of
@@ -308,7 +308,7 @@ centerItem <- function(id, itemId, options) {
 }
 
 #' Set the items of a timeline
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param data A dataframe containing the item data to use.
 #' @examples
 #'
@@ -341,7 +341,7 @@ setItems <- function(id, data) {
 }
 
 #' Set the groups of a timeline
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param data A dataframe containing the groups data to use.
 #' @examples
 #'
@@ -385,7 +385,7 @@ setGroups <- function(id, data) {
 }
 
 #' Update the configuration options of a timeline
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param options A named list containing updated configuration options to use.
 #' See the \code{options} parameter of the
 #' \code{\link[timevis]{timevis}} function to see more details.
@@ -424,7 +424,7 @@ setOptions <- function(id, options) {
 }
 
 #' Select one or multiple items on a timeline
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param itemId A vector (or single value) of the item ids to select
 #' @param options Named list of options controlling mainly the animation.
 #' Most common options are \code{focus = TRUE/FALSE} and
@@ -463,7 +463,7 @@ setSelection <- function(id, itemId, options) {
 }
 
 #' Set the current visible window
-#' @param id Timeline id
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param start The start date/time to show in the timeline
 #' @param end The end date/time to show in the timeline
 #' @param options Named list of options controlling mainly the animation.
