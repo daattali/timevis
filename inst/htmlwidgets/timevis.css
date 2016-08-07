@@ -19,6 +19,13 @@
   display: block;
 }
 .timevis.html-widget .zoom-menu .btn {
+  color: #333;
+  font-family: arial;
+  font-size: 18px;
+  line-height: 1.3333333;
+  text-shadow: none;
+  border-radius: 6px;
+  border: 1px solid #CCC;
   padding: 0;
   width: 30px;
   height: 30px;

@@ -1,4 +1,4 @@
-# timevis 0.1.9000
+# timevis 0.1.900x
 
 ### Breaking changes
 
@@ -16,6 +16,7 @@
 
 - when re-rendering a timeline, the old data are not removed (#3)
 - can now use a dataframe that results from merging/binding two dataframes as input (#7)
+- zoom buttons show up when using a custom `shinytheme()` (#9)
 
 ### Misc
 
