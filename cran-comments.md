@@ -54,3 +54,7 @@ Thanks, on CRAN now
 No errors, warnings or notes
 
 ### Reviewer comments
+
+2016-08-24 Kurt Hornik
+
+Thanks, on CRAN now
