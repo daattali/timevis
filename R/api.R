@@ -7,7 +7,7 @@ callJS <- function() {
   # initialization of the widget, so keep track of the desired function call
   # by adding it to a list of functions that should be performed when the widget
   # is ready
-  if (is(message$id, "timevis")) {
+  if (methods::is(message$id, "timevis")) {
     widget <- message$id
     message$id <- NULL
     widget$x$api

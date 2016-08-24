@@ -209,7 +209,7 @@ timevis() \%>\%
   setSelection("3") \%>\%
   fitWindow(list(animation = FALSE))
 
-#----------------------- Items can be a single point or a range, and can contain HTML -----------------
+#------- Items can be a single point or a range, and can contain HTML -------
 timevis(
   data.frame(id = 1:2,
              content = c("one", "two<br><h3>HTML is supported</h3>"),
