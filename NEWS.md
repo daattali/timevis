@@ -1,4 +1,4 @@
-# timevis 0.1.900x
+# timevis 0.2
 
 ### Breaking changes
 

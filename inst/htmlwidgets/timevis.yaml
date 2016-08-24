@@ -6,6 +6,6 @@ dependencies:
     stylesheet: vis.min.css
 
   - name: timeline
-    version: 0.0.0.9000
+    version: 0.2
     src: htmlwidgets
     stylesheet: timevis.css
