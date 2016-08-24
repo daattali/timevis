@@ -97,7 +97,7 @@ fluidPage(
     ),
 
     tabPanel(
-      div(icon("bars"), "Groups"),
+      div(icon("users"), "Groups"),
       timevisOutput("timelineGroups"),
       div(class = "sourcecode",
           "The exact code for all the timelines in this app is",

@@ -6,6 +6,9 @@ Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travi
 [![CRAN
 version](http://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
+> *Copyright 2016 [Dean Attali](http://deanattali.com). Licensed under
+> the MIT license.*
+
 `timevis` lets you create rich and *fully interactive* timeline
 visualizations in R. Timelines can be included in Shiny apps and R
 markdown documents, or viewed from the R console and RStudio Viewer.
@@ -14,13 +17,27 @@ creation, and supports getting data out of the visualization into R.
 This package is based on the [vis.js](http://visjs.org/) Timeline module
 and the [htmlwidgets](http://www.htmlwidgets.org/) R package.
 
-### Demo
+Demo
+----
 
 [Click here](http://daattali.com/shiny/timevis-demo/) to view a live
 interactive demo of `timevis`.
 
-### Installation
+Table of contents
+-----------------
 
+-   [Installation](#install)
+-   [How to use](#usage)
+-   [Functions to manipulate a timeline](#manipulate-api)
+-   [Interactivity](#interactivity)
+-   [Slightly more advanced examples](#advanced-examples)
+-   [Groups](#groups)
+-   [In a Shiny app](#shiny-apps)
+    -   [Retrieving data from the widget](#retrieve-data)
+
+<h2 id="install">
+Installation
+</h2>
 `timevis` is available through both CRAN and GitHub:
 
 To install the stable CRAN version:
@@ -32,8 +49,9 @@ To install the latest development version from GitHub:
     install.packages("devtools")
     devtools::install_github("daattali/timevis")
 
-### How to use
-
+<h2 id="usage">
+How to use
+</h2>
 You can view a minimal timeline without any data by simply running
 
     library(timevis)
@@ -61,6 +79,81 @@ There are more variables that can be used in the data.frame -- they are
 all documented in the help file for `?timevis()` under the **Data
 format** section.
 
+<h2 id="manipulate-api">
+Functions to manipulate a timeline
+</h2>
+There are many functions that allow programmatic manipulation of a
+timeline. For example: `addItem()` programmatically adds a new item,
+`centerItem()` moves the timeline so that a given item is centered,
+`setWindow()` sets the start and end dates of the timeline,
+`setOptions()` updates the configuration options, and many more
+functions are available.
+
+There are two ways to call these timeline manipulation functions:
+
+#### 1. Timeline manipulation using `%>%` on `timevis()`
+
+You can manipulate a timeline widget during its creation by chaining
+functions to the `timevis()` call. For example:
+
+    timevis() %>%
+      addItem(list(id = "item1", content = "one", start = "2016-08-01")) %>%
+      centerItem("item1")
+
+This method of manipulating a timeline is especially useful when
+creating timeline widgets in the R console or in R markdown documents
+because it can be used directly when initializing the widget.
+
+#### 2. Timeline manipulation using a timeline's ID
+
+In Shiny apps, you can manipulate a timeline widget at any point after
+its creation by referring to its ID. For example:
+
+    library(shiny)
+
+    ui <- fluidPage(
+      timevisOutput("mytime"),
+      actionButton("btn", "Add item and center")
+    )
+
+    server <- function(input, output, session) {
+      output$mytime <- renderTimevis(timevis())
+      observeEvent(input$btn, {
+        addItem("mytime", list(id = "item1", content = "one", start = "2016-08-01"))
+        centerItem("mytime", "item1")
+      })
+    }
+
+    shinyApp(ui = ui, server = server)
+
+You can even chain these functions and use this manipulation code
+instead:
+
+    addItem("mytime", list(id = "item1", content = "one", start = "2016-08-01")) %>%
+      centerItem("item1")
+
+*Technical note: If you're trying to understand how both methods of
+timeline manipulation work, it might seem very bizarre to you. The
+reason they work is that every manipulation function accepts either a
+`timevis` object or the ID of one. In order to make chaining work, the
+return value from these functions depend on the input: if a `timevis`
+object was given, then an updated `timevis` object is returned, and if
+an ID was given, then the same ID is returned.*
+
+<h2 id="interactivity">
+Interactivity
+</h2>
+The timeline lets the user interact with it seamlessly. You can click on
+the zoom in/out buttons or drag the timeline left/right in order to move
+to past/future dates.
+
+If you set the `editable = TRUE` option, then the user will be able to
+add new items by double clicking, modify items by dragging, and delete
+items by selecting them.
+
+<h2 id="advanced-examples">
+Slightly more advanced examples
+</h2>
 The content of an item can even include HTML, which makes it easy to
 show any kind of data in a timeline, such as the matches of the 2014
 World Cup:
@@ -77,18 +170,9 @@ and will have zoom in/out buttons. You can supply many customization
 options to `timevis()` in order to get it just right (see `?timevis()`
 for details).
 
-### Interactivity
-
-The timeline lets the user interact with it seamlessly. You can click on
-the zoom in/out buttons or drag the timeline left/right in order to move
-to past/future dates.
-
-If you set the `editable = TRUE` option, then the user will be able to
-add new items by double clicking, modify items by dragging, and delete
-items by selecting them.
-
-### Groups
-
+<h2 id="groups">
+Groups
+</h2>
 You can use the groups feature to group together multiple items into
 different "buckets". When using groups, all items with the same group
 are placed on one line. A vertical axis is displayed showing the group
@@ -108,21 +192,18 @@ provided. More information about using groups and the groups dataframe
 is available in the help file for `?timevis()` under the **Groups**
 section.
 
-### In a Shiny app
-
+<h2 id="shiny-apps">
+In a Shiny app
+</h2>
 You can add a timeline to a Shiny app by adding `timevisOutput()` to the
 UI and `renderTimevis(timevis())` to the server.
 
-There are many functions that allow programmatic manipulation of a
-timeline. For example, `addItem()` programmatically adds a new item,
-`centerItem()` moves the timeline so that the given item is centered,
-`setWindow()` sets the start and end dates of the timeline, and more
-functions are available. Note that all these functions take the
-timeline's ID as their first argument.
-
-It is also possible to retrieve data from a timeline in a Shiny app.
-When a timeline widget is created in a Shiny app, there are four pieces
-of information that are always accessible as Shiny inputs. These inputs
+<h3 id="retrieve-data">
+Retrieving data from the widget
+</h3>
+It is possible to retrieve data from a timeline in a Shiny app. When a
+timeline widget is created in a Shiny app, there are four pieces of
+information that are always accessible as Shiny inputs. These inputs
 have special names based on the timeline's id. Suppose that a timeline
 is created with an `outputId` of **"mytime"**, then the following four
 input variables will be available:
@@ -143,8 +224,14 @@ input variables will be available:
     input is updated every time the viewable window of dates is updated
     (by zooming or moving the window).
 
+------------------------------------------------------------------------
+
 You can view examples of many of the features supported by checking out
 the [demo Shiny app](http://daattali.com/shiny/timevis-demo/). If you
 want to see how those examples were created, the full code for the
 examples is inside
 [inst/example](https://github.com/daattali/timevis/tree/master/inst/example).
+
+If you create any cool timelines that you'd like to share with me, or if
+you want to get in touch with me for any reason, feel free to [contact
+me](http://deanattali.com/contact)!
