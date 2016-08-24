@@ -35,3 +35,22 @@ Added author info to DESCRIPTION
 2016-07-25 Duncan Murdoch
 
 Thanks, on CRAN now
+
+
+# Version 0.2
+
+### Test environments
+
+* Windows 7, R 3.3.1 (local)
+* ubuntu 12.04, R 3.3.1 (on travis-ci)
+* ubuntu 14.04, R 3.2.1 (on my DigitalOcean droplet)
+
+## Round 1
+
+### Submission comments
+
+2016-08-24
+
+No errors, warnings or notes
+
+### Reviewer comments
