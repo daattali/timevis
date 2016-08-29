@@ -74,3 +74,9 @@ Thanks, on CRAN now
 2016-08-29
 
 added VignetteBuilder field to DESCRIPTION file as per CRAN's request
+
+### Reviewer comments
+
+2016-08-29 Duncan Murdoch
+
+Thanks, on CRAN now.
