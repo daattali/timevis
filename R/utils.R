@@ -4,7 +4,7 @@
   # to a vector
   shiny::registerInputHandler("timevisDF", function(data, ...) {
     jsonlite::fromJSON(jsonlite::toJSON(data, auto_unbox = TRUE))
-  })
+  }, force = TRUE)
 }
 
 # Check if an argument is a single boolean value

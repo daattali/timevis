@@ -1,8 +1,9 @@
-# timevis 0.3.1
+# timevis 0.4 2016-09-16
 
 ### Bug fixes
 
 - timevis and visNetwork can work together in the same app (the bug is fixed on timevis' end, so it will only work if a timevis widget is defined before a visNetwork one until visNetwork also fix the bug) (#11)
+- re-defining the data input handler does not cause a warning 
 
 # timevis 0.3
 
