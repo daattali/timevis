@@ -99,3 +99,8 @@ no errors, warnings, or notes
 
 ### Reviewer comments
 
+2016-09-16 Uwe Ligges
+
+Thanks, on CRAN now.
+
+Next time (and now in your master sources), please single quote RStudio and other software names in your Description.
