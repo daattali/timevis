@@ -26,8 +26,7 @@ HTMLWidgets.widget({
         if (!initialized) {
           initialized = true;
 
-          // attach the timeline object and the widget to the DOM
-          container.timeline = timeline;
+          // attach the widget to the DOM
           container.widget = that;
 
           // Set up the zoom button click listeners
