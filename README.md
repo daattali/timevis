@@ -236,3 +236,9 @@ examples is inside
 If you create any cool timelines that you'd like to share with me, or if
 you want to get in touch with me for any reason, feel free to [contact
 me](http://deanattali.com/contact)!
+
+Lastly, if you want to learn how to develop an htmlwidget to have
+similar features as this package, you can check out the
+[`timevisBasic`](https://github.com/daattali/timevisBasic) package or
+[my tutorial on htmlwidgets
+tips](http://deanattali.com/blog/advanced-htmlwidgets-tips).
