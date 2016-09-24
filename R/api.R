@@ -10,7 +10,6 @@ callJS <- function() {
   if (methods::is(message$id, "timevis")) {
     widget <- message$id
     message$id <- NULL
-    widget$x$api
     widget$x$api <- c(widget$x$api, list(message))
     return(widget)
   }
