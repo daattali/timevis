@@ -1,3 +1,7 @@
+# timevis 0.4.0.x
+
+- added documentation for how to extend the timevis object in JavaScript
+
 # timevis 0.4 2016-09-16
 
 ### Bug fixes

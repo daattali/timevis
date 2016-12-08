@@ -175,6 +175,18 @@ variables will be available:
 All four inputs will return a value upon initialization of the timeline and
 every time the corresponding value is updated.
 }
+
+\section{Extending timevis}{
+
+If you need to perform any actions on the timeline object that are not
+supported by this package's API, you may be able to do so by manipulating the
+timeline's JavaScript object directly. The timeline object is available via
+\code{document.getElementById(id).widget.timeline} (replace \code{id} with
+the timeline's id).\cr\cr
+This timeline object is the direct widget that \code{vis.js} creates, and you
+can see the \href{http://visjs.org/docs/timeline/}{visjs documentation} to
+see what actions you can perform on that object.
+}
 \examples{
 # For more examples, see http://daattali.com/shiny/timevis-demo/
 
