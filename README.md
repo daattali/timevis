@@ -5,6 +5,7 @@ timevis - Create interactive timeline visualizations in R
 Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
 [![CRAN
 version](http://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
+[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/daattali)
 
 > *Copyright 2016 [Dean Attali](http://deanattali.com). Licensed under
 > the MIT license.*
