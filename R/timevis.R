@@ -269,10 +269,25 @@
 timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                     options, width = NULL, height = NULL, elementId = NULL) {
 
+
+
   # Validate the input data
   if (missing(data)) {
     data <- data.frame()
   }
+
+  # handle crosstalk
+  crosstalkOpts <- NULL
+  if(inherits(data,"SharedData")) {
+    # collect key and group
+    crosstalkOpts <- list(
+      key = data$key(),
+      group = data$groupName()
+    )
+    # get data from SharedData
+    data <- data$data(withKey = TRUE)
+  }
+
   if (!is.data.frame(data)) {
     stop("timevis: 'data' must be a data.frame",
          call. = FALSE)
@@ -338,6 +353,12 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     rmarkdown::html_dependency_jquery(),
     rmarkdown::html_dependency_bootstrap("default")
   )
+
+  # add crosstalk deps and options
+  if(!is.null(crosstalkOpts)) {
+    deps <- c(deps, crosstalk::crosstalkLibs())
+    x$crosstalkOpts = crosstalkOpts
+  }
 
   # create widget
   htmlwidgets::createWidget(
