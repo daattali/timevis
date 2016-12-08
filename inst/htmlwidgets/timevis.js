@@ -95,6 +95,47 @@ HTMLWidgets.widget({
           }
         }
 
+        // for now handle crosstalk separately from Shiny
+        //  but eventually integrate the two
+        if(typeof(crosstalk)!=="undefined" && opts.crosstalkOpts) {
+          // get selection handle with group provided by
+          //  SharedData in R
+          var ctSelect = new crosstalk.SelectionHandle(opts.crosstalkOpts.group);
+          // handle selection on timeline
+          timeline.on('select', function (properties) {
+            // find properties.items in data and return key
+            ctSelect.set(
+              timeline.itemsData.get()
+                .filter(function(d) {
+                  return properties.items.indexOf(d.id) >= 0;
+                })
+                .map(function(d){
+                  return d.key_;
+                })
+            );
+          });
+
+          // handle selection from outside this timeline
+          ctSelect.on("change", function(val){
+            if(val.sender !== ctSelect) {
+              var selection = ctSelect.value;
+              if(typeof(selection)!==undefined && selection !== null) {
+                selection = Array.isArray(selection) ? selection : [selection];
+                timeline.setSelection(
+                  // find the keys
+                  timeline.itemsData.get()
+                    .filter(function(d){
+                      return selection.indexOf(d.key_) >= 0;
+                    })
+                    .map(function(d){
+                      return d.id;
+                    })
+                );
+              }
+            }
+          });
+        }
+
         // set the data items and groups
         timeline.itemsData.clear();
         timeline.itemsData.add(opts.items);

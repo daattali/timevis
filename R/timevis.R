@@ -281,7 +281,8 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   if(inherits(data,"SharedData")) {
     # collect key and group
     crosstalkOpts <- list(
-      key = data$key(),
+      # ideally key will match id, but we can't be sure
+      key = data$data(withKey = TRUE)[,c("id", "key_")],
       group = data$groupName()
     )
     # get data from SharedData
