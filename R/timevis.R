@@ -45,6 +45,8 @@
 #' automatically.
 #' @param elementId Use an explicit element ID for the widget (rather than an
 #' automatically generated one). Ignored when used in a Shiny app.
+#' @param loadDependencies Loading jquery and bootstrap dependencies (they are 
+#' needed for timevis to work so it should alway be TRUE (default)).
 #' @return A timeline visualization \code{htmlwidgets} object
 #' @section Data format:
 #' The \code{data} parameter supplies the input dataframe that describes the
@@ -276,7 +278,8 @@
 #' @seealso \href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 #' @export
 timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
-                    options, width = NULL, height = NULL, elementId = NULL) {
+                    options, width = NULL, height = NULL, elementId = NULL, 
+                    loadDependencies = TRUE) {
 
   # Validate the input data
   if (missing(data)) {
@@ -343,10 +346,14 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   x$api <- list()
 
   # add dependencies so that the zoom buttons will work in non-Shiny mode
-  deps <- list(
-    rmarkdown::html_dependency_jquery(),
-    rmarkdown::html_dependency_bootstrap("default")
-  )
+  if(loadDependencies) {
+    deps <- list(
+      rmarkdown::html_dependency_jquery(),
+      rmarkdown::html_dependency_bootstrap("default")
+    )
+  } else {
+    deps <- NULL
+  }
 
   # create widget
   htmlwidgets::createWidget(
