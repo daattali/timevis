@@ -7,7 +7,8 @@
 \title{Create a timeline visualization}
 \usage{
 timevis(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
-  options, width = NULL, height = NULL, elementId = NULL)
+  options, width = NULL, height = NULL, elementId = NULL,
+  loadDependencies = TRUE)
 }
 \arguments{
 \item{data}{A dataframe containing the timeline items. Each item on the
@@ -52,6 +53,10 @@ automatically.}
 
 \item{elementId}{Use an explicit element ID for the widget (rather than an
 automatically generated one). Ignored when used in a Shiny app.}
+
+\item{loadDependencies}{Whether to load JQuery and bootstrap
+dependencies (you should only set to \code{FALSE} if you manually include
+them)}
 }
 \value{
 A timeline visualization \code{htmlwidgets} object

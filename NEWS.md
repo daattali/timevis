@@ -1,6 +1,7 @@
 # timevis 0.4.0.x
 
 - added documentation for how to extend the timevis object in JavaScript
+- added an option to not load the javascript dependencies (#25)
 
 # timevis 0.4 2016-09-16
 
