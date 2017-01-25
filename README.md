@@ -1,11 +1,11 @@
 timevis - Create interactive timeline visualizations in R
 =========================================================
 
+[![Donate](http://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/daattali)
 [![Build
 Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
 [![CRAN
 version](http://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
-[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/daattali)
 
 > *Copyright 2016 [Dean Attali](http://deanattali.com). Licensed under
 > the MIT license.*
@@ -17,6 +17,14 @@ markdown documents, or viewed from the R console and RStudio Viewer.
 creation, and supports getting data out of the visualization into R.
 This package is based on the [vis.js](http://visjs.org/) Timeline module
 and the [htmlwidgets](http://www.htmlwidgets.org/) R package.
+
+**timevis is one of my many pet projects, but maintaining it and responding to daily questions has become very time consuming. If you find timevis useful, please consider showing your support :)**
+
+<p align="center">
+  <a href="https://www.paypal.me/daattali">
+    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" />
+  </a>
+</p>
 
 Demo
 ----
