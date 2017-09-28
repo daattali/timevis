@@ -12,7 +12,7 @@ clean:
 
 README.md : vignettes/timevis.Rmd
 #	echo "Rendering the timevis vignette"
-	Rscript -e 'rmarkdown::render("vignettes/timevis.Rmd", output_format = "md_document")'
+	Rscript -e 'rmarkdown::render("vignettes/timevis.Rmd", output_format = "md_document", output_options = list(pandoc_args = c("-t", "commonmark")))'
 #	echo "Correcting image paths"
 #	sed -i -- 's,../inst,inst,g' vignettes/timevis.md
 	Rscript -e 'file <- gsub("\\.\\./inst", "inst", readLines("vignettes/timevis.md")); writeLines(file, "vignettes/timevis.md")'
