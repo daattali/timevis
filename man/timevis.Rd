@@ -4,6 +4,7 @@
 \name{timevis}
 \alias{timevis}
 \alias{timevis-package}
+\alias{timevis}
 \title{Create a timeline visualization}
 \usage{
 timevis(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
@@ -36,10 +37,10 @@ current date.}
 
 \item{options}{A named list containing any extra configuration options to
 customize the timeline. All available options can be found in the
-\href{http://visjs.org/docs/timeline/#Configuration_Options}{official
-Timeline documentation}. Note that any options that define a JavaScript
-function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
-examples section below to see example usage.}
+\href{http://visjs.org/docs/timeline/#Configuration_Options}{'vis.js'
+official Timeline documentation}. Note that any options that define a
+JavaScript function must be wrapped in a call to \code{htmlwidgets::JS()}.
+See the examples section below to see example usage.}
 
 \item{width}{Fixed width for timeline (in css units). Ignored when used in a
 Shiny app -- use the \code{width} parameter in
@@ -192,6 +193,7 @@ This timeline object is the direct widget that \code{vis.js} creates, and you
 can see the \href{http://visjs.org/docs/timeline/}{visjs documentation} to
 see what actions you can perform on that object.
 }
+
 \examples{
 # For more examples, see http://daattali.com/shiny/timevis-demo/
 
@@ -315,4 +317,3 @@ shinyApp(ui, server)
 \seealso{
 \href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 }
-
