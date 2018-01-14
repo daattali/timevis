@@ -31,10 +31,10 @@
 #' current date.
 #' @param options A named list containing any extra configuration options to
 #' customize the timeline. All available options can be found in the
-#' \href{http://visjs.org/docs/timeline/#Configuration_Options}{official
-#' Timeline documentation}. Note that any options that define a JavaScript
-#' function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
-#' examples section below to see example usage.
+#' \href{http://visjs.org/docs/timeline/#Configuration_Options}{'vis.js'
+#' official Timeline documentation}. Note that any options that define a
+#' JavaScript function must be wrapped in a call to \code{htmlwidgets::JS()}.
+#' See the examples section below to see example usage.
 #' @param width Fixed width for timeline (in css units). Ignored when used in a
 #' Shiny app -- use the \code{width} parameter in
 #' \code{\link[timevis]{timevisOutput}}.
