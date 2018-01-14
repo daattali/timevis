@@ -37,8 +37,8 @@ current date.}
 
 \item{options}{A named list containing any extra configuration options to
 customize the timeline. All available options can be found in the
-\href{http://visjs.org/docs/timeline/#Configuration_Options}{'vis.js'
-official Timeline documentation}. Note that any options that define a
+\href{http://visjs.org/docs/timeline/#Configuration_Options}{official
+'vis.js' Timeline documentation}. Note that any options that define a
 JavaScript function must be wrapped in a call to \code{htmlwidgets::JS()}.
 See the examples section below to see example usage.}
 
