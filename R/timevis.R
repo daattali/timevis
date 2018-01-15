@@ -361,7 +361,6 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
       warning(sprintf("timevis: unknown columns in groups argument to timevis(): %s",
                       setdiff(colnames(groups), groupscols)))
     }
-    groups <- groups[,intersect(colnames(groups), usedgroups)]
     groups <- dataframeToD3(groups)
   }
 
