@@ -346,7 +346,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                 "editable.updateTime")
   if (length(setdiff(colnames(data), datacols)) != 0) {
     warning(sprintf("timevis: unknown columns in data argument to timevis(): %s",
-                    setdiff(colnames(data), datacols)))
+                    paste(setdiff(colnames(data), datacols), collapse=", ")))
   }
 
   items <- dataframeToD3(data)
@@ -359,7 +359,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                     "nestedGroups", "showNested")
     if (length(setdiff(colnames(groups), groupscols))) {
       warning(sprintf("timevis: unknown columns in groups argument to timevis(): %s",
-                      setdiff(colnames(groups), groupscols)))
+                      paste(setdiff(colnames(groups), groupscols), collapse=", ")))
     }
     groups <- dataframeToD3(groups)
   }
