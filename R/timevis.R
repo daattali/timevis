@@ -345,7 +345,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                 "editable", "editable.remove", "editable.updateGroup",
                 "editable.updateTime")
   if (length(setdiff(colnames(data), datacols)) != 0) {
-    warning(sprintf("timevis: unknown columns in data argument to timevis(): %s",
+    warning(sprintf("timevis: unknown columns in data argument to timevis(): %s\nPOSSIBLE DATA LEAKAGE!!",
                     paste(setdiff(colnames(data), datacols), collapse=", ")))
   }
 
@@ -358,7 +358,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                     "subgroupOrder", "subgroupStack", "title", "visible",
                     "nestedGroups", "showNested")
     if (length(setdiff(colnames(groups), groupscols))) {
-      warning(sprintf("timevis: unknown columns in groups argument to timevis(): %s",
+      warning(sprintf("timevis: unknown columns in groups argument to timevis(): %s\nPOSSIBLE DATA LEAKAGE!!",
                       paste(setdiff(colnames(groups), groupscols), collapse=", ")))
     }
     groups <- dataframeToD3(groups)
