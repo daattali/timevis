@@ -15,9 +15,14 @@
 #' timeline is represented by a row in the dataframe. \code{start} and
 #' \code{content} are required for each item, while several other variables
 #' are also supported. See the \strong{Data format} section below for more
-#' details.
+#' details.  WARNING: all the data in the ``data'' dataframe will be included
+#' in the derived HTML file (not just the data in the columns used by timevis).
+#' Be careful to not release sensitive data.
 #' @param groups A dataframe containing the groups data (optional). See the
-#' \strong{Groups} section below for more details.
+#' \strong{Groups} section below for more details.  WARNING: all the data in
+#' the ``groups'' dataframe will be included in the derived HTML file (not
+#' just the data in the columns used by timevis). Be careful to not release
+#' sensitive data.
 #' @param showZoom If \code{TRUE} (default), then include "Zoom In"/"Zoom Out"
 #' buttons on the widget.
 #' @param zoomFactor How much to zoom when zooming out. A zoom factor of 0.5
@@ -324,17 +329,38 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
          call. = FALSE)
   }
 
-  ## restrict data to columns we actually may use
-  useddata <- c("start", "content", "end", "id", "type", "title", "editable",
-                "group", "subgroup", "className", "style")
-  data <- data[,intersect(colnames(data), useddata)]
+  ## problem: all columns passed in "data", "groups" will end up in
+  ## (possibly world-visible) output html file.  if the invoker passes
+  ## sensitive data, without understanding this, their data may be
+  ## compromised.  however, since the accepted columns are really
+  ## defined by vis.js's Timeline, we're not in a position to reject
+  ## an incoming column.  so, instead, we give a warning for any
+  ## column(s) we don't know about.
+  ##
+  ## the definitive list is currently in
+  ## http://visjs.org/docs/timeline/#items
+  datacols <- c("className", "align", "content", "end",
+                "group", "id", "start", "style",
+                "subgroup", "title", "type", "limitsize",
+                "editable", "editable.remove", "editable.updateGroup",
+                "editable.updateTime")
+  if (length(setdiff(colnames(data), datacols)) != 0) {
+    warning(sprintf("timevis: unknown columns in data argument to timevis(): %s",
+                    setdiff(colnames(data), datacols)))
+  }
 
   items <- dataframeToD3(data)
   if (missing(groups)) {
     groups <- NULL
   } else {
-    usedgroups <- c("id", "content", "title", "subgroupOrder",
-                    "className", "style")
+    ## (see comment above)
+    groupscols <- c("className", "content", "id", "style",
+                    "subgroupOrder", "subgroupStack", "title", "visible",
+                    "nestedGroups", "showNested")
+    if (length(setdiff(colnames(groups), groupcols))) {
+      warning(sprintf("timevis: unknown columns in groups argument to timevis(): %s",
+                      setdiff(colnames(groups), groupscols)))
+    }
     groups <- groups[,intersect(colnames(groups), usedgroups)]
     groups <- dataframeToD3(groups)
   }
