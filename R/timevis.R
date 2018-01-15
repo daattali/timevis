@@ -357,7 +357,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     groupscols <- c("className", "content", "id", "style",
                     "subgroupOrder", "subgroupStack", "title", "visible",
                     "nestedGroups", "showNested")
-    if (length(setdiff(colnames(groups), groupcols))) {
+    if (length(setdiff(colnames(groups), groupscols))) {
       warning(sprintf("timevis: unknown columns in groups argument to timevis(): %s",
                       setdiff(colnames(groups), groupscols)))
     }
