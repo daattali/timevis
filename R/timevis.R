@@ -324,10 +324,18 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
          call. = FALSE)
   }
 
+  ## restrict data to columns we actually may use
+  useddata <- c("start", "content", "end", "id", "type", "title", "editable",
+                "group", "subgroup", "className", "style")
+  data <- data[,intersect(colnames(data), useddata)]
+
   items <- dataframeToD3(data)
   if (missing(groups)) {
     groups <- NULL
   } else {
+    usedgroups <- c("id", "content", "title", "subgroupOrder",
+                    "className", "style")
+    groups <- groups[,intersect(colnames(groups), usedgroups)]
     groups <- dataframeToD3(groups)
   }
 
