@@ -2,6 +2,7 @@
 
 - added documentation for how to extend the timevis object in JavaScript
 - added an option to not load the javascript dependencies (#25)
+- Fix issue #47: Leading whitespace when getting selected item Id as a string
 
 # timevis 0.4 2016-09-16
 
