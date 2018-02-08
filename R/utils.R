@@ -21,7 +21,10 @@ dataframeToD3 <- function(df) {
     stop("timevis: the input must be a dataframe", call. = FALSE)
   }
   row.names(df) <- NULL
-  apply(df, 1, function(row) as.list(row[!is.na(row)]))
+  lapply(seq_len(nrow(df)), function(row) {
+    row <- df[row, , drop = FALSE]
+    lapply(row[, !is.na(row), drop = FALSE], as.character)
+  })
 }
 
 #' @importFrom magrittr %>%
