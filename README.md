@@ -1,12 +1,12 @@
 # timevis - Create interactive timeline visualizations in R
 
-[![Donate](http://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/daattali)
+[![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/daattali)
 [![Build
 Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
 [![CRAN
-version](http://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
+version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
-> *Copyright 2016 [Dean Attali](http://deanattali.com). Licensed under
+> *Copyright 2016 [Dean Attali](https://deanattali.com). Licensed under
 > the MIT license.*
 
 `timevis` lets you create rich and *fully interactive* timeline
@@ -31,7 +31,7 @@ find timevis useful, please consider showing your support :)**
 
 ## Demo
 
-[Click here](http://daattali.com/shiny/timevis-demo/) to view a live
+[Click here](https://daattali.com/shiny/timevis-demo/) to view a live
 interactive demo of `timevis`.
 
 ## Table of contents
@@ -272,17 +272,17 @@ input variables will be available:
 -----
 
 You can view examples of many of the features supported by checking out
-the [demo Shiny app](http://daattali.com/shiny/timevis-demo/). If you
+the [demo Shiny app](https://daattali.com/shiny/timevis-demo/). If you
 want to see how those examples were created, the full code for the
 examples is inside
 [inst/example](https://github.com/daattali/timevis/tree/master/inst/example).
 
 If you create any cool timelines that you'd like to share with me, or if
 you want to get in touch with me for any reason, feel free to [contact
-me](http://deanattali.com/contact)\!
+me](https://deanattali.com/contact)\!
 
 Lastly, if you want to learn how to develop an htmlwidget to have
 similar features as this package, you can check out the
 [`timevisBasic`](https://github.com/daattali/timevisBasic) package or
 [my tutorial on htmlwidgets
-tips](http://deanattali.com/blog/advanced-htmlwidgets-tips).
+tips](https://deanattali.com/blog/advanced-htmlwidgets-tips).
