@@ -55,7 +55,7 @@
 #' dataframe:
 #' \itemize{
 #'   \item{\strong{\code{start}}} - (required) The start date of the item, for
-#'   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
+#'   example \code{"1988-11-22"} or \code{"1988-11-22T16:30:00"}.
 #'   \item{\strong{\code{content}}} - (required) The contents of the item. This
 #'   can be plain text or HTML code.
 #'   \item{\strong{\code{end}}} - The end date of the item. The end date is
@@ -240,7 +240,7 @@
 #'
 #' data <- data.frame(
 #'   id = 1:3,
-#'   start = c("2015-04-04", "2015-04-05 11:00:00", "2015-04-06 15:00:00"),
+#'   start = c("2015-04-04", "2015-04-05T11:00:00", "2015-04-06T15:00:00"),
 #'   end = c("2015-04-08", NA, NA),
 #'   content = c("<h2>Vacation!!!</h2>", "Acupuncture", "Massage"),
 #'   style = c("color: red;", NA, NA)
@@ -405,7 +405,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
 #' #----------------------- More advanced example -----------------
 #' data <- data.frame(
 #'   id = 1:3,
-#'   start = c("2015-04-04", "2015-04-05 11:00:00", "2015-04-06 15:00:00"),
+#'   start = c("2015-04-04", "2015-04-05T11:00:00", "2015-04-06T15:00:00"),
 #'   end = c("2015-04-08", NA, NA),
 #'   content = c("<h2>Vacation!!!</h2>", "Acupuncture", "Massage"),
 #'   style = c("color: red;", NA, NA)
