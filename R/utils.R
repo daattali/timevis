@@ -20,6 +20,7 @@ dataframeToD3 <- function(df) {
   if (!is.data.frame(df)) {
     stop("timevis: the input must be a dataframe", call. = FALSE)
   }
+  df = as.data.frame(df)
   row.names(df) <- NULL
   lapply(seq_len(nrow(df)), function(row) {
     row <- df[row, , drop = FALSE]
