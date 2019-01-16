@@ -1,6 +1,6 @@
 Package: timevis
 Title: Create Interactive Timeline Visualizations in R
-Version: 0.4.0.9001
+Version: 0.5
 Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = "R interface"),
@@ -34,4 +34,4 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1

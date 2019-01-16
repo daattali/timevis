@@ -51,8 +51,8 @@ dataWC <- data.frame(
   )
 )
 
-# Data for groups example
-dataGroups <- data.frame(
+# Data for groups example (this data also gets exported in the package)
+timevisData <- data.frame(
   id = 1:11,
   content = c("Open", "Open",
               "Open", "Open", "Half price entry",
@@ -71,8 +71,7 @@ dataGroups <- data.frame(
   group = c(rep("lib", 2), rep("gym", 3), rep("pool", 5), NA),
   type = c(rep("range", 9), "point", "background")
 )
-
-groups <- data.frame(
+timevisDataGroups <- data.frame(
   id = c("lib", "gym", "pool"),
   content = c("Library", "Gym", "Pool")
 )

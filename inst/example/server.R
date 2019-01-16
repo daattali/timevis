@@ -13,7 +13,7 @@ function(input, output, session) {
   })
 
   output$timelineGroups <- renderTimevis({
-    timevis(data = dataGroups, groups = groups, options = list(editable = TRUE))
+    timevis(data = timevisData, groups = timevisDataGroups, options = list(editable = TRUE))
   })
 
   output$timelineCustom <- renderTimevis({
@@ -46,7 +46,7 @@ function(input, output, session) {
   output$table <- renderTable({
     data <- input$timelineInteractive_data
     data$start <- prettyDate(data$start)
-    if(!is.null(data$end)) {
+    if (!is.null(data$end)) {
       data$end <- prettyDate(data$end)
     }
     data

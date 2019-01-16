@@ -1,10 +1,13 @@
-# timevis 0.4.0.x
+# timevis 0.5
+
+2019-01-16
 
 - `tibble`s converted to `data.frame`s (Fixes issue #53, @muschellij2).
 - added documentation for how to extend the timevis object in JavaScript
 - added an option to not load the javascript dependencies (#25)
 - Fix issue #47: Leading whitespace when getting selected item Id as a string
 - Show correct timezone in demo app
+- Add demo advanced data `timevisData` and `timevisDataGroups`
 
 # timevis 0.4 2016-09-16
 
