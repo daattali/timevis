@@ -4,5 +4,8 @@ randomID <- function() {
 }
 
 prettyDate <- function(d) {
-  suppressWarnings(format(as.POSIXct(gsub("T", " ", d), "%Y-%m-%d %H:%M")))
+  if (is.null(d)) return()
+  posix <- as.POSIXct(d, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC")
+  corrected <- lubridate::with_tz(posix, tzone = Sys.timezone())
+  format(corrected, "%Y-%m-%d %H:%M:%OS %Z")
 }
