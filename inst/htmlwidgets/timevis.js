@@ -121,6 +121,11 @@ HTMLWidgets.widget({
             typeof opts['options']['height'] === "undefined") {
           opts['options']['height'] = opts['height'];
         }
+        if (opts['timezone'] !== null) {
+          opts['options']['moment'] = function(date) {
+            return vis.moment(date).utcOffset(opts['timezone']);
+          };
+        }
         timeline.setOptions(opts.options);
 
         // Now that the timeline is initialized, call any outstanding API

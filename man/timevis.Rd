@@ -8,7 +8,7 @@
 \usage{
 timevis(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   options, width = NULL, height = NULL, elementId = NULL,
-  loadDependencies = TRUE)
+  loadDependencies = TRUE, timezone = NULL)
 }
 \arguments{
 \item{data}{A dataframe containing the timeline items. Each item on the
@@ -57,6 +57,12 @@ automatically generated one). Ignored when used in a Shiny app.}
 \item{loadDependencies}{Whether to load JQuery and bootstrap
 dependencies (you should only set to \code{FALSE} if you manually include
 them)}
+
+\item{timezone}{By default, the timevis widget displays times in the local
+time of the browser rendering it. You can set timevis to display times in
+another time zone by providing a number between -15 to 15 to specify the
+number of hours offset from UTC. For example, use `0` to display in UTC,
+and use `-4` to display in a timezone that is 4 hours behind UTC.}
 }
 \value{
 A timeline visualization \code{htmlwidgets} object
@@ -192,6 +198,7 @@ This timeline object is the direct widget that \code{vis.js} creates, and you
 can see the \href{http://visjs.org/docs/timeline/}{visjs documentation} to
 see what actions you can perform on that object.
 }
+
 \examples{
 # For more examples, see http://daattali.com/shiny/timevis-demo/
 
@@ -315,4 +322,3 @@ shinyApp(ui, server)
 \seealso{
 \href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 }
-

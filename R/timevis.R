@@ -48,6 +48,11 @@
 #' @param loadDependencies Whether to load JQuery and bootstrap
 #' dependencies (you should only set to \code{FALSE} if you manually include
 #' them)
+#' @param timezone By default, the timevis widget displays times in the local
+#' time of the browser rendering it. You can set timevis to display times in
+#' another time zone by providing a number between -15 to 15 to specify the
+#' number of hours offset from UTC. For example, use `0` to display in UTC,
+#' and use `-4` to display in a timezone that is 4 hours behind UTC.
 #' @return A timeline visualization \code{htmlwidgets} object
 #' @section Data format:
 #' The \code{data} parameter supplies the input dataframe that describes the
@@ -280,7 +285,7 @@
 #' @export
 timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                     options, width = NULL, height = NULL, elementId = NULL,
-                    loadDependencies = TRUE) {
+                    loadDependencies = TRUE, timezone = NULL) {
 
   # Validate the input data
   if (missing(data)) {
@@ -323,6 +328,13 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     stop("timevis: 'options' must be a named list",
          call. = FALSE)
   }
+  if (!is.null(timezone)) {
+    if (!is.numeric(timezone) || length(timezone) != 1 ||
+        timezone < -15 || timezone > 15) {
+      stop("timevis: 'timezone' must be a number between -15 and 15",
+           call. = FALSE)
+    }
+  }
 
   items <- dataframeToD3(data)
   if (missing(groups)) {
@@ -339,7 +351,8 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     zoomFactor = zoomFactor,
     fit = fit,
     options = options,
-    height = height
+    height = height,
+    timezone = timezone
   )
 
   # Allow a list of API functions to be called on the timevis after

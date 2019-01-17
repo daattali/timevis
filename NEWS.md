@@ -1,3 +1,9 @@
+# timevis 0.5.*
+
+TODO
+
+- Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine
+
 # timevis 0.5
 
 2019-01-16
