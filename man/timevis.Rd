@@ -199,6 +199,44 @@ can see the \href{http://visjs.org/docs/timeline/}{visjs documentation} to
 see what actions you can perform on that object.
 }
 
+\section{Customizing the timevis look and style using CSS}{
+
+To change the styling of individual items or group labels, use the
+\code{className} and \code{style} columns in the \code{data} or \code{groups}
+dataframes.\cr\cr
+When running a Shiny app, you can use CSS files to apply custom styling to
+other components of the timevis widget. When using timevis outside of a Shiny
+app, you can use CSS in the following way:\cr
+\preformatted{
+tv <- timevis(
+  data.frame(
+    content = "Today",
+    start = Sys.Date()
+  )
+)
+
+style <- "
+.vis-timeline {
+  border-color: #269026;
+  background-color: lightgreen;
+  font-size: 15px;
+  color: green;
+}
+
+.vis-item {
+  border: 2px solid #5ace5a;
+  font-size: 12pt;
+  background: #d9ffd9;
+  font-family: cursive;
+  padding: 5px;
+}
+"
+
+tv <- tagList(tags$style(style), tv)
+htmltools::html_print(tv)
+}
+}
+
 \examples{
 # For more examples, see http://daattali.com/shiny/timevis-demo/
 
