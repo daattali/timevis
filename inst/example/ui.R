@@ -68,42 +68,22 @@ fluidPage(
             tags$pre(codeShiny)
           )
         )
-      ),
-      div(class = "sourcecode",
-        "The exact code for all the timelines in this app is",
-        tags$a(href = "https://github.com/daattali/timevis/tree/master/inst/example",
-               "on GitHub")
       )
     ),
 
     tabPanel(
       div(icon("cog"), "Custom style"),
-      timevisOutput("timelineCustom"),
-      div(class = "sourcecode",
-          "The exact code for all the timelines in this app is",
-          tags$a(href = "https://github.com/daattali/timevis/tree/master/inst/example",
-                 "on GitHub")
-      )
+      timevisOutput("timelineCustom")
     ),
 
     tabPanel(
       div(icon("trophy"), "World Cup 2014"),
-      timevisOutput("timelineWC"),
-      div(class = "sourcecode",
-          "The exact code for all the timelines in this app is",
-          tags$a(href = "https://github.com/daattali/timevis/tree/master/inst/example",
-                 "on GitHub")
-      )
+      timevisOutput("timelineWC")
     ),
 
     tabPanel(
       div(icon("users"), "Groups"),
-      timevisOutput("timelineGroups"),
-      div(class = "sourcecode",
-          "The exact code for all the timelines in this app is",
-          tags$a(href = "https://github.com/daattali/timevis/tree/master/inst/example",
-                 "on GitHub")
-      )
+      timevisOutput("timelineGroups")
     ),
 
     tabPanel(
@@ -169,12 +149,16 @@ fluidPage(
                  textOutput("selected", inline = TRUE))
            )
         )
-      ),
-      div(class = "sourcecode",
-          "The exact code for all the timelines in this app is",
-          tags$a(href = "https://github.com/daattali/timevis/tree/master/inst/example",
-                 "on GitHub")
       )
+    ),
+    tabPanel(
+      div(icon("question"), "Usage"),
+      div(id = "usage-tab", includeMarkdown("www/help.md"))
     )
+  ),
+  div(class = "sourcecode",
+      "The exact code for all the timelines in this app is",
+      tags$a(href = "https://github.com/daattali/timevis/tree/master/inst/example",
+             "on GitHub")
   )
 )

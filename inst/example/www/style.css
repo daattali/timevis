@@ -84,7 +84,7 @@ body {
   background: #fff;
 }
 
-@media only screen and (max-width: 979px) {
+@media only screen and (max-width: 1100px) {
   #header {
     padding: 15px 0 65px;
   }
@@ -117,7 +117,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 850px) {
   #header {
     padding: 15px 0 65px;
   }
@@ -260,4 +260,9 @@ body {
   font-weight: bold;
   margin-bottom: 5px;
   margin-top: 0;
+}
+
+#usage-tab {
+  padding: 10px 40px;
+  font-size: 17px;
 }

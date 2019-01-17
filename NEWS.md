@@ -5,6 +5,7 @@ TODO
 - Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine (#67)
 - Add `setCustomTime()` and `setCurrentTime()` functions (#20)
 - Add documentation about how to add custom style to timevis (#45)
+- Add documentation tab to the demo app
 
 # timevis 0.5
 
