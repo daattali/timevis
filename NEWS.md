@@ -2,7 +2,8 @@
 
 TODO
 
-- Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine
+- Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine (#67)
+- Add `setCustomTime()` and `setCurrentTime()` functions (#20)
 
 # timevis 0.5
 

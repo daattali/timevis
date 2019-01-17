@@ -205,6 +205,12 @@ HTMLWidgets.widget({
       removeCustomTime : function(params) {
         timeline.removeCustomTime(params.itemId);
       },
+      setCustomTime : function(params) {
+        timeline.setCustomTime(params.time, params.itemId);
+      },
+      setCurrentTime : function(params) {
+        timeline.setCurrentTime(params.time);
+      },
       fitWindow : function(params) {
         timeline.fit(params.options);
       },
@@ -240,7 +246,7 @@ if (HTMLWidgets.shinyMode) {
   var fxns =
     ['addItem', 'addItems', 'removeItem', 'addCustomTime', 'removeCustomTime',
      'fitWindow', 'centerTime', 'centerItem', 'setItems', 'setGroups',
-     'setOptions', 'setSelection', 'setWindow'];
+     'setOptions', 'setSelection', 'setWindow', 'setCustomTime', 'setCurrentTime'];
 
   var addShinyHandler = function(fxn) {
     return function() {
