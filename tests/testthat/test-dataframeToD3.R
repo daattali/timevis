@@ -43,13 +43,12 @@ test_that("dataframeToD3 returns the same whether the dataframe is pure or merge
 
 test_that("nested columns behave the way they ought to",{
   matts_hobbies <- c("Working", "thinking about work")
-  expect_hobbies <- jsonlite::toJSON(matts_hobbies, auto_unbox = TRUE)
   df <- data.frame(name = c("Dean", "Matt"),
                    age = c(27, 23),
                    hobbies = c(NA, NA))
   df$hobbies[2] <- list(matts_hobbies)
   out <- dataframeToD3(df)
   expect <- list(list(name = "Dean", age = "27"),
-                 list(name = "Matt", age = "23", hobbies = expect_hobbies))
+                 list(name = "Matt", age = "23", hobbies = as.list(matts_hobbies)))
   expect_identical(out, expect, info = info_comp(out, expect))
 })
