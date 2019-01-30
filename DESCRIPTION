@@ -29,7 +29,8 @@ Imports:
 Suggests:
     knitr (>= 1.7),
     testthat (>= 0.9.1),
-    tibble
+    tibble,
+    glue
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
