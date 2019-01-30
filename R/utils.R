@@ -25,7 +25,9 @@ dataframeToD3 <- function(df) {
   lapply(seq_len(nrow(df)), function(row) {
     row <- df[row, , drop = FALSE]
     lapply(row[, !is.na(row), drop = FALSE], function(x){
-      if (length(x) > 1) return(jsonlite::toJSON(x, auto_unbox = TRUE))
+      if (lengths(x) > 1) {
+        return(jsonlite::toJSON(unlist(x), auto_unbox = TRUE))
+      }
       return(as.character(x))
     })
   })
