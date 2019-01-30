@@ -24,7 +24,12 @@ dataframeToD3 <- function(df) {
   row.names(df) <- NULL
   lapply(seq_len(nrow(df)), function(row) {
     row <- df[row, , drop = FALSE]
-    lapply(row[, !is.na(row), drop = FALSE], as.character)
+    lapply(row[, !is.na(row), drop = FALSE], function(x){
+      if (lengths(x) > 1) {
+        return(lapply(unlist(x),as.character))
+      }
+      return(as.character(x))
+    })
   })
 }
 
