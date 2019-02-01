@@ -1,8 +1,8 @@
-/*********************************************************************/
-/* Dean Attali 2016                                                  */
-/* timevis                                                           */
-/* Create timeline visualizations in R using htmlwidgets and vis.js  */
-/*********************************************************************/
+/**************************************************************************/
+/* Dean Attali 2016                                                       */
+/* timevis                                                                */
+/* Create timeline visualizations in R using htmlwidgets and timeline.js  */
+/**************************************************************************/
 
 HTMLWidgets.widget({
 
@@ -14,7 +14,7 @@ HTMLWidgets.widget({
 
     var elementId = el.id;
     var container = document.getElementById(elementId);
-    var timeline = new vis.Timeline(container, [], {});
+    var timeline = new timeline.Timeline(container, [], {});
     var initialized = false;
 
     return {
@@ -123,7 +123,7 @@ HTMLWidgets.widget({
         }
         if (opts['timezone'] !== null) {
           opts['options']['moment'] = function(date) {
-            return vis.moment(date).utcOffset(opts['timezone']);
+            return timeline.moment(date).utcOffset(opts['timezone']);
           };
         }
         timeline.setOptions(opts.options);
