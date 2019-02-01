@@ -14,7 +14,7 @@ HTMLWidgets.widget({
 
     var elementId = el.id;
     var container = document.getElementById(elementId);
-    var timeline = new vis.Timeline(container, [], {});
+    var vistime = new vis.Timeline(container, [], {});
     var initialized = false;
 
     return {
@@ -40,7 +40,7 @@ HTMLWidgets.widget({
           if (HTMLWidgets.shinyMode) {
 
             // Items have been manually selected
-            timeline.on('select', function (properties) {
+            vistime.on('select', function (properties) {
               Shiny.onInputChange(
                 elementId + "_selected",
                 properties.items
@@ -48,61 +48,61 @@ HTMLWidgets.widget({
             });
             Shiny.onInputChange(
               elementId + "_selected",
-              timeline.getSelection()
+              vistime.getSelection()
             );
 
             // The range of the window has changes (by dragging or zooming)
-            timeline.on('rangechanged', function (properties) {
+            vistime.on('rangechanged', function (properties) {
               Shiny.onInputChange(
                 elementId + "_window",
-                [timeline.getWindow().start, timeline.getWindow().end]
+                [vistime.getWindow().start, vistime.getWindow().end]
               );
             });
             Shiny.onInputChange(
               elementId + "_window",
-              [timeline.getWindow().start, timeline.getWindow().end]
+              [vistime.getWindow().start, vistime.getWindow().end]
             );
 
             // The data in the timeline has changed
-            timeline.itemsData.on('*', function (event, properties, senderId) {
+            vistime.itemsData.on('*', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_data" + ":timevisDF",
-                timeline.itemsData.get()
+                vistime.itemsData.get()
               );
             });
             Shiny.onInputChange(
               elementId + "_data" + ":timevisDF",
-              timeline.itemsData.get()
+              vistime.itemsData.get()
             );
 
             // An item was added or removed, send back the list of IDs
-            timeline.itemsData.on('add', function (event, properties, senderId) {
+            vistime.itemsData.on('add', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_ids",
-                timeline.itemsData.getIds()
+                vistime.itemsData.getIds()
               );
             });
-            timeline.itemsData.on('remove', function (event, properties, senderId) {
+            vistime.itemsData.on('remove', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_ids",
-                timeline.itemsData.getIds()
+                vistime.itemsData.getIds()
               );
             });
             Shiny.onInputChange(
               elementId + "_ids",
-              timeline.itemsData.getIds()
+              vistime.itemsData.getIds()
             );
           }
         }
 
         // set the data items and groups
-        timeline.itemsData.clear();
-        timeline.itemsData.add(opts.items);
-        timeline.setGroups(opts.groups);
+        vistime.itemsData.clear();
+        vistime.itemsData.add(opts.items);
+        vistime.setGroups(opts.groups);
 
         // fit the items on the timeline
         if (opts.fit) {
-          timeline.fit({ animation : false });
+          vistime.fit({ animation : false });
         }
 
         // Show or hide the zoom button
@@ -126,7 +126,7 @@ HTMLWidgets.widget({
             return vis.moment(date).utcOffset(opts['timezone']);
           };
         }
-        timeline.setOptions(opts.options);
+        vistime.setOptions(opts.options);
 
         // Now that the timeline is initialized, call any outstanding API
         // functions that the user wantd to run on the timeline before it was
@@ -153,7 +153,7 @@ HTMLWidgets.widget({
         if (typeof animation === "undefined") {
           animation = true;
         }
-        var range = timeline.getWindow();
+        var range = vistime.getWindow();
         var start = range.start.valueOf();
         var end = range.end.valueOf();
         var interval = end - start;
@@ -162,7 +162,7 @@ HTMLWidgets.widget({
         var newStart = start + distance;
         var newEnd = end - distance;
 
-        timeline.setWindow({
+        vistime.setWindow({
           start   : newStart,
           end     : newEnd,
           animation : animation
@@ -172,14 +172,14 @@ HTMLWidgets.widget({
         if (typeof animation === "undefined") {
           animation = true;
         }
-        var range = timeline.getWindow();
+        var range = vistime.getWindow();
         var start = range.start.valueOf();
         var end = range.end.valueOf();
         var interval = end - start;
         var newStart = start - interval * percentage / 2;
         var newEnd = end + interval * percentage / 2;
 
-        timeline.setWindow({
+        vistime.setWindow({
           start   : newStart,
           end     : newEnd,
           animation : animation
@@ -187,55 +187,55 @@ HTMLWidgets.widget({
       },
 
       // export the timeline object for others to use if they want to
-      timeline : timeline,
+      vistime : vistime,
 
       /* API functions that manipulate a timeline's data */
       addItem : function(params) {
-        timeline.itemsData.add(params.data);
+        vistime.itemsData.add(params.data);
       },
       addItems : function(params) {
-        timeline.itemsData.add(params.data);
+        vistime.itemsData.add(params.data);
       },
       removeItem : function(params) {
-        timeline.itemsData.remove(params.itemId);
+        vistime.itemsData.remove(params.itemId);
       },
       addCustomTime : function(params) {
-        timeline.addCustomTime(params.time, params.itemId);
+        vistime.addCustomTime(params.time, params.itemId);
       },
       removeCustomTime : function(params) {
-        timeline.removeCustomTime(params.itemId);
+        vistime.removeCustomTime(params.itemId);
       },
       setCustomTime : function(params) {
-        timeline.setCustomTime(params.time, params.itemId);
+        vistime.setCustomTime(params.time, params.itemId);
       },
       setCurrentTime : function(params) {
-        timeline.setCurrentTime(params.time);
+        vistime.setCurrentTime(params.time);
       },
       fitWindow : function(params) {
-        timeline.fit(params.options);
+        vistime.fit(params.options);
       },
       centerTime : function(params) {
-        timeline.moveTo(params.time, params.options);
+        vistime.moveTo(params.time, params.options);
       },
       centerItem : function(params) {
-        timeline.focus(params.itemId, params.options);
+        vistime.focus(params.itemId, params.options);
       },
       setItems : function(params) {
-        timeline.itemsData.clear();
-        timeline.itemsData.add(params.data);
+        vistime.itemsData.clear();
+        vistime.itemsData.add(params.data);
       },
       setGroups : function(params) {
-        timeline.groupsData.clear();
-        timeline.groupsData.add(params.data);
+        vistime.groupsData.clear();
+        vistime.groupsData.add(params.data);
       },
       setOptions : function(params) {
-        timeline.setOptions(params.options);
+        vistime.setOptions(params.options);
       },
       setSelection : function(params) {
-        timeline.setSelection(params.itemId, params.options);
+        vistime.setSelection(params.itemId, params.options);
       },
       setWindow : function(params) {
-        timeline.setWindow(params.start, params.end, params.options);
+        vistime.setWindow(params.start, params.end, params.options);
       }
     };
   }
