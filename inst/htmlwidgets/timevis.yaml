@@ -1,5 +1,5 @@
 dependencies:
-  - name: timeline-plus
+  - name: timeline
     version: 2.3.4
     src: htmlwidgets/lib/timeline-plus-2.3.4
     script: timeline.js
