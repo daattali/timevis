@@ -56,8 +56,16 @@ test_that("nested columns behave the way they ought to",{
   expect2 <- expect
 
   deans_hobby <- "Responding to pull requests"
-  df2$hobbies[1] <- list(deans_hobby)
+  df2$hobbies[[1]] <- list(deans_hobby)
   expect2[[1]]$hobbies <- list(deans_hobby)
   out2 <- dataframeToD3(df2)
   expect_identical(out2, expect2, info = info_comp(out2, expect2))
+
+  df3 <- df2
+  expect3 <- expect2
+  expect3[[1]]$hobbies <- NA
+
+  df3$hobbies[[1]] <- list()
+  out3 <- df3 %>% dataframeToD3()
+  expect_identical(out3, expect3, info = info_comp(out3, expect3))
 })
