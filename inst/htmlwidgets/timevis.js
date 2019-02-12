@@ -1,8 +1,8 @@
-/************************************************************************/
-/* Dean Attali 2016                                                  	*/
-/* timevis                                                           	*/
-/* Create timeline visualizations in R using htmlwidgets and timeline.js*/
-/************************************************************************/
+/*********************************************************************/
+/* Dean Attali 2016                                                  */
+/* timevis                                                           */
+/* Create timeline visualizations in R using htmlwidgets and vis.js  */
+/*********************************************************************/
 
 HTMLWidgets.widget({
 
@@ -14,7 +14,7 @@ HTMLWidgets.widget({
 
     var elementId = el.id;
     var container = document.getElementById(elementId);
-    var vistime = new timeline.Timeline(container, [], {});
+    var timeline = new vis.Timeline(container, [], {});
     var initialized = false;
 
     return {
@@ -40,7 +40,7 @@ HTMLWidgets.widget({
           if (HTMLWidgets.shinyMode) {
 
             // Items have been manually selected
-            vistime.on('select', function (properties) {
+            timeline.on('select', function (properties) {
               Shiny.onInputChange(
                 elementId + "_selected",
                 properties.items
@@ -48,61 +48,61 @@ HTMLWidgets.widget({
             });
             Shiny.onInputChange(
               elementId + "_selected",
-              vistime.getSelection()
+              timeline.getSelection()
             );
 
             // The range of the window has changes (by dragging or zooming)
-            vistime.on('rangechanged', function (properties) {
+            timeline.on('rangechanged', function (properties) {
               Shiny.onInputChange(
                 elementId + "_window",
-                [vistime.getWindow().start, vistime.getWindow().end]
+                [timeline.getWindow().start, timeline.getWindow().end]
               );
             });
             Shiny.onInputChange(
               elementId + "_window",
-              [vistime.getWindow().start, vistime.getWindow().end]
+              [timeline.getWindow().start, timeline.getWindow().end]
             );
 
             // The data in the timeline has changed
-            vistime.itemsData.on('*', function (event, properties, senderId) {
+            timeline.itemsData.on('*', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_data" + ":timevisDF",
-                vistime.itemsData.get()
+                timeline.itemsData.get()
               );
             });
             Shiny.onInputChange(
               elementId + "_data" + ":timevisDF",
-              vistime.itemsData.get()
+              timeline.itemsData.get()
             );
 
             // An item was added or removed, send back the list of IDs
-            vistime.itemsData.on('add', function (event, properties, senderId) {
+            timeline.itemsData.on('add', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_ids",
-                vistime.itemsData.getIds()
+                timeline.itemsData.getIds()
               );
             });
-            vistime.itemsData.on('remove', function (event, properties, senderId) {
+            timeline.itemsData.on('remove', function (event, properties, senderId) {
               Shiny.onInputChange(
                 elementId + "_ids",
-                vistime.itemsData.getIds()
+                timeline.itemsData.getIds()
               );
             });
             Shiny.onInputChange(
               elementId + "_ids",
-              vistime.itemsData.getIds()
+              timeline.itemsData.getIds()
             );
           }
         }
 
         // set the data items and groups
-        vistime.itemsData.clear();
-        vistime.itemsData.add(opts.items);
-        vistime.setGroups(opts.groups);
+        timeline.itemsData.clear();
+        timeline.itemsData.add(opts.items);
+        timeline.setGroups(opts.groups);
 
         // fit the items on the timeline
         if (opts.fit) {
-          vistime.fit({ animation : false });
+          timeline.fit({ animation : false });
         }
 
         // Show or hide the zoom button
@@ -123,10 +123,10 @@ HTMLWidgets.widget({
         }
         if (opts['timezone'] !== null) {
           opts['options']['moment'] = function(date) {
-            return timeline.moment(date).utcOffset(opts['timezone']);
+            return vis.moment(date).utcOffset(opts['timezone']);
           };
         }
-        vistime.setOptions(opts.options);
+        timeline.setOptions(opts.options);
 
         // Now that the timeline is initialized, call any outstanding API
         // functions that the user wantd to run on the timeline before it was
@@ -153,7 +153,7 @@ HTMLWidgets.widget({
         if (typeof animation === "undefined") {
           animation = true;
         }
-        var range = vistime.getWindow();
+        var range = timeline.getWindow();
         var start = range.start.valueOf();
         var end = range.end.valueOf();
         var interval = end - start;
@@ -162,7 +162,7 @@ HTMLWidgets.widget({
         var newStart = start + distance;
         var newEnd = end - distance;
 
-        vistime.setWindow({
+        timeline.setWindow({
           start   : newStart,
           end     : newEnd,
           animation : animation
@@ -172,14 +172,14 @@ HTMLWidgets.widget({
         if (typeof animation === "undefined") {
           animation = true;
         }
-        var range = vistime.getWindow();
+        var range = timeline.getWindow();
         var start = range.start.valueOf();
         var end = range.end.valueOf();
         var interval = end - start;
         var newStart = start - interval * percentage / 2;
         var newEnd = end + interval * percentage / 2;
 
-        vistime.setWindow({
+        timeline.setWindow({
           start   : newStart,
           end     : newEnd,
           animation : animation
@@ -187,55 +187,55 @@ HTMLWidgets.widget({
       },
 
       // export the timeline object for others to use if they want to
-      vistime : vistime,
+      timeline : timeline,
 
       /* API functions that manipulate a timeline's data */
       addItem : function(params) {
-        vistime.itemsData.add(params.data);
+        timeline.itemsData.add(params.data);
       },
       addItems : function(params) {
-        vistime.itemsData.add(params.data);
+        timeline.itemsData.add(params.data);
       },
       removeItem : function(params) {
-        vistime.itemsData.remove(params.itemId);
+        timeline.itemsData.remove(params.itemId);
       },
       addCustomTime : function(params) {
-        vistime.addCustomTime(params.time, params.itemId);
+        timeline.addCustomTime(params.time, params.itemId);
       },
       removeCustomTime : function(params) {
-        vistime.removeCustomTime(params.itemId);
+        timeline.removeCustomTime(params.itemId);
       },
       setCustomTime : function(params) {
-        vistime.setCustomTime(params.time, params.itemId);
+        timeline.setCustomTime(params.time, params.itemId);
       },
       setCurrentTime : function(params) {
-        vistime.setCurrentTime(params.time);
+        timeline.setCurrentTime(params.time);
       },
       fitWindow : function(params) {
-        vistime.fit(params.options);
+        timeline.fit(params.options);
       },
       centerTime : function(params) {
-        vistime.moveTo(params.time, params.options);
+        timeline.moveTo(params.time, params.options);
       },
       centerItem : function(params) {
-        vistime.focus(params.itemId, params.options);
+        timeline.focus(params.itemId, params.options);
       },
       setItems : function(params) {
-        vistime.itemsData.clear();
-        vistime.itemsData.add(params.data);
+        timeline.itemsData.clear();
+        timeline.itemsData.add(params.data);
       },
       setGroups : function(params) {
-        vistime.groupsData.clear();
-        vistime.groupsData.add(params.data);
+        timeline.groupsData.clear();
+        timeline.groupsData.add(params.data);
       },
       setOptions : function(params) {
-        vistime.setOptions(params.options);
+        timeline.setOptions(params.options);
       },
       setSelection : function(params) {
-        vistime.setSelection(params.itemId, params.options);
+        timeline.setSelection(params.itemId, params.options);
       },
       setWindow : function(params) {
-        vistime.setWindow(params.start, params.end, params.options);
+        timeline.setWindow(params.start, params.end, params.options);
       }
     };
   }
