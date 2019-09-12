@@ -233,6 +233,12 @@ HTMLWidgets.widget({
       },
       setSelection : function(params) {
         timeline.setSelection(params.itemId, params.options);
+        if (HTMLWidgets.shinyMode) {
+          Shiny.onInputChange(
+            elementId + "_selected",
+            params.itemId
+          );
+        }
       },
       setWindow : function(params) {
         timeline.setWindow(params.start, params.end, params.options);
