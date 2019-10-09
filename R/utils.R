@@ -9,7 +9,7 @@
 
 # Check if an argument is a single boolean value
 is.bool <- function(x) {
-  is.logical(x) && length(x) == 1
+  is.logical(x) && length(x) == 1 && !is.na(x)
 }
 
 # Convert a data.frame to a list of lists (the data format that D3 uses)
