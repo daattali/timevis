@@ -2,6 +2,7 @@
 
 TODO date
 
+- **BREAKING CHANGE** API functions now work in shiny modules without having to specify the namespace. This means that if you previously explicitly used a namespace when calling API functions, you need to remove the namespace (#90)
 - Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine (#67)
 - Add `setCustomTime()` and `setCurrentTime()` functions (#20)
 - Fixed bug: using `setSelection()` did not trigger the Shiny selected input (#82)

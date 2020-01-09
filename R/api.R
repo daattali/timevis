@@ -16,6 +16,7 @@ callJS <- function() {
   # If an ID was passed, the widget already exists and we can simply call the
   # appropriate JS function
   else if (is.character(message$id)) {
+    message$id <- session$ns(message$id)
     method <- paste0("timevis:", message$method)
     session$sendCustomMessage(method, message)
     return(message$id)
