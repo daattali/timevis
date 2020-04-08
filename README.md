@@ -62,8 +62,8 @@ install.packages("timevis")
 To install the latest development version from GitHub:
 
 ``` r
-install.packages("devtools")
-devtools::install_github("daattali/timevis")
+install.packages("remotes")
+remotes::install_github("daattali/timevis")
 ```
 
 <h2 id="usage">
