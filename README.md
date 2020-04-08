@@ -1,6 +1,6 @@
 # timevis - Create interactive timeline visualizations in R
 
-[![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/daattali)
+[![Donate](https://i.imgur.com/vCIGFrH.png)](https://github.com/sponsors/daattali)
 [![Build
 Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
 [![CRAN
@@ -23,7 +23,7 @@ find timevis useful, please consider showing your support :)**
 
 <p align="center">
 
-<a href="https://www.paypal.me/daattali">
+<a href="https://github.com/sponsors/daattali">
 <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" />
 </a>
 
