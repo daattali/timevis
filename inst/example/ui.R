@@ -3,6 +3,7 @@ library(timevis)
 source("ui-helpers.R")
 
 fluidPage(
+  shinydisconnect::disconnectMessage2(),
   title = "timevis - An R package for creating timeline visualizations",
   tags$head(
     tags$link(href = "style.css", rel = "stylesheet"),
