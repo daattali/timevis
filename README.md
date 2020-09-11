@@ -14,8 +14,8 @@ visualizations in R. Timelines can be included in Shiny apps and R
 markdown documents, or viewed from the R console and RStudio Viewer.
 {timevis} includes an extensive API to manipulate a timeline after
 creation, and supports getting data out of the visualization into R.
-This package is based on the [vis.js](http://visjs.org/) Timeline module
-and the [htmlwidgets](http://www.htmlwidgets.org/) R package.
+This package is based on the [visjs](https://visjs.org/) Timeline
+JavaScript library.
 
 **Need Shiny help? [I’m available for
 consulting](https://attalitech.com/).**<br/> **If you find {timevis}

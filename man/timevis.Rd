@@ -45,7 +45,7 @@ current date.}
 
 \item{options}{A named list containing any extra configuration options to
 customize the timeline. All available options can be found in the
-\href{http://visjs.org/docs/timeline/#Configuration_Options}{official
+\href{https://visjs.org/docs/timeline/#Configuration_Options}{official
 Timeline documentation}. Note that any options that define a JavaScript
 function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
 examples section below to see example usage.}
@@ -81,12 +81,16 @@ A timeline visualization \code{htmlwidgets} object
 Timelines can be included in Shiny apps and R markdown documents, or viewed
 from the R console and RStudio Viewer. \code{timevis} Includes an extensive
 API to manipulate a timeline after creation, and supports getting data out of
-the visualization into R. Based on the \href{http://visjs.org/}{'vis.js'}
-Timeline module and the \href{http://www.htmlwidgets.org/}{'htmlwidgets'} R
-package.\cr\cr
-View a \href{http://daattali.com/shiny/timevis-demo/}{demo Shiny app}
+the visualization into R. Based on the \href{https://visjs.org/}{'visjs'}
+Timeline JavaScript library.\cr\cr
+View a \href{https://daattali.com/shiny/timevis-demo/}{demo Shiny app}
 or see the full \href{https://github.com/daattali/timevis}{README} on
-GitHub.
+GitHub.\cr\cr
+\strong{Important note:} This package provides a way to use the
+\href{https://visjs.org/}{visjs Timeline JavaScript library} within R.
+The visjs Timeline library has many features that cannot all be documented
+here. To see the full details on what the timeline can support, please read the
+official documentation of visjs Timeline.
 }
 \section{Data format}{
 
@@ -206,7 +210,7 @@ timeline's JavaScript object directly. The timeline object is available via
 \code{document.getElementById(id).widget.timeline} (replace \code{id} with
 the timeline's id).\cr\cr
 This timeline object is the direct widget that \code{vis.js} creates, and you
-can see the \href{http://visjs.org/docs/timeline/}{visjs documentation} to
+can see the \href{https://visjs.org/docs/timeline/}{visjs documentation} to
 see what actions you can perform on that object.
 }
 
@@ -249,7 +253,7 @@ htmltools::html_print(tv)
 }
 
 \examples{
-# For more examples, see http://daattali.com/shiny/timevis-demo/
+# For more examples, see https://daattali.com/shiny/timevis-demo/
 
 #----------------------- Most basic -----------------
 timevis()
@@ -369,5 +373,5 @@ shinyApp(ui, server)
 
 }
 \seealso{
-\href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
+\href{https://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 }
