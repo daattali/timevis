@@ -1,17 +1,13 @@
-# timevis 0.5.*
+# timevis 1.0.0 (DATE TBD)
 
-TODO date
-
-- **BREAKING CHANGE** API functions now work in shiny modules without having to specify the namespace. This means that if you previously explicitly used a namespace when calling API functions, you need to remove the namespace (#90)
+- **BREAKING CHANGE** API functions now work in shiny modules without having to specify the namespace. This means that if you previously explicitly used a namespace when calling API functions, you need to remove the namespace function (#90)
 - Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine (#67)
 - Add `setCustomTime()` and `setCurrentTime()` functions (#20)
 - Fixed bug: using `setSelection()` did not trigger the Shiny selected input (#82)
 - Add documentation about how to add custom style to timevis (#45)
 - Add documentation tab to the demo app
 
-# timevis 0.5
-
-2019-01-16
+# timevis 0.5 (2019-01-16)
 
 - `tibble`s converted to `data.frame`s (Fixes issue #53, @muschellij2).
 - added documentation for how to extend the timevis object in JavaScript
@@ -20,24 +16,20 @@ TODO date
 - Show correct timezone in demo app
 - Add demo advanced data `timevisData` and `timevisDataGroups`
 
-# timevis 0.4 2016-09-16
+# timevis 0.4 (2016-09-16)
 
 ### Bug fixes
 
 - timevis and visNetwork can work together in the same app (the bug is fixed on timevis' end, so it will only work if a timevis widget is defined before a visNetwork one until visNetwork also fix the bug) (#11)
 - re-defining the data input handler does not cause a warning 
 
-# timevis 0.3
-
-2016-08-29
+# timevis 0.3 (2016-08-29)
 
 #### Misc
 
 - Added VignetteBuilder field to DESCRIPTION file as per CRAN's request
 
-# timevis 0.2
-
-2016-08-24
+# timevis 0.2 (2016-08-24)
 
 ### Breaking changes
 
@@ -66,8 +58,6 @@ TODO date
 - added social media meta tags to Shiny app 
 - add a lot of responsive CSS to make the app look well in smaller screens
 
-# timevis 0.1
-
-2016-07-25
+# timevis 0.1 (2016-07-25)
 
 Initial CRAN release
