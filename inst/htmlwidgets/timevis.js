@@ -92,6 +92,18 @@ HTMLWidgets.widget({
               elementId + "_ids",
               timeline.itemsData.getIds()
             );
+
+            // Visible items have changed
+            var sendShinyVisible = function() {
+              Shiny.onInputChange(
+                elementId + "_visible",
+                timeline.getVisibleItems()
+              );
+            };
+            timeline.on('rangechanged', sendShinyVisible);
+            timeline.itemsData.on('add', sendShinyVisible);
+            timeline.itemsData.on('remove', sendShinyVisible);
+            setTimeout(sendShinyVisible, 0);
           }
         }
 

@@ -273,6 +273,8 @@ input variables will be available:
     the minimum and maximum dates currently visible in the timeline. The
     input is updated every time the viewable window of dates is updated
     (by zooming or moving the window).
+  - **input$mytime\_visible** - will return a list of IDs of items
+    currently visible in the timeline.
 
 <h2 id="sponsors">
 

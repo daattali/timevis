@@ -3,6 +3,7 @@
 - **BREAKING CHANGE** API functions now work in shiny modules without having to specify the namespace. This means that if you previously explicitly used a namespace when calling API functions, you need to remove the namespace function (#90)
 - Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine (#67)
 - Add `setCustomTime()` and `setCurrentTime()` functions (#20)
+- Add `<timeline>_visible` Shiny input that sends the items that are currently visible in the timeline to Shiny as an input (#22)
 - Fixed bug: using `setSelection()` did not trigger the Shiny selected input (#82)
 - Add documentation about how to add custom style to timevis (#45)
 - Add documentation about how to use BCE dates (#99)
