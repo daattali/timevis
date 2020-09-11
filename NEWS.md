@@ -5,6 +5,7 @@
 - Add `setCustomTime()` and `setCurrentTime()` functions (#20)
 - Fixed bug: using `setSelection()` did not trigger the Shiny selected input (#82)
 - Add documentation about how to add custom style to timevis (#45)
+- Add documentation about how to use BCE dates (#99)
 - Add documentation tab to the demo app
 
 # timevis 0.5 (2019-01-16)

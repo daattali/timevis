@@ -95,7 +95,9 @@ items in the timeline. The following variables are supported for the items
 dataframe:
 \itemize{
 \item{\strong{\code{start}}} - (required) The start date of the item, for
-example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
+example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}. To specify BCE
+dates you must use 6 digits (for example \code{"-000600"} corresponds to year 600BCE).
+To specify dates between year 0 and year 99 CE, you must use 4 digits.
 \item{\strong{\code{content}}} - (required) The contents of the item. This
 can be plain text or HTML code.
 \item{\strong{\code{end}}} - The end date of the item. The end date is
