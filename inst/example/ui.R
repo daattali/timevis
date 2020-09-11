@@ -147,7 +147,9 @@ fluidPage(
              div(tags$strong("Visible window:"),
                  textOutput("window", inline = TRUE)),
              div(tags$strong("Selected items:"),
-                 textOutput("selected", inline = TRUE))
+                 textOutput("selected", inline = TRUE)),
+             div(tags$strong("Visible items:"),
+                 textOutput("visible", inline = TRUE)),
            )
         )
       )
