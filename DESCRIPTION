@@ -1,6 +1,6 @@
 Package: timevis
 Title: Create Interactive Timeline Visualizations in R
-Version: 0.5.0.9005
+Version: 0.5.0.9006
 Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = "R interface"),
@@ -29,9 +29,8 @@ Imports:
 Suggests:
     knitr (>= 1.7),
     testthat (>= 0.9.1),
-    tibble
-Remotes:
-    daattali/shinydisconnect
+    tibble,
+    shinydisconnect
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
