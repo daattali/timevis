@@ -4,7 +4,9 @@
 \name{timevisData}
 \alias{timevisData}
 \title{Timevis sample data}
-\format{A data frame with 11 rows and 6 variables.}
+\format{
+A data frame with 11 rows and 6 variables.
+}
 \usage{
 timevisData
 }
