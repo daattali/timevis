@@ -8,7 +8,7 @@ runExample()
 }
 \description{
 This example is also
-\href{http://daattali.com/shiny/timevis-demo/}{available online}.
+\href{https://daattali.com/shiny/timevis-demo/}{available online}.
 }
 \examples{
 if (interactive()) {

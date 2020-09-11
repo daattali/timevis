@@ -15,7 +15,7 @@ setSelection(id, itemId, options)
 Most common options are \code{focus = TRUE/FALSE} and
 \code{"animation" = TRUE/FALSE}. For a full list of options, see
 the "setSelection" method in the
-\href{http://visjs.org/docs/timeline/#Methods}{official
+\href{https://visjs.org/docs/timeline/#Methods}{official
 Timeline documentation}}
 }
 \description{

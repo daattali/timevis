@@ -1,7 +1,7 @@
 share <- list(
   title = "timevis - An R package for creating timeline visualizations",
-  url = "http://daattali.com/shiny/timevis-demo/",
-  image = "http://daattali.com/shiny/img/timevis-demo.png",
+  url = "https://daattali.com/shiny/timevis-demo/",
+  image = "https://daattali.com/shiny/img/timevis-demo.png",
   description = "Create rich and fully interactive timeline visualizations. Timelines can be included in Shiny apps and R markdown documents, or viewed from the R console and RStudio Viewer.",
   twitter_user = "daattali"
 )

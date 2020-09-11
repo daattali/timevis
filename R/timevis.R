@@ -4,12 +4,16 @@
 #' Timelines can be included in Shiny apps and R markdown documents, or viewed
 #' from the R console and RStudio Viewer. \code{timevis} Includes an extensive
 #' API to manipulate a timeline after creation, and supports getting data out of
-#' the visualization into R. Based on the \href{http://visjs.org/}{'vis.js'}
-#' Timeline module and the \href{http://www.htmlwidgets.org/}{'htmlwidgets'} R
-#' package.\cr\cr
-#' View a \href{http://daattali.com/shiny/timevis-demo/}{demo Shiny app}
+#' the visualization into R. Based on the \href{https://visjs.org/}{'visjs'}
+#' Timeline JavaScript library.\cr\cr
+#' View a \href{https://daattali.com/shiny/timevis-demo/}{demo Shiny app}
 #' or see the full \href{https://github.com/daattali/timevis}{README} on
-#' GitHub.
+#' GitHub.\cr\cr
+#' **Important note:** This package provides a way to use the
+#' \href{https://visjs.org/}{visjs Timeline JavaScript library} within R.
+#' The visjs Timeline library has many features that cannot all be documented
+#' here. To see the full details on what the timeline can support, please read the
+#' official documentation of visjs Timeline.
 #'
 #' @param data A dataframe containing the timeline items. Each item on the
 #' timeline is represented by a row in the dataframe. \code{start} and
@@ -31,7 +35,7 @@
 #' current date.
 #' @param options A named list containing any extra configuration options to
 #' customize the timeline. All available options can be found in the
-#' \href{http://visjs.org/docs/timeline/#Configuration_Options}{official
+#' \href{https://visjs.org/docs/timeline/#Configuration_Options}{official
 #' Timeline documentation}. Note that any options that define a JavaScript
 #' function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
 #' examples section below to see example usage.
@@ -162,7 +166,7 @@
 #' \code{document.getElementById(id).widget.timeline} (replace \code{id} with
 #' the timeline's id).\cr\cr
 #' This timeline object is the direct widget that \code{vis.js} creates, and you
-#' can see the \href{http://visjs.org/docs/timeline/}{visjs documentation} to
+#' can see the \href{https://visjs.org/docs/timeline/}{visjs documentation} to
 #' see what actions you can perform on that object.
 #' @section Customizing the timevis look and style using CSS:
 #' To change the styling of individual items or group labels, use the
@@ -200,7 +204,7 @@
 #' htmltools::html_print(tv)
 #' }
 #' @examples
-#' # For more examples, see http://daattali.com/shiny/timevis-demo/
+#' # For more examples, see https://daattali.com/shiny/timevis-demo/
 #'
 #' #----------------------- Most basic -----------------
 #' timevis()
@@ -318,7 +322,7 @@
 #' shinyApp(ui, server)
 #' }
 #'
-#' @seealso \href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
+#' @seealso \href{https://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 #' @export
 timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
                     options, width = NULL, height = NULL, elementId = NULL,

@@ -1,7 +1,7 @@
 #' Run examples of using timevis in a Shiny app
 #'
 #' This example is also
-#' \href{http://daattali.com/shiny/timevis-demo/}{available online}.
+#' \href{https://daattali.com/shiny/timevis-demo/}{available online}.
 #'
 #' @examples
 #' if (interactive()) {

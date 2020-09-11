@@ -9,7 +9,7 @@ fluidPage(
     tags$link(href = "style.css", rel = "stylesheet"),
 
     # Favicon
-    tags$link(rel = "shortcut icon", type="image/x-icon", href="http://daattali.com/shiny/img/favicon.ico"),
+    tags$link(rel = "shortcut icon", type="image/x-icon", href="https://daattali.com/shiny/img/favicon.ico"),
 
     # Facebook OpenGraph tags
     tags$meta(property = "og:title", content = share$title),
@@ -40,12 +40,12 @@ fluidPage(
         "An R package for creating timeline visualizations"),
     div(id = "subsubtitle",
         "By",
-        tags$a(href = "http://deanattali.com/", "Dean Attali"),
+        tags$a(href = "https://deanattali.com/", "Dean Attali"),
         HTML("&bull;"),
         "Available",
         tags$a(href = "https://github.com/daattali/timevis", "on GitHub"),
         HTML("&bull;"),
-        tags$a(href = "http://daattali.com/shiny/", "More apps"), "by Dean"
+        tags$a(href = "https://daattali.com/shiny/", "More apps"), "by Dean"
     )
   ),
   tabsetPanel(
