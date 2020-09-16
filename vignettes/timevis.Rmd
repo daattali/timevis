@@ -15,20 +15,19 @@ knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 
 # {timevis} - Create interactive timeline visualizations in R
 
-[![Donate](https://i.imgur.com/vCIGFrH.png)](https://github.com/sponsors/daattali)
 [![Build Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
 [![CRAN version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
-> [Demo](https://daattali.com/shiny/timevis-demo) &middot; Created by [Dean Attali](https://deanattali.com)
+> By [Dean Attali](https://deanattali.com) &middot; [Demo](https://daattali.com/shiny/timevis-demo) 
 
 {timevis} lets you create rich and *fully interactive* timeline visualizations in R. Timelines can be included in Shiny apps and R markdown documents, or viewed from the R console and RStudio Viewer. {timevis} includes an extensive API to manipulate a timeline after creation, and supports getting data out of the visualization into R. This package is based on the [visjs](https://visjs.org/) Timeline JavaScript library.
 
 **Need Shiny help? [I'm available for consulting](https://attalitech.com/).**<br/>
-**If you find {timevis} useful, please consider [supporting my work](https://github.com/sponsors/daattali/sponsorships?tier_id=39852) to unlock rewards\! ❤**
+**If you find {timevis} useful, please consider [supporting my work](https://github.com/sponsors/daattali) to unlock rewards\! ❤**
 
 <p align="center">
 
-<a style="display: inline-block;" href="https://github.com/sponsors/daattali/sponsorships?tier_id=39852">
+<a style="display: inline-block;" href="https://github.com/sponsors/daattali">
 <img height="35" src="https://i.imgur.com/034B8vq.png" /> </a>
 
 <a style="display: inline-block;" href="https://paypal.me/daattali">
