@@ -6,7 +6,7 @@ Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travi
 version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
 > By [Dean Attali](https://deanattali.com) ·
-> [Demo](https://daattali.com/shiny/timevis-demo)
+> [Demo](https://daattali.com/shiny/timevis-demo/)
 
 {timevis} lets you create rich and *fully interactive* timeline
 visualizations in R. Timelines can be included in Shiny apps and R
@@ -295,10 +295,10 @@ examples is inside
 
 If you create any cool timelines that you’d like to share with me, or if
 you want to get in touch with me for any reason, feel free to [contact
-me](https://deanattali.com/contact)\!
+me](https://deanattali.com/contact/)\!
 
 Lastly, if you want to learn how to develop an htmlwidget to have
 similar features as this package, you can check out the
 [`timevisBasic`](https://github.com/daattali/timevisBasic) package or
 [my tutorial on htmlwidgets
-tips](https://deanattali.com/blog/advanced-htmlwidgets-tips).
+tips](https://deanattali.com/blog/advanced-htmlwidgets-tips/).
