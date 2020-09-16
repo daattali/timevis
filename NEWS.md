@@ -1,4 +1,4 @@
-# timevis 1.0.0 (DATE TBD)
+# timevis 1.0.0 (2020-09-15)
 
 - **BREAKING CHANGE** API functions now work in shiny modules without having to specify the namespace. This means that if you previously explicitly used a namespace when calling API functions, you need to remove the namespace function (#90)
 - Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine (#67)

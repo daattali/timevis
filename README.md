@@ -1,13 +1,12 @@
 # {timevis} - Create interactive timeline visualizations in R
 
-[![Donate](https://i.imgur.com/vCIGFrH.png)](https://github.com/sponsors/daattali)
 [![Build
 Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
 [![CRAN
 version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
-> [Demo](https://daattali.com/shiny/timevis-demo) · Created by [Dean
-> Attali](https://deanattali.com)
+> By [Dean Attali](https://deanattali.com) ·
+> [Demo](https://daattali.com/shiny/timevis-demo)
 
 {timevis} lets you create rich and *fully interactive* timeline
 visualizations in R. Timelines can be included in Shiny apps and R
@@ -20,12 +19,11 @@ JavaScript library.
 **Need Shiny help? [I’m available for
 consulting](https://attalitech.com/).**<br/> **If you find {timevis}
 useful, please consider [supporting my
-work](https://github.com/sponsors/daattali/sponsorships?tier_id=39852)
-to unlock rewards\! ❤**
+work](https://github.com/sponsors/daattali) to unlock rewards\! ❤**
 
 <p align="center">
 
-<a style="display: inline-block;" href="https://github.com/sponsors/daattali/sponsorships?tier_id=39852">
+<a style="display: inline-block;" href="https://github.com/sponsors/daattali">
 <img height="35" src="https://i.imgur.com/034B8vq.png" /> </a>
 
 <a style="display: inline-block;" href="https://paypal.me/daattali">

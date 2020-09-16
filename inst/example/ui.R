@@ -19,7 +19,7 @@ fluidPage(
     tags$meta(property = "og:description", content = share$description),
 
     # Twitter summary cards
-    tags$meta(name = "twitter:card", content = "summary"),
+    tags$meta(name = "twitter:card", content = "summary_large_image"),
     tags$meta(name = "twitter:site", content = paste0("@", share$twitter_user)),
     tags$meta(name = "twitter:creator", content = paste0("@", share$twitter_user)),
     tags$meta(name = "twitter:title", content = share$title),
@@ -45,7 +45,7 @@ fluidPage(
         "Available",
         tags$a(href = "https://github.com/daattali/timevis", "on GitHub"),
         HTML("&bull;"),
-        tags$a(href = "https://daattali.com/shiny/", "More apps"), "by Dean"
+        tags$a(href = "https://github.com/sponsors/daattali", "Support my work"), "❤"
     )
   ),
   tabsetPanel(
