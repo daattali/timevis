@@ -1,10 +1,5 @@
 # timevis 0.5.*
 
-### Additions
-
-- List-Columns may now be passed to `timevis`, to support use of `nestedGroups` 
-  ( `nestedGroups` is added in recent versions of `vis-timeline` thanks @matthewstrasiotto )
-
 TODO
 
 - Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine (#67)
