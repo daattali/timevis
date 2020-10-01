@@ -16,6 +16,7 @@ callJS <- function() {
   # If an ID was passed, the widget already exists and we can simply call the
   # appropriate JS function
   else if (is.character(message$id)) {
+    message$id <- session$ns(message$id)
     method <- paste0("timevis:", message$method)
     session$sendCustomMessage(method, message)
     return(message$id)
@@ -266,7 +267,7 @@ removeCustomTime <- function(id, itemId) {
 #' @param options Named list of options controlling the animation. Most common
 #' option is \code{"animation" = TRUE/FALSE}. For a full list of options, see
 #' the "fit" method in the
-#' \href{http://visjs.org/docs/timeline/#Methods}{official
+#' \href{https://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
 #' if (interactive()) {
@@ -300,7 +301,7 @@ fitWindow <- function(id, options) {
 #' @param options Named list of options controlling the animation. Most common
 #' option is \code{"animation" = TRUE/FALSE}. For a full list of options, see
 #' the "moveTo" method in the
-#' \href{http://visjs.org/docs/timeline/#Methods}{official
+#' \href{https://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
 #'
@@ -336,7 +337,7 @@ centerTime <- function(id, time, options) {
 #' @param options Named list of options controlling mainly the animation.
 #' Most common option is \code{"animation" = TRUE/FALSE}. For a full list of
 #' options, see the "focus" method in the
-#' \href{http://visjs.org/docs/timeline/#Methods}{official
+#' \href{https://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
 #'
@@ -497,7 +498,7 @@ setOptions <- function(id, options) {
 #' Most common options are \code{focus = TRUE/FALSE} and
 #' \code{"animation" = TRUE/FALSE}. For a full list of options, see
 #' the "setSelection" method in the
-#' \href{http://visjs.org/docs/timeline/#Methods}{official
+#' \href{https://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
 #'
@@ -536,7 +537,7 @@ setSelection <- function(id, itemId, options) {
 #' @param options Named list of options controlling mainly the animation.
 #' Most common option is \code{animation = TRUE/FALSE}. For a full list of
 #' options, see the "setWindow" method in the
-#' \href{http://visjs.org/docs/timeline/#Methods}{official
+#' \href{https://visjs.org/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
 #'

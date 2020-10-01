@@ -35,6 +35,9 @@ function(input, output, session) {
     timevis(dataBasic, options = config)
   })
 
+  output$visible <- renderText(
+    paste(input$timelineInteractive_visible, collapse = " ")
+  )
   output$selected <- renderText(
     paste(input$timelineInteractive_selected, collapse = " ")
   )

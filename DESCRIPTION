@@ -1,11 +1,11 @@
 Package: timevis
 Title: Create Interactive Timeline Visualizations in R
-Version: 0.5.0.9003
+Version: 1.0.0
 Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = "R interface"),
     person(family = "Almende B.V.", role = c("aut", "cph"),
-       comment = "vis.js library, http://visjs.org, http://www.almende.com/home")
+       comment = "vis.js library, https://visjs.org")
       )
 Description: Create rich and fully interactive timeline visualizations.
     Timelines can be included in Shiny apps and R markdown documents, or viewed
@@ -13,7 +13,7 @@ Description: Create rich and fully interactive timeline visualizations.
     to manipulate a timeline after creation, and supports getting data out of
     the visualization into R. Based on the 'vis.js' Timeline module and the
     'htmlwidgets' R package.
-URL: https://github.com/daattali/timevis, http://daattali.com/shiny/timevis-demo/
+URL: https://github.com/daattali/timevis, https://daattali.com/shiny/timevis-demo/
 BugReports: https://github.com/daattali/timevis/issues
 Depends:
     R (>= 3.1.0)
@@ -29,9 +29,11 @@ Imports:
 Suggests:
     knitr (>= 1.7),
     testthat (>= 0.9.1),
-    tibble
+    tibble,
+    shinydisconnect
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)

@@ -3,12 +3,21 @@
 \docType{package}
 \name{timevis}
 \alias{timevis}
-\alias{timevis-package}
 \title{Create a timeline visualization}
 \usage{
-timevis(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
-  options, width = NULL, height = NULL, elementId = NULL,
-  loadDependencies = TRUE, timezone = NULL)
+timevis(
+  data,
+  groups,
+  showZoom = TRUE,
+  zoomFactor = 0.5,
+  fit = TRUE,
+  options,
+  width = NULL,
+  height = NULL,
+  elementId = NULL,
+  loadDependencies = TRUE,
+  timezone = NULL
+)
 }
 \arguments{
 \item{data}{A dataframe containing the timeline items. Each item on the
@@ -24,7 +33,7 @@ details.}
 buttons on the widget.}
 
 \item{zoomFactor}{How much to zoom when zooming out. A zoom factor of 0.5
-means that when zooming out the timeline will show 50% more more content. For
+means that when zooming out the timeline will show 50\% more more content. For
 example, if the timeline currently shows 20 days, then after zooming out with
 a \code{zoomFactor} of 0.5, the timeline will show 30 days, and zooming out
 again will show 45 days. Similarly, zooming out from 20 days with a
@@ -36,7 +45,7 @@ current date.}
 
 \item{options}{A named list containing any extra configuration options to
 customize the timeline. All available options can be found in the
-\href{http://visjs.org/docs/timeline/#Configuration_Options}{official
+\href{https://visjs.org/docs/timeline/#Configuration_Options}{official
 Timeline documentation}. Note that any options that define a JavaScript
 function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
 examples section below to see example usage.}
@@ -61,8 +70,8 @@ them)}
 \item{timezone}{By default, the timevis widget displays times in the local
 time of the browser rendering it. You can set timevis to display times in
 another time zone by providing a number between -15 to 15 to specify the
-number of hours offset from UTC. For example, use `0` to display in UTC,
-and use `-4` to display in a timezone that is 4 hours behind UTC.}
+number of hours offset from UTC. For example, use \code{0} to display in UTC,
+and use \code{-4} to display in a timezone that is 4 hours behind UTC.}
 }
 \value{
 A timeline visualization \code{htmlwidgets} object
@@ -72,12 +81,16 @@ A timeline visualization \code{htmlwidgets} object
 Timelines can be included in Shiny apps and R markdown documents, or viewed
 from the R console and RStudio Viewer. \code{timevis} Includes an extensive
 API to manipulate a timeline after creation, and supports getting data out of
-the visualization into R. Based on the \href{http://visjs.org/}{'vis.js'}
-Timeline module and the \href{http://www.htmlwidgets.org/}{'htmlwidgets'} R
-package.\cr\cr
-View a \href{http://daattali.com/shiny/timevis-demo/}{demo Shiny app}
+the visualization into R. Based on the \href{https://visjs.org/}{'visjs'}
+Timeline JavaScript library.\cr\cr
+View a \href{https://daattali.com/shiny/timevis-demo/}{demo Shiny app}
 or see the full \href{https://github.com/daattali/timevis}{README} on
-GitHub.
+GitHub.\cr\cr
+\strong{Important note:} This package provides a way to use the
+\href{https://visjs.org/}{visjs Timeline JavaScript library} within R.
+The visjs Timeline library has many features that cannot all be documented
+here. To see the full details on what the timeline can support, please read the
+official documentation of visjs Timeline.
 }
 \section{Data format}{
 
@@ -85,38 +98,40 @@ The \code{data} parameter supplies the input dataframe that describes the
 items in the timeline. The following variables are supported for the items
 dataframe:
 \itemize{
-  \item{\strong{\code{start}}} - (required) The start date of the item, for
-  example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}.
-  \item{\strong{\code{content}}} - (required) The contents of the item. This
-  can be plain text or HTML code.
-  \item{\strong{\code{end}}} - The end date of the item. The end date is
-  optional. If end date is provided, the item is displayed as a range. If
-  not, the item is displayed as a single point on the timeline.
-  \item{\strong{\code{id}}} - An id for the item. Using an id is not required
-  but highly recommended. An id is needed when removing or selecting items
-  (using \code{\link[timevis]{removeItem}} or
-  \code{\link[timevis]{setSelection}}).
-  \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
-  'point', 'range', or 'background'. Types 'box' and 'point' need only a
-  start date, types 'range' and 'background' need both a start and end date.
-  \item{\strong{\code{title}}} - Add a title for the item, displayed when
-  hovering the mouse over the item. The title can only contain plain text.
-  \item{\strong{\code{editable}}} - If \code{TRUE}, the item can be
-  manipulated with the mouse. Overrides the global \code{editable}
-  configuration option if it is set. An editable item can be removed or
-  have its start/end dates modified by clicking on it.
-  \item{\strong{\code{group}}} - The id of a group. When a \code{group} is
-  provided, all items with the same group are placed on one line. A vertical
-  axis is displayed showing the group names. See more details in the
-  \strong{Groups} section below.
-  \item{\strong{\code{subgroup}}} - The id of a subgroup. Groups all items
-  within a group per subgroup, and positions them on the same height instead
-  of stacking them on top of each other. See more details in the
-  \strong{Groups} section below.
-  \item{\strong{\code{className}}} - A className can be used to give items an
-  individual CSS style.
-  \item{\strong{\code{style}}} - A CSS text string to apply custom styling
-  for an individual item, for example \code{color: red;}.
+\item{\strong{\code{start}}} - (required) The start date of the item, for
+example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}. To specify BCE
+dates you must use 6 digits (for example \code{"-000600"} corresponds to year 600BCE).
+To specify dates between year 0 and year 99 CE, you must use 4 digits.
+\item{\strong{\code{content}}} - (required) The contents of the item. This
+can be plain text or HTML code.
+\item{\strong{\code{end}}} - The end date of the item. The end date is
+optional. If end date is provided, the item is displayed as a range. If
+not, the item is displayed as a single point on the timeline.
+\item{\strong{\code{id}}} - An id for the item. Using an id is not required
+but highly recommended. An id is needed when removing or selecting items
+(using \code{\link[timevis]{removeItem}} or
+\code{\link[timevis]{setSelection}}).
+\item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
+'point', 'range', or 'background'. Types 'box' and 'point' need only a
+start date, types 'range' and 'background' need both a start and end date.
+\item{\strong{\code{title}}} - Add a title for the item, displayed when
+hovering the mouse over the item. The title can only contain plain text.
+\item{\strong{\code{editable}}} - If \code{TRUE}, the item can be
+manipulated with the mouse. Overrides the global \code{editable}
+configuration option if it is set. An editable item can be removed or
+have its start/end dates modified by clicking on it.
+\item{\strong{\code{group}}} - The id of a group. When a \code{group} is
+provided, all items with the same group are placed on one line. A vertical
+axis is displayed showing the group names. See more details in the
+\strong{Groups} section below.
+\item{\strong{\code{subgroup}}} - The id of a subgroup. Groups all items
+within a group per subgroup, and positions them on the same height instead
+of stacking them on top of each other. See more details in the
+\strong{Groups} section below.
+\item{\strong{\code{className}}} - A className can be used to give items an
+individual CSS style.
+\item{\strong{\code{style}}} - A CSS text string to apply custom styling
+for an individual item, for example \code{color: red;}.
 }
 \code{start} and \code{content} are the only required variables for each
 item, while the rest of the variables are optional. If you include a variable
@@ -137,19 +152,19 @@ rooms, or other resources next to each other. You can also think of groups as
 "adding a Y axis", if that helps. The following variables are supported in
 the groups dataframe:
 \itemize{
-  \item{\strong{\code{id}}} - (required) An id for the group. The group will
-  display all items having a \code{group} variable which matches this id.
-  \item{\strong{\code{content}}} - (required) The contents of the group. This
-  can be plain text or HTML code.
-  \item{\strong{\code{title}}} - Add a title for the group, displayed when
-  hovering the mouse over the group's label. The title can only contain
-  plain text.
-  \item{\strong{\code{subgroupOrder}}} - Order the subgroups by a field name.
-  By default, groups are ordered by first-come, first-show
-  \item{\strong{\code{className}}} - A className can be used to give groups
-  an individual CSS style.
-  \item{\strong{\code{style}}} - A CSS text string to apply custom styling
-  for an individual group label, for example \code{color: red;}.
+\item{\strong{\code{id}}} - (required) An id for the group. The group will
+display all items having a \code{group} variable which matches this id.
+\item{\strong{\code{content}}} - (required) The contents of the group. This
+can be plain text or HTML code.
+\item{\strong{\code{title}}} - Add a title for the group, displayed when
+hovering the mouse over the group's label. The title can only contain
+plain text.
+\item{\strong{\code{subgroupOrder}}} - Order the subgroups by a field name.
+By default, groups are ordered by first-come, first-show
+\item{\strong{\code{className}}} - A className can be used to give groups
+an individual CSS style.
+\item{\strong{\code{style}}} - A CSS text string to apply custom styling
+for an individual group label, for example \code{color: red;}.
 }
 \code{id} and \code{content} are the only required variables for each group,
 while the rest of the variables are optional. If you include a variable that
@@ -167,21 +182,23 @@ special names based on the timeline's id. Suppose that a timeline is created
 with an \code{outputId} of \strong{"mytime"}, then the following four input
 variables will be available:
 \itemize{
-  \item{\strong{\code{input$mytime_data}}} - will return a data.frame containing
-  the data of the items in the timeline. The input is updated every time
-  an item is modified, added, or removed.
-  \item{\strong{\code{input$mytime_ids}}} - will return the IDs (a vector) of
-  all the items in the timeline. The input is updated every time an item
-  is added or removed from the timeline.
-  \item{\strong{\code{input$mytime_selected}}} - will return the IDs (a vector)
-  of the selected items in the timeline. The input is updated every time an
-  item is selected or unselected by the user. Note that this will not get updated if
-  an item is selected programmatically using
-  \code{\link[timevis]{setSelection}}.
-  \item{\strong{\code{input$mytime_window}}} - will return a 2-element vector
-  containing the minimum and maximum dates currently visible in the timeline.
-  The input is updated every time the viewable window of dates is updated
-  (by zooming or moving the window).
+\item{\strong{\code{input$mytime_data}}} - will return a data.frame containing
+the data of the items in the timeline. The input is updated every time
+an item is modified, added, or removed.
+\item{\strong{\code{input$mytime_ids}}} - will return the IDs (a vector) of
+all the items in the timeline. The input is updated every time an item
+is added or removed from the timeline.
+\item{\strong{\code{input$mytime_selected}}} - will return the IDs (a vector)
+of the selected items in the timeline. The input is updated every time an
+item is selected or unselected by the user. Note that this will not get updated if
+an item is selected programmatically using
+\code{\link[timevis]{setSelection}}.
+\item{\strong{\code{input$mytime_window}}} - will return a 2-element vector
+containing the minimum and maximum dates currently visible in the timeline.
+The input is updated every time the viewable window of dates is updated
+(by zooming or moving the window).
+\item{\strong{\code{input$mytime_visible}}} - will return a list of IDs of items currently
+visible in the timeline.
 }
 All four inputs will return a value upon initialization of the timeline and
 every time the corresponding value is updated.
@@ -195,7 +212,7 @@ timeline's JavaScript object directly. The timeline object is available via
 \code{document.getElementById(id).widget.timeline} (replace \code{id} with
 the timeline's id).\cr\cr
 This timeline object is the direct widget that \code{vis.js} creates, and you
-can see the \href{http://visjs.org/docs/timeline/}{visjs documentation} to
+can see the \href{https://visjs.org/docs/timeline/}{visjs documentation} to
 see what actions you can perform on that object.
 }
 
@@ -238,7 +255,7 @@ htmltools::html_print(tv)
 }
 
 \examples{
-# For more examples, see http://daattali.com/shiny/timevis-demo/
+# For more examples, see https://daattali.com/shiny/timevis-demo/
 
 #----------------------- Most basic -----------------
 timevis()
@@ -358,5 +375,5 @@ shinyApp(ui, server)
 
 }
 \seealso{
-\href{http://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
+\href{https://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 }

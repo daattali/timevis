@@ -1,20 +1,22 @@
-# timevis 0.5.*
+# timevis 1.0.0.*
 
 ### Additions
 
 - List-Columns may now be passed to `timevis`, to support use of `nestedGroups` 
   ( `nestedGroups` is added in recent versions of `vis-timeline` thanks @matthewstrasiotto )
 
-TODO
+# timevis 1.0.0 (2020-09-15)
 
+- **BREAKING CHANGE** API functions now work in shiny modules without having to specify the namespace. This means that if you previously explicitly used a namespace when calling API functions, you need to remove the namespace function (#90)
 - Add `timezone` parameter to `timevis()` - supports showing the timeline in a different timezone than your local machine (#67)
 - Add `setCustomTime()` and `setCurrentTime()` functions (#20)
+- Add `<timeline>_visible` Shiny input that sends the items that are currently visible in the timeline to Shiny as an input (#22)
+- Fixed bug: using `setSelection()` did not trigger the Shiny selected input (#82)
 - Add documentation about how to add custom style to timevis (#45)
+- Add documentation about how to use BCE dates (#99)
 - Add documentation tab to the demo app
 
-# timevis 0.5
-
-2019-01-16
+# timevis 0.5 (2019-01-16)
 
 - `tibble`s converted to `data.frame`s (Fixes issue #53, @muschellij2).
 - added documentation for how to extend the timevis object in JavaScript
@@ -23,24 +25,20 @@ TODO
 - Show correct timezone in demo app
 - Add demo advanced data `timevisData` and `timevisDataGroups`
 
-# timevis 0.4 2016-09-16
+# timevis 0.4 (2016-09-16)
 
 ### Bug fixes
 
 - timevis and visNetwork can work together in the same app (the bug is fixed on timevis' end, so it will only work if a timevis widget is defined before a visNetwork one until visNetwork also fix the bug) (#11)
 - re-defining the data input handler does not cause a warning 
 
-# timevis 0.3
-
-2016-08-29
+# timevis 0.3 (2016-08-29)
 
 #### Misc
 
 - Added VignetteBuilder field to DESCRIPTION file as per CRAN's request
 
-# timevis 0.2
-
-2016-08-24
+# timevis 0.2 (2016-08-24)
 
 ### Breaking changes
 
@@ -69,8 +67,6 @@ TODO
 - added social media meta tags to Shiny app 
 - add a lot of responsive CSS to make the app look well in smaller screens
 
-# timevis 0.1
-
-2016-07-25
+# timevis 0.1 (2016-07-25)
 
 Initial CRAN release
