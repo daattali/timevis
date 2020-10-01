@@ -1,3 +1,10 @@
+# timevis 1.0.0.
+
+### Additions
+
+- List-Columns may now be passed to `timevis`, to support use of `nestedGroups` 
+  ( `nestedGroups` is added in recent versions of `vis-timeline` thanks @matthewstrasiotto )
+
 # timevis 1.0.0 (2020-09-15)
 
 - **BREAKING CHANGE** API functions now work in shiny modules without having to specify the namespace. This means that if you previously explicitly used a namespace when calling API functions, you need to remove the namespace function (#90)
