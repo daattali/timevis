@@ -21,9 +21,6 @@ consulting](https://attalitech.com/).**<br/> **If you find {timevis}
 useful, please consider [supporting my
 work](https://github.com/sponsors/daattali) to unlock rewards\! ❤**
 
-If you create a cool timeline with {timevis}, I’d love to [hear about
-it](https://deanattali.com/contact/)\!
-
 <p align="center">
 
 <a style="display: inline-block;" href="https://github.com/sponsors/daattali">
@@ -34,6 +31,9 @@ it](https://deanattali.com/contact/)\!
 </a>
 
 </p>
+
+If you create a cool timeline with {timevis}, I’d love to [hear about
+it](https://deanattali.com/contact/)\!
 
 ## Demo
 
