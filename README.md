@@ -21,6 +21,9 @@ consulting](https://attalitech.com/).**<br/> **If you find {timevis}
 useful, please consider [supporting my
 work](https://github.com/sponsors/daattali) to unlock rewards\! ❤**
 
+If you create a cool timeline with {timevis}, I’d love to [hear about
+it](https://deanattali.com/contact/)\!
+
 <p align="center">
 
 <a style="display: inline-block;" href="https://github.com/sponsors/daattali">
@@ -292,10 +295,6 @@ the [demo Shiny app](https://daattali.com/shiny/timevis-demo/). If you
 want to see how those examples were created, the full code for the
 examples is inside
 [inst/example](https://github.com/daattali/timevis/tree/master/inst/example).
-
-If you create any cool timelines that you’d like to share with me, or if
-you want to get in touch with me for any reason, feel free to [contact
-me](https://deanattali.com/contact/)\!
 
 Lastly, if you want to learn how to develop an htmlwidget to have
 similar features as this package, you can check out the
