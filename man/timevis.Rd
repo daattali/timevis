@@ -108,8 +108,8 @@ can be plain text or HTML code.
 optional. If end date is provided, the item is displayed as a range. If
 not, the item is displayed as a single point on the timeline.
 \item{\strong{\code{id}}} - An id for the item. Using an id is not required
-but highly recommended. An id is needed when removing or selecting items
-(using \code{\link[timevis]{removeItem}} or
+but highly recommended, and must be unique. An id is needed when removing or
+selecting items (using \code{\link[timevis]{removeItem}} or
 \code{\link[timevis]{setSelection}}).
 \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
 'point', 'range', or 'background'. Types 'box' and 'point' need only a
