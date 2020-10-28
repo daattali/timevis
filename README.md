@@ -32,13 +32,18 @@ work](https://github.com/sponsors/daattali) to unlock rewards\! ❤**
 
 </p>
 
-If you create a cool timeline with {timevis}, I’d love to [hear about
-it](https://deanattali.com/contact/)\!
-
 ## Demo
 
-[Click here](https://daattali.com/shiny/timevis-demo/) to view a live
-interactive demo of {timevis}.
+[Click here](https://daattali.com/shiny/timevis-demo/) to view an
+interactive demo of many {timevis} features.
+
+Or check out examples from real users: [Pet Records by Jenna
+Allen](https://jennadallen.shinyapps.io/pet-records-app/), [Mohamad
+Ghassany’s life timeline](https://www.mghassany.com/blog/my-timetable/),
+[an English Premier League game
+timeline](https://vidigalbr.shinyapps.io/timevis_premier_league/). If
+you create a cool timeline with {timevis} and want to share it, I’d love
+to [hear about it](https://deanattali.com/contact/)\!
 
 ## Table of contents
 
