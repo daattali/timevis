@@ -1,6 +1,7 @@
 # {timevis} - Create interactive timeline visualizations in R
 
-[![R Build Status](https://github.com/daattali/timevis/workflows/R-CMD-check/badge.svg)](https://github.com/daattali/timevis/actions)
+[![R Build
+Status](https://github.com/daattali/timevis/workflows/R-CMD-check/badge.svg)](https://github.com/daattali/timevis/actions)
 [![CRAN
 version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
@@ -44,6 +45,17 @@ timeline](https://vidigalbr.shinyapps.io/timevis_premier_league/). If
 you create a cool timeline with {timevis} and want to share it, I’d love
 to [hear about it](https://deanattali.com/contact/)\!
 
+<h2 id="sponsors">
+
+Sponsors 🏆
+
+</h2>
+
+> There are no sponsors yet
+
+[Become the first sponsor for
+{timevis}\!](https://github.com/sponsors/daattali/sponsorships?tier_id=39856)
+
 ## Table of contents
 
   - [Installation](#install)
@@ -54,7 +66,6 @@ to [hear about it](https://deanattali.com/contact/)\!
   - [Functions to manipulate a timeline](#manipulate-api)
   - [In a Shiny app](#shiny-apps)
       - [Retrieving data from the widget](#retrieve-data)
-  - [Sponsors 🏆](#sponsors)
 
 <h2 id="install">
 
@@ -280,17 +291,6 @@ input variables will be available:
     (by zooming or moving the window).
   - **input$mytime\_visible** - will return a list of IDs of items
     currently visible in the timeline.
-
-<h2 id="sponsors">
-
-Sponsors 🏆
-
-</h2>
-
-> There are no sponsors yet
-
-[Become the first sponsor for
-{timevis}\!](https://github.com/sponsors/daattali/sponsorships?tier_id=39856)
 
 -----
 
