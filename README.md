@@ -1,7 +1,6 @@
 # {timevis} - Create interactive timeline visualizations in R
 
-[![Build
-Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
+[![R Build Status](https://github.com/daattali/timevis/workflows/R-CMD-check/badge.svg)](https://github.com/daattali/timevis/actions)
 [![CRAN
 version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
