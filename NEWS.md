@@ -1,5 +1,6 @@
 # Unreleased version
 
+- **BREAKING CHANGE** Upgrade to visjs-Timeline version 7.4.9 which includes many new features and performance improvements. You may notice some small differences in behaviour when upgrading as the new version includes 5 years of developments. (#50)
 - Add documentation about `id` parameter (#103)
 
 # timevis 1.0.0 (2020-09-15)

@@ -12,7 +12,7 @@ fitWindow(id, options)
 \item{options}{Named list of options controlling the animation. Most common
 option is \code{"animation" = TRUE/FALSE}. For a full list of options, see
 the "fit" method in the
-\href{https://visjs.org/docs/timeline/#Methods}{official
+\href{https://visjs.github.io/vis-timeline/docs/timeline/#Methods}{official
 Timeline documentation}}
 }
 \description{

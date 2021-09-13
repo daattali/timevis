@@ -35,7 +35,7 @@
 #' current date.
 #' @param options A named list containing any extra configuration options to
 #' customize the timeline. All available options can be found in the
-#' \href{https://visjs.org/docs/timeline/#Configuration_Options}{official
+#' \href{https://visjs.github.io/vis-timeline/docs/timeline/#Configuration_Options}{official
 #' Timeline documentation}. Note that any options that define a JavaScript
 #' function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
 #' examples section below to see example usage.
@@ -168,7 +168,7 @@
 #' \code{document.getElementById(id).widget.timeline} (replace \code{id} with
 #' the timeline's id).\cr\cr
 #' This timeline object is the direct widget that \code{vis.js} creates, and you
-#' can see the \href{https://visjs.org/docs/timeline/}{visjs documentation} to
+#' can see the \href{https://visjs.github.io/vis-timeline/docs/timeline/}{visjs documentation} to
 #' see what actions you can perform on that object.
 #' @section Customizing the timevis look and style using CSS:
 #' To change the styling of individual items or group labels, use the
