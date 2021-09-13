@@ -230,6 +230,11 @@ HTMLWidgets.widget({
         timeline.moveTo(params.time, params.options);
       },
       centerItem : function(params) {
+         if (typeof params.options === 'undefined') {
+          params.options = { 'zoom' : false };
+        } else if (typeof params.options.zoom === 'undefined') {
+          params.options.zoom = false;
+        }
         timeline.focus(params.itemId, params.options);
       },
       setItems : function(params) {
