@@ -123,6 +123,7 @@ addItems <- function(id, data) {
 #' @export
 removeItem <- function(id, itemId) {
   method <- "removeItem"
+  itemId <- as.character(itemId)
   callJS()
 }
 
@@ -372,6 +373,7 @@ centerTime <- function(id, time, options) {
 #' @export
 centerItem <- function(id, itemId, options) {
   method <- "centerItem"
+  itemId <- as.character(itemId)
   callJS()
 }
 
