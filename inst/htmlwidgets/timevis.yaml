@@ -1,10 +1,4 @@
 dependencies:
-  - name: vis
-    version: 4.16.1
-    src: htmlwidgets/lib/vis-4.16.1
-    script: vis.min.js
-    stylesheet: vis.min.css
-
   - name: timeline
     version: 0.4
     src: htmlwidgets

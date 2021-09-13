@@ -402,14 +402,23 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   # initialization
   x$api <- list()
 
+  deps <- list(
+    htmltools::htmlDependency(
+      name = "visjs",
+      version = "7.4.9",
+      package = "timevis",
+      src = "htmlwidgets/lib/vis-7.4.9",
+      script = "vis-timeline-graph2d.min.js",
+      stylesheet = "vis-timeline-graph2d.min.css"
+    )
+  )
+
   # add dependencies so that the zoom buttons will work in non-Shiny mode
   if (loadDependencies) {
-    deps <- list(
+    deps <- c(deps, list(
       rmarkdown::html_dependency_jquery(),
       rmarkdown::html_dependency_bootstrap("default")
-    )
-  } else {
-    deps <- NULL
+    ))
   }
 
   # create widget
