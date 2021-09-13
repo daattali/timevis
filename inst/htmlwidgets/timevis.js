@@ -242,8 +242,7 @@ HTMLWidgets.widget({
         timeline.itemsData.add(params.data);
       },
       setGroups : function(params) {
-        timeline.groupsData.clear();
-        timeline.groupsData.add(params.data);
+        timeline.setGroups(params.data);
       },
       setOptions : function(params) {
         timeline.setOptions(params.options);
