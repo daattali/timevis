@@ -416,6 +416,10 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     groups <- dataframeToD3(groups)
   }
 
+  if (!is.null(options[["start"]]) || !is.null(options[["end"]])) {
+    fit <- FALSE
+  }
+
   # forward options using x
   x = list(
     items = items,
