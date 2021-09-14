@@ -95,8 +95,10 @@ official documentation of visjs Timeline.
 \section{Data format}{
 
 The \code{data} parameter supplies the input dataframe that describes the
-items in the timeline. The following variables are supported for the items
-dataframe:
+items in the timeline. The following is a subset of the variables supported
+in the items dataframe (the full list of supported variables can be found in
+the \href{https://visjs.github.io/vis-timeline/docs/timeline/#Data_Format}{official
+visjs documentation}):
 \itemize{
 \item{\strong{\code{start}}} - (required) The start date of the item, for
 example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}. To specify BCE
@@ -321,6 +323,34 @@ timevis(
   )
 )
 
+
+#----------------------- Using a custom format for hours ------------------
+timevis(
+  data.frame(
+    id = 1:2,
+    content = c("one", "two"),
+    start = c("2020-01-10", "2020-01-10 04:00:00")
+  ),
+  options = list(
+    format = htmlwidgets::JS("{ minorLabels: { minute: 'h:mma', hour: 'ha' }}")
+  )
+)
+
+#----------------------- Allowing editable items to "snap" to round hours only -------------
+timevis(
+  data.frame(
+    id = 1:2,
+    content = c("one", "two"),
+    start = c("2020-01-10", "2020-01-10 04:00:00")
+  ),
+  options = list(
+    editable = TRUE,
+    snap = htmlwidgets::JS("function (date, scale, step) {
+         var hour = 60 * 60 * 1000;
+         return Math.round(date / hour) * hour;
+     }")
+  )
+)
 
 #----------------------- Using groups -----------------
 timevis(data = data.frame(
