@@ -1,12 +1,28 @@
-# {timevis} - Create interactive timeline visualizations in R
+<p align="center">
 
-[![R Build
-Status](https://github.com/daattali/timevis/workflows/R-CMD-check/badge.svg)](https://github.com/daattali/timevis/actions)
-[![CRAN
-version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
+<h3 align="center">timevis</h3>
 
-> By [Dean Attali](https://deanattali.com) ·
-> [Demo](https://daattali.com/shiny/timevis-demo/)
+<h4 align="center">Create interactive timeline visualizations in R
+<br><br>
+<a href="https://daattali.com/shiny/timevis-demo/">Demo</a>
+&middot;
+by <a href="https://deanattali.com">Dean Attali</a>
+</h4>
+
+<p align="center">
+<a href="https://github.com/daattali/timevis/actions">
+<img src="https://github.com/daattali/timevis/workflows/R-CMD-check/badge.svg" alt="R build status" />
+</a>
+<a href="https://cran.r-project.org/package=timevis">
+<img src="https://www.r-pkg.org/badges/version/timevis" alt="CRAN version" />
+</a>
+</p>
+
+</p>
+
+---
+
+<img src="inst/img/hex.png" width="170" align="right"/>
 
 {timevis} lets you create rich and *fully interactive* timeline
 visualizations in R. Timelines can be included in Shiny apps and R
@@ -25,10 +41,6 @@ work](https://github.com/sponsors/daattali) to unlock rewards\! ❤**
 
 <a style="display: inline-block;" href="https://github.com/sponsors/daattali">
 <img height="35" src="https://i.imgur.com/034B8vq.png" /> </a>
-
-<a style="display: inline-block;" href="https://paypal.me/daattali">
-<img height="35" src="https://camo.githubusercontent.com/0e9e5cac101f7093336b4589c380ab5dcfdcbab0/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e40312e302e302f646973742f627574746f6e2e737667" />
-</a>
 
 </p>
 
@@ -367,3 +379,7 @@ similar features as this package, you can check out the
 [`timevisBasic`](https://github.com/daattali/timevisBasic) package or
 [my tutorial on htmlwidgets
 tips](https://deanattali.com/blog/advanced-htmlwidgets-tips/).
+
+## Credits
+
+Logo design by [Alfredo Hernández](https://aldomann.com/).
