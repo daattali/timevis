@@ -1,6 +1,6 @@
 Package: timevis
 Title: Create Interactive Timeline Visualizations in R
-Version: 1.0.0.9001
+Version: 2.0.0
 Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = c("R interface", ORCID="0000-0002-5645-3493")),
@@ -33,7 +33,6 @@ Suggests:
     shinydisconnect
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)

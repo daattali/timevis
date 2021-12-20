@@ -1,4 +1,4 @@
-# Unreleased version
+# timevis 2.0.0 (2021-12-20)
 
 - **BREAKING CHANGE** Upgrade to visjs-Timeline version 7.4.9 which includes many new features and performance improvements. You may notice some small differences in behaviour when upgrading as the new version includes 5 years of developments. (#50)
   - One of the major differences is that previously when a config option (such as `editable=TRUE`) was set on an existing timeline, the option would apply retroactively to all existing items. In the new version, existing items don't change and only new items will inherit the new options.
