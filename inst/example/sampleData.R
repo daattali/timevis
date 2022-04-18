@@ -6,6 +6,16 @@ dataBasic <- data.frame(
   end    = c(NA, NA, "2016-02-04", NA)
 )
 
+countryToCode <- list(
+  "Argentina" = "ar",
+  "Belgium" = "be",
+  "Brazil" = "br",
+  "Colombia" = "co",
+  "Costa Rica" = "cr",
+  "France" = "fr",
+  "Germany" = "de",
+  "Netherlands" = "nl"
+)
 
 # Template for world cup HTML of each item
 templateWC <- function(stage, team1, team2, score1, score2) {
@@ -18,13 +28,12 @@ templateWC <- function(stage, team1, team2, score1, score2) {
         <td>%s</td>
       </tr>
       <tr>
-        <td><img src="flags/%s.png" width="31" height="20" alt="%s"></td>
+        <td><img src="https://flagpedia.net/data/flags/mini/%s.png" width="31" height="20" alt="%s"></td>
         <th></th>
-        <td><img src="flags/%s.png" width="31" height="20" alt="%s"></td>
+        <td><img src="https://flagpedia.net/data/flags/mini/%s.png" width="31" height="20" alt="%s"></td>
       </tr>
     </tbody></table>',
-    stage, team1, score1, score2, team2, gsub("\\s", "", tolower(team1)),
-    team1, gsub("\\s", "", tolower(team2)), team2
+    stage, team1, score1, score2, team2, countryToCode[[team1]], team1, countryToCode[[team2]], team2
   )
 }
 
