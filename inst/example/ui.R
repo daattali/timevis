@@ -88,7 +88,7 @@ fluidPage(
     ),
 
     tabPanel(
-      div(icon("sliders"), "Fully interactive"),
+      div(icon("sliders-h"), "Fully interactive"),
       fluidRow(
         column(
           8,
