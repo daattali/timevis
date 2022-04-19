@@ -1,5 +1,6 @@
 # Unreleased version
 
+- Support `subgroupStack = TRUE` option (#117)
 - Don't use local images in demo app (#118)
 
 # timevis 2.0.0 (2021-12-20)
