@@ -1,5 +1,6 @@
 # Unreleased version
 
+- List-columns may now be passed to `timevis()`, to support `nestedGroups` and any other parameters that may require nested lists
 - Support `subgroupStack = TRUE` option (#117)
 - Don't use local images in demo app (#118)
 
