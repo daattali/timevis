@@ -27,7 +27,7 @@
 #' @param showZoom If \code{TRUE} (default), then include "Zoom In"/"Zoom Out"
 #' buttons on the widget.
 #' @param zoomFactor How much to zoom when zooming out. A zoom factor of 0.5
-#' means that when zooming out the timeline will show 50% more more content. For
+#' means that when zooming out the timeline will show 50% more content. For
 #' example, if the timeline currently shows 20 days, then after zooming out with
 #' a \code{zoomFactor} of 0.5, the timeline will show 30 days, and zooming out
 #' again will show 45 days. Similarly, zooming out from 20 days with a
@@ -103,7 +103,7 @@
 #' that is only used for some rows, you can use \code{NA} for the rows where
 #' it's not used. The items data of a timeline can either be set by supplying
 #' the \code{data} argument to \code{timevis()}, or by calling the
-#' \code{\link[timevis]{setItems()}} function.
+#' \code{\link[timevis]{setItems}} function.
 #' @section Groups:
 #' The \code{groups} parameter must be provided if the data items have groups
 #' (ie. if any of the items have a \code{group} variable). When using groups, all
@@ -137,7 +137,7 @@
 #' is only used for some rows, you can use \code{NA} for the rows where it's
 #' not used. The groups data of a timeline can either be set by supplying the
 #' \code{groups} argument to \code{timevis()}, or by calling the
-#' \code{\link[timevis]{setGroups()}} function.
+#' \code{\link[timevis]{setGroups}} function.
 #' @section Getting data out of a timeline in Shiny:
 #' When a timeline widget is created in a Shiny app, there are four pieces of
 #' information that are always accessible as Shiny inputs. These inputs have

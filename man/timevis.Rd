@@ -35,7 +35,7 @@ visjs Timeline documentation}.}
 buttons on the widget.}
 
 \item{zoomFactor}{How much to zoom when zooming out. A zoom factor of 0.5
-means that when zooming out the timeline will show 50\% more more content. For
+means that when zooming out the timeline will show 50\% more content. For
 example, if the timeline currently shows 20 days, then after zooming out with
 a \code{zoomFactor} of 0.5, the timeline will show 30 days, and zooming out
 again will show 45 days. Similarly, zooming out from 20 days with a
@@ -138,7 +138,7 @@ item, while the rest of the variables are optional. If you include a variable
 that is only used for some rows, you can use \code{NA} for the rows where
 it's not used. The items data of a timeline can either be set by supplying
 the \code{data} argument to \code{timevis()}, or by calling the
-\code{\link[timevis]{setItems()}} function.
+\code{\link[timevis]{setItems}} function.
 }
 
 \section{Groups}{
@@ -175,7 +175,7 @@ while the rest of the variables are optional. If you include a variable that
 is only used for some rows, you can use \code{NA} for the rows where it's
 not used. The groups data of a timeline can either be set by supplying the
 \code{groups} argument to \code{timevis()}, or by calling the
-\code{\link[timevis]{setGroups()}} function.
+\code{\link[timevis]{setGroups}} function.
 }
 
 \section{Getting data out of a timeline in Shiny}{
