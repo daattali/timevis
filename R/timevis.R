@@ -1,25 +1,27 @@
 #' Create a timeline visualization
 #'
 #' \code{timevis} lets you create rich and fully interactive timeline visualizations.
-#' Timelines can be included in Shiny apps and R markdown documents, or viewed
-#' from the R console and RStudio Viewer. \code{timevis} Includes an extensive
+#' Timelines can be included in Shiny apps or R markdown documents.
+#' \code{timevis} Includes an extensive
 #' API to manipulate a timeline after creation, and supports getting data out of
-#' the visualization into R. Based on the \href{https://visjs.org/}{'visjs'}
+#' the visualization into R. Based on the \href{https://visjs.github.io/vis-timeline/docs/timeline/}{'visjs'}
 #' Timeline JavaScript library.\cr\cr
 #' View a \href{https://daattali.com/shiny/timevis-demo/}{demo Shiny app}
-#' or see the full \href{https://github.com/daattali/timevis}{README} on
+#' or see the full \href{https://github.com/daattali/timevis#readme}{README} on
 #' GitHub.\cr\cr
-#' **Important note:** This package provides a way to use the
-#' \href{https://visjs.org/}{visjs Timeline JavaScript library} within R.
-#' The visjs Timeline library has many features that cannot all be documented
+#' **Important note: This package provides a way to use the
+#' \href{https://visjs.github.io/vis-timeline/docs/timeline/}{visjs Timeline JavaScript library} within R.
+#' The visjs Timeline library has too many features that cannot all be documented
 #' here. To see the full details on what the timeline can support, please read the
-#' official documentation of visjs Timeline.
+#' official documentation of visjs Timeline.**
 #'
 #' @param data A dataframe containing the timeline items. Each item on the
 #' timeline is represented by a row in the dataframe. \code{start} and
-#' \code{content} are required for each item, while several other variables
-#' are also supported. See the \strong{Data format} section below for more
-#' details.
+#' \code{content} are the only two required columns.
+#' See the \strong{Data format} section below for more
+#' details. For a full list of all supported columns, see the Data Format section in the
+#' \href{https://visjs.github.io/vis-timeline/docs/timeline/#Data_Format}{official
+#' visjs Timeline documentation}.
 #' @param groups A dataframe containing the groups data (optional). See the
 #' \strong{Groups} section below for more details.
 #' @param showZoom If \code{TRUE} (default), then include "Zoom In"/"Zoom Out"
@@ -61,9 +63,9 @@
 #' @section Data format:
 #' The \code{data} parameter supplies the input dataframe that describes the
 #' items in the timeline. The following is a subset of the variables supported
-#' in the items dataframe (the full list of supported variables can be found in
+#' in the items dataframe. \strong{The full list of supported variables can be found in
 #' the \href{https://visjs.github.io/vis-timeline/docs/timeline/#Data_Format}{official
-#' visjs documentation}):
+#' visjs documentation}}.
 #' \itemize{
 #'   \item{\strong{\code{start}}} - (required) The start date of the item, for
 #'   example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}. To specify BCE
@@ -91,10 +93,6 @@
 #'   provided, all items with the same group are placed on one line. A vertical
 #'   axis is displayed showing the group names. See more details in the
 #'   \strong{Groups} section below.
-#'   \item{\strong{\code{subgroup}}} - The id of a subgroup. Groups all items
-#'   within a group per subgroup, and positions them on the same height instead
-#'   of stacking them on top of each other. See more details in the
-#'   \strong{Groups} section below.
 #'   \item{\strong{\code{className}}} - A className can be used to give items an
 #'   individual CSS style.
 #'   \item{\strong{\code{style}}} - A CSS text string to apply custom styling
@@ -104,17 +102,20 @@
 #' item, while the rest of the variables are optional. If you include a variable
 #' that is only used for some rows, you can use \code{NA} for the rows where
 #' it's not used. The items data of a timeline can either be set by supplying
-#' the \code{data} argument to \code{timevis}, or by calling the
-#' \code{\link[timevis]{setItems}} function.
+#' the \code{data} argument to \code{timevis()}, or by calling the
+#' \code{\link[timevis]{setItems()}} function.
 #' @section Groups:
 #' The \code{groups} parameter must be provided if the data items have groups
-#' (if any of the items have a \code{group} variable). When using groups, all
+#' (ie. if any of the items have a \code{group} variable). When using groups, all
 #' items with the same group are placed on one line. A vertical axis is
 #' displayed showing the group names. Grouping items can be useful for a wide range
 #' of applications, for example when showing availability of multiple people,
 #' rooms, or other resources next to each other. You can also think of groups as
-#' "adding a Y axis", if that helps. The following variables are supported in
-#' the groups dataframe:
+#' "adding a Y axis".\cr\cr
+#' The following is a subset of the variables supported in
+#' the groups dataframe. \strong{The full list of supported variables can be found in
+#' the \href{https://visjs.github.io/vis-timeline/docs/timeline/#groups}{official
+#' visjs documentation}}.
 #' \itemize{
 #'   \item{\strong{\code{id}}} - (required) An id for the group. The group will
 #'   display all items having a \code{group} variable which matches this id.
@@ -123,8 +124,9 @@
 #'   \item{\strong{\code{title}}} - Add a title for the group, displayed when
 #'   hovering the mouse over the group's label. The title can only contain
 #'   plain text.
-#'   \item{\strong{\code{subgroupOrder}}} - Order the subgroups by a field name.
-#'   By default, groups are ordered by first-come, first-show
+#'   \item{\strong{\code{nestedGroups}}} - List of group ids nested in the group.
+#'   The syntax for defining a dataframe with a list inside a column can be tricky,
+#'   see the examples below for sample usage.
 #'   \item{\strong{\code{className}}} - A className can be used to give groups
 #'   an individual CSS style.
 #'   \item{\strong{\code{style}}} - A CSS text string to apply custom styling
@@ -134,8 +136,8 @@
 #' while the rest of the variables are optional. If you include a variable that
 #' is only used for some rows, you can use \code{NA} for the rows where it's
 #' not used. The groups data of a timeline can either be set by supplying the
-#' \code{groups} argument to \code{timevis}, or by calling the
-#' \code{\link[timevis]{setGroups}} function.
+#' \code{groups} argument to \code{timevis()}, or by calling the
+#' \code{\link[timevis]{setGroups()}} function.
 #' @section Getting data out of a timeline in Shiny:
 #' When a timeline widget is created in a Shiny app, there are four pieces of
 #' information that are always accessible as Shiny inputs. These inputs have
@@ -167,7 +169,7 @@
 #' If you need to perform any actions on the timeline object that are not
 #' supported by this package's API, you may be able to do so by manipulating the
 #' timeline's JavaScript object directly. The timeline object is available via
-#' \code{document.getElementById(id).widget.timeline} (replace \code{id} with
+#' \code{document.getElementById("id").widget.timeline} (replace \code{id} with
 #' the timeline's id).\cr\cr
 #' This timeline object is the direct widget that \code{vis.js} creates, and you
 #' can see the \href{https://visjs.github.io/vis-timeline/docs/timeline/}{visjs documentation} to

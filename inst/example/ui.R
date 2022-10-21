@@ -84,6 +84,7 @@ fluidPage(
 
     tabPanel(
       div(icon("users"), "Groups"),
+      checkboxInput("nested", "Use nested groups (Sauna and Hot Tub are collapsible under Pool)", FALSE, width = "auto"),
       timevisOutput("timelineGroups")
     ),
 
@@ -156,7 +157,20 @@ fluidPage(
     ),
     tabPanel(
       div(icon("question"), "Usage"),
-      div(id = "usage-tab", includeMarkdown("www/help.md"))
+      div(
+        id = "usage-tab",
+        tags$p(
+          "{timevis} lets you create rich and fully interactive timeline visualizations in R. Timelines can be included in Shiny apps or R markdown documents. {timevis} includes an extensive API to manipulate a timeline after creation, and supports getting data out of the visualization into R. This package is based on the",
+          tags$a("visjs", href="https://visjs.github.io/vis-timeline/docs/timeline/"), "Timeline JavaScript library."
+        ),
+        br(),
+        tags$a(
+          "View Documentation", icon("external-link"),
+          href = "https://github.com/daattali/timevis#readme",
+          class = "btn btn-lg btn-success"
+        ),
+        br(), br()
+      )
     )
   ),
   div(class = "sourcecode",

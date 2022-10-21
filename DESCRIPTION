@@ -5,10 +5,10 @@ Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = c("R interface", ORCID="0000-0002-5645-3493")),
     person(family = "Almende B.V.", role = c("aut", "cph"),
-       comment = "vis.js library, https://visjs.org")
+       comment = "vis.js Timeline library, https://visjs.github.io/vis-timeline/docs/timeline/")
       )
 Description: Create rich and fully interactive timeline visualizations.
-    Timelines can be included in Shiny apps and R markdown documents.
+    Timelines can be included in Shiny apps or R markdown documents.
     'timevis' includes an extensive API to manipulate a timeline after creation,
     and supports getting data out of the visualization into R. Based on the
     'vis.js' Timeline JavaScript library.

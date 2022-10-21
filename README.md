@@ -25,7 +25,7 @@ by <a href="https://deanattali.com">Dean Attali</a>
 <img src="inst/img/hex.png" width="170" align="right"/>
 
 {timevis} lets you create rich and *fully interactive* timeline
-visualizations in R. Timelines can be included in Shiny apps and R
+visualizations in R. Timelines can be included in Shiny apps or R
 markdown documents.
 {timevis} includes an extensive API to manipulate a timeline after
 creation, and supports getting data out of the visualization into R.
@@ -241,18 +241,23 @@ are placed on one line. A vertical axis is displayed showing the group
 names. Grouping items can be useful for a wide range of applications,
 for example when showing availability of multiple people, rooms, or
 other resources next to each other. You can also think of groups as
-"adding a Y axis", if that helps.
+"adding a Y axis".
 
-Here is an example of a timeline that has three groups: "Library",
-"Gym", and "Pool":
+Here is an example of a timeline that has four groups: "Gym", "Pool", "Sauna", "Hot Tub":
 
 ![Groups timeline](inst/img/groups.png)
 
 In order to use groups, items in the data need to have group ids, and a
 separate dataframe containing the group information needs to be
-provided. More information about using groups and the groups dataframe
-is available in the help file for `?timevis()` under the **Groups**
+provided. More information about using groups is available in the help file for `?timevis()` under the **Groups**
 section.
+
+Groups can also contain nested groups. The next example is similar to the previous one, except
+"Sauna" and "Hot Tub" are now nested under "Pool":
+
+![Nested groups timeline](inst/img/nestedgroups.png)
+
+Refer to the [visjs Timeline](https://visjs.github.io/vis-timeline/docs/timeline/) documentation to see all the options that are supported.
 
 <h2 id="manipulate-api">
 
@@ -319,6 +324,12 @@ reason they work is that every manipulation function accepts either a
 return value from these functions depend on the input: if a `timevis`
 object was given, then an updated `timevis` object is returned, and if
 an ID was given, then the same ID is returned.*
+
+### Extending timevis
+
+If you need to perform any actions on the timeline object that are not supported by the {timevis} API, you may be able to do so by manipulating the timeline's JavaScript object directly. The timeline object is available via `document.getElementById("id").widget.timeline` (replace `id` with the timeline's id).
+
+This timeline object is the direct widget that vis.js creates, and you can see the [visjs documentation](https://visjs.github.io/vis-timeline/docs/timeline/#Methods) to see what actions you can perform on that object.
 
 <h2 id="shiny-apps">
 
