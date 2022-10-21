@@ -32,9 +32,9 @@ HTMLWidgets.widget({
           // Set up the zoom button click listeners
           var zoomMenu = container.getElementsByClassName("zoom-menu")[0];
           zoomMenu.getElementsByClassName("zoom-in")[0]
-            .onclick = function(ev) { that.zoomIn(opts.zoomFactor); };
+            .onclick = function(ev) { that.zoomInTimevis(opts.zoomFactor); };
           zoomMenu.getElementsByClassName("zoom-out")[0]
-            .onclick = function(ev) { that.zoomOut(opts.zoomFactor); };
+            .onclick = function(ev) { that.zoomOutTimevis(opts.zoomFactor); };
 
           // set listeners to events and pass data back to Shiny
           if (HTMLWidgets.shinyMode) {
@@ -161,7 +161,7 @@ HTMLWidgets.widget({
       // zoom the timeline in/out
       // I had to work out the math on paper so that zooming in and then out
       // will exactly negate each other
-      zoomIn : function(percentage, animation) {
+      zoomInTimevis : function(percentage, animation) {
         if (typeof animation === "undefined") {
           animation = true;
         }
@@ -180,7 +180,7 @@ HTMLWidgets.widget({
           animation : animation
         });
       },
-      zoomOut : function(percentage, animation) {
+      zoomOutTimevis : function(percentage, animation) {
         if (typeof animation === "undefined") {
           animation = true;
         }
@@ -258,7 +258,13 @@ HTMLWidgets.widget({
       },
       setWindow : function(params) {
         timeline.setWindow(params.start, params.end, params.options);
-      }
+      },
+      zoomIn : function(params) {
+        timeline.zoomIn(params.percent);
+      },
+      zoomOut : function(params) {
+        timeline.zoomOut(params.percent);
+      },
     };
   }
 });
@@ -268,7 +274,8 @@ if (HTMLWidgets.shinyMode) {
   var fxns =
     ['addItem', 'addItems', 'removeItem', 'addCustomTime', 'removeCustomTime',
      'fitWindow', 'centerTime', 'centerItem', 'setItems', 'setGroups',
-     'setOptions', 'setSelection', 'setWindow', 'setCustomTime', 'setCurrentTime'];
+     'setOptions', 'setSelection', 'setWindow', 'setCustomTime', 'setCurrentTime',
+     'zoomIn', 'zoomOut'];
 
   var addShinyHandler = function(fxn) {
     return function() {

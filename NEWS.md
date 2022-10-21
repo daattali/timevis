@@ -1,9 +1,9 @@
 # Unreleased version
 
-- Simplify documentation and augment with more examples
+- Add functions `zoomIn()` and `zoomOut()`
 - List-columns may now be passed to `timevis()`, to support `nestedGroups` and any other parameters that may require nested lists (#11)
 - Support `subgroupStack = TRUE` option (#117)
-- Don't use local images in demo app (#118)
+- Simplify documentation and augment with more examples
 
 # timevis 2.0.0 (2021-12-20)
 

@@ -568,3 +568,70 @@ setWindow <- function(id, start, end, options) {
   method <- "setWindow"
   callJS()
 }
+
+#' Zoom in the current visible window
+#'
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
+#' @param percent The amount to zoom in. Must be a number between 0 and 1.
+#' @examples
+#'
+#' timevis() %>%
+#'   zoomIn()
+#'
+#' if (interactive()) {
+#' library(shiny)
+#' shinyApp(
+#'   ui = fluidPage(
+#'     timevisOutput("timeline"),
+#'     sliderInput("zoom", "Zoom in by", min = 0, max = 1, value = 0.5, step = 0.1),
+#'     actionButton("btn", "Go")
+#'   ),
+#'   server = function(input, output) {
+#'     output$timeline <- renderTimevis(
+#'       timevis()
+#'     )
+#'     observeEvent(input$btn, {
+#'       zoomIn("timeline", percent = input$zoom)
+#'     })
+#'   }
+#' )
+#' }
+#' @export
+zoomIn <- function(id, percent = 0.5) {
+  method <- "zoomIn"
+  callJS()
+}
+
+#' Zoom in the current visible window
+#'
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
+#' @param percent The amount to zoom in. Must be a number between 0 and 1. A value of 0.5
+#' means that after zooming out the timeline will show 50% more content.
+#' @examples
+#'
+#' timevis() %>%
+#'   zoomOut()
+#'
+#' if (interactive()) {
+#' library(shiny)
+#' shinyApp(
+#'   ui = fluidPage(
+#'     timevisOutput("timeline"),
+#'     sliderInput("zoom", "Zoom out by", min = 0, max = 1, value = 0.5, step = 0.1),
+#'     actionButton("btn", "Go")
+#'   ),
+#'   server = function(input, output) {
+#'     output$timeline <- renderTimevis(
+#'       timevis()
+#'     )
+#'     observeEvent(input$btn, {
+#'       zoomOut("timeline", percent = input$zoom)
+#'     })
+#'   }
+#' )
+#' }
+#' @export
+zoomOut <- function(id, percent = 0.5) {
+  method <- "zoomOut"
+  callJS()
+}
