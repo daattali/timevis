@@ -569,68 +569,53 @@ setWindow <- function(id, start, end, options) {
   callJS()
 }
 
-#' Zoom in the current visible window
+#' Zoom in/out the current visible window
 #'
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
-#' @param percent The amount to zoom in. Must be a number between 0 and 1.
+#' @param percent The amount to zoom in or out. Must be a number between 0 and 1.
+#' A value of 0.5 means that after zooming out the timeline will show 50% more content.
 #' @examples
 #'
 #' timevis() %>%
 #'   zoomIn()
 #'
+#' timevis() %>%
+#'   zoomOut(0.3)
+#'
 #' if (interactive()) {
 #' library(shiny)
 #' shinyApp(
 #'   ui = fluidPage(
 #'     timevisOutput("timeline"),
-#'     sliderInput("zoom", "Zoom in by", min = 0, max = 1, value = 0.5, step = 0.1),
-#'     actionButton("btn", "Go")
+#'     sliderInput("zoom", "Zoom by", min = 0, max = 1, value = 0.5, step = 0.1),
+#'     actionButton("zoomIn", "Zoom IN"),
+#'     actionButton("zoomOut", "Zoom OUT")
 #'   ),
 #'   server = function(input, output) {
 #'     output$timeline <- renderTimevis(
 #'       timevis()
 #'     )
-#'     observeEvent(input$btn, {
+#'     observeEvent(input$zoomIn, {
 #'       zoomIn("timeline", percent = input$zoom)
 #'     })
-#'   }
-#' )
-#' }
-#' @export
-zoomIn <- function(id, percent = 0.5) {
-  method <- "zoomIn"
-  callJS()
-}
-
-#' Zoom in the current visible window
-#'
-#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
-#' @param percent The amount to zoom in. Must be a number between 0 and 1. A value of 0.5
-#' means that after zooming out the timeline will show 50% more content.
-#' @examples
-#'
-#' timevis() %>%
-#'   zoomOut()
-#'
-#' if (interactive()) {
-#' library(shiny)
-#' shinyApp(
-#'   ui = fluidPage(
-#'     timevisOutput("timeline"),
-#'     sliderInput("zoom", "Zoom out by", min = 0, max = 1, value = 0.5, step = 0.1),
-#'     actionButton("btn", "Go")
-#'   ),
-#'   server = function(input, output) {
-#'     output$timeline <- renderTimevis(
-#'       timevis()
-#'     )
-#'     observeEvent(input$btn, {
+#'     observeEvent(input$zoomOut, {
 #'       zoomOut("timeline", percent = input$zoom)
 #'     })
 #'   }
 #' )
 #' }
+#' @name zoom
+NULL
+
 #' @export
+#' @rdname zoom
+zoomIn <- function(id, percent = 0.5) {
+  method <- "zoomIn"
+  callJS()
+}
+
+#' @export
+#' @rdname zoom
 zoomOut <- function(id, percent = 0.5) {
   method <- "zoomOut"
   callJS()
