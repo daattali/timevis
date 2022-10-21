@@ -45,27 +45,24 @@ test_that("nested columns behave the way they ought to",{
   matts_hobbies <- c("Working", "thinking about work")
   df <- data.frame(name = c("Dean", "Matt"),
                    age = c(27, 23),
-                   hobbies = c(NA, NA))
-  df$hobbies[2] <- list(matts_hobbies)
+                   hobbies = I(list(NA, matts_hobbies)))
   out <- dataframeToD3(df)
   expect <- list(list(name = "Dean", age = "27"),
                  list(name = "Matt", age = "23", hobbies = as.list(matts_hobbies)))
   expect_identical(out, expect, info = info_comp(out, expect))
 
-  df2 <- df
-  expect2 <- expect
 
   deans_hobby <- "Responding to pull requests"
-  df2$hobbies[[1]] <- list(deans_hobby)
-  expect2[[1]]$hobbies <- list(deans_hobby)
-  out2 <- dataframeToD3(df2)
-  expect_identical(out2, expect2, info = info_comp(out2, expect2))
+  df <- data.frame(name = c("Dean", "Matt"),
+                   age = c(27, 23),
+                   hobbies = I(list(deans_hobby, matts_hobbies)))
+  expect <- list(list(name = "Dean", age = "27", hobbies = as.list(deans_hobby)),
+                 list(name = "Matt", age = "23", hobbies = as.list(matts_hobbies)))
+  out <- dataframeToD3(df)
+  expect_identical(out, expect, info = info_comp(out, expect))
 
-  df3 <- df2
-  expect3 <- expect2
-  expect3[[1]]$hobbies <- NA
-
-  df3$hobbies[[1]] <- list()
-  out3 <- df3 %>% dataframeToD3()
-  expect_identical(out3, expect3, info = info_comp(out3, expect3))
+  df$hobbies[[1]] <- NA
+  expect[[1]]$hobbies <- NULL
+  out <- dataframeToD3(df)
+  expect_identical(out, expect, info = info_comp(out, expect))
 })
