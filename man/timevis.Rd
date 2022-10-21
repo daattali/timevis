@@ -45,7 +45,7 @@ current date.}
 
 \item{options}{A named list containing any extra configuration options to
 customize the timeline. All available options can be found in the
-\href{https://visjs.org/docs/timeline/#Configuration_Options}{official
+\href{https://visjs.github.io/vis-timeline/docs/timeline/#Configuration_Options}{official
 Timeline documentation}. Note that any options that define a JavaScript
 function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
 examples section below to see example usage.}
@@ -95,8 +95,10 @@ official documentation of visjs Timeline.
 \section{Data format}{
 
 The \code{data} parameter supplies the input dataframe that describes the
-items in the timeline. The following variables are supported for the items
-dataframe:
+items in the timeline. The following is a subset of the variables supported
+in the items dataframe (the full list of supported variables can be found in
+the \href{https://visjs.github.io/vis-timeline/docs/timeline/#Data_Format}{official
+visjs documentation}):
 \itemize{
 \item{\strong{\code{start}}} - (required) The start date of the item, for
 example \code{"1988-11-22"} or \code{"1988-11-22 16:30:00"}. To specify BCE
@@ -108,8 +110,8 @@ can be plain text or HTML code.
 optional. If end date is provided, the item is displayed as a range. If
 not, the item is displayed as a single point on the timeline.
 \item{\strong{\code{id}}} - An id for the item. Using an id is not required
-but highly recommended. An id is needed when removing or selecting items
-(using \code{\link[timevis]{removeItem}} or
+but highly recommended, and must be unique. An id is needed when removing or
+selecting items (using \code{\link[timevis]{removeItem}} or
 \code{\link[timevis]{setSelection}}).
 \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
 'point', 'range', or 'background'. Types 'box' and 'point' need only a
@@ -212,7 +214,7 @@ timeline's JavaScript object directly. The timeline object is available via
 \code{document.getElementById(id).widget.timeline} (replace \code{id} with
 the timeline's id).\cr\cr
 This timeline object is the direct widget that \code{vis.js} creates, and you
-can see the \href{https://visjs.org/docs/timeline/}{visjs documentation} to
+can see the \href{https://visjs.github.io/vis-timeline/docs/timeline/}{visjs documentation} to
 see what actions you can perform on that object.
 }
 
@@ -321,6 +323,34 @@ timevis(
   )
 )
 
+
+#----------------------- Using a custom format for hours ------------------
+timevis(
+  data.frame(
+    id = 1:2,
+    content = c("one", "two"),
+    start = c("2020-01-10", "2020-01-10 04:00:00")
+  ),
+  options = list(
+    format = htmlwidgets::JS("{ minorLabels: { minute: 'h:mma', hour: 'ha' }}")
+  )
+)
+
+#----------------------- Allowing editable items to "snap" to round hours only -------------
+timevis(
+  data.frame(
+    id = 1:2,
+    content = c("one", "two"),
+    start = c("2020-01-10", "2020-01-10 04:00:00")
+  ),
+  options = list(
+    editable = TRUE,
+    snap = htmlwidgets::JS("function (date, scale, step) {
+         var hour = 60 * 60 * 1000;
+         return Math.round(date / hour) * hour;
+     }")
+  )
+)
 
 #----------------------- Using groups -----------------
 timevis(data = data.frame(

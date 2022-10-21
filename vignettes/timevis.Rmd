@@ -15,7 +15,7 @@ knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 
 # {timevis} - Create interactive timeline visualizations in R
 
-[![Build Status](https://travis-ci.org/daattali/timevis.svg?branch=master)](https://travis-ci.org/daattali/timevis)
+[![R Build Status](https://github.com/daattali/timevis/workflows/R-CMD-check/badge.svg)](https://github.com/daattali/timevis/actions)
 [![CRAN version](https://www.r-pkg.org/badges/version/timevis)](https://cran.r-project.org/package=timevis)
 
 > By [Dean Attali](https://deanattali.com) &middot; [Demo](https://daattali.com/shiny/timevis-demo/) 
@@ -36,9 +36,34 @@ knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 
 </p>
 
+> This package is part of a larger ecosystem of packages with a shared vision: solving common Shiny issues and improving Shiny apps with minimal effort, minimal code changes, and straightforward documentation. Other packages for your Shiny apps:
+
+| Package | Description | Demo |
+|---|---|---|
+| [shinyjs](https://deanattali.com/shinyjs/) | 💡 Easily improve the user experience of your Shiny apps in seconds | [🔗](https://deanattali.com/shinyjs/overview#demo) |
+| [shinyalert](https://github.com/daattali/shinyalert) | 🗯️ Easily create pretty popup messages (modals) in Shiny | [🔗](https://daattali.com/shiny/shinyalert-demo/) |
+| [shinyscreenshot](https://github.com/daattali/shinyscreenshot/) | 📷 Capture screenshots of entire pages or parts of pages in Shiny apps | [🔗](https://daattali.com/shiny/shinyscreenshot-demo/) |
+| [shinycssloaders](https://github.com/daattali/shinycssloaders/) | ⌛ Add loading animations to a Shiny output while it's recalculating | [🔗](https://daattali.com/shiny/shinycssloaders-demo/) |
+| [colourpicker](https://github.com/daattali/colourpicker/) | 🎨 A colour picker tool for Shiny and for selecting colours in plots | [🔗](https://daattali.com/shiny/colourInput/) |
+| [shinybrowser](https://github.com/daattali/shinybrowser/) | 🌐 Find out information about a user's web browser in Shiny apps | [🔗](https://daattali.com/shiny/shinybrowser-demo/) |
+| [shinydisconnect](https://github.com/daattali/shinydisconnect/) | 🔌 Show a nice message when a Shiny app disconnects or errors | [🔗](https://daattali.com/shiny/shinydisconnect-demo/) |
+| [shinyforms](https://github.com/daattali/shinyforms/) | 📝 Easily create questionnaire-type forms with Shiny | WIP |
+
 ## Demo
 
-[Click here](https://daattali.com/shiny/timevis-demo/) to view a live interactive demo of {timevis}.
+[Click here](https://daattali.com/shiny/timevis-demo/) to view an interactive demo of many {timevis} features.
+
+Or check out examples from real users: [Pet Records by Jenna
+Allen](https://jennadallen.shinyapps.io/pet-records-app/), [Mohamad
+Ghassany’s life timeline](https://www.mghassany.com/blog/my-timetable/), [an English Premier League game timeline](https://vidigalbr.shinyapps.io/timevis_premier_league/).
+If you create a cool timeline with {timevis} and want to share it, I’d
+love to [hear about it](https://deanattali.com/contact/)\!
+
+<h2 id="sponsors">Sponsors 🏆</h2>
+
+> There are no sponsors yet
+
+[Become the first sponsor for {timevis}!](https://github.com/sponsors/daattali/sponsorships?tier_id=39856)
 
 ## Table of contents
 
@@ -50,7 +75,6 @@ knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 - [Functions to manipulate a timeline](#manipulate-api)
 - [In a Shiny app](#shiny-apps)
     - [Retrieving data from the widget](#retrieve-data)
-- [Sponsors 🏆](#sponsors)
 
 <h2 id="install">Installation</h2>
 
@@ -189,16 +213,8 @@ It is possible to retrieve data from a timeline in a Shiny app. When a timeline 
 - **input$mytime_window** - will return a 2-element vector containing the minimum and maximum dates currently visible in the timeline. The input is updated every time the viewable window of dates is updated (by zooming or moving the window).
 - **input$mytime_visible** - will return a list of IDs of items currently visible in the timeline.
 
-<h2 id="sponsors">Sponsors 🏆</h2>
-
-> There are no sponsors yet
-
-[Become the first sponsor for {timevis}!](https://github.com/sponsors/daattali/sponsorships?tier_id=39856)
-
 ---
 
 You can view examples of many of the features supported by checking out the [demo Shiny app](https://daattali.com/shiny/timevis-demo/). If you want to see how those examples were created, the full code for the examples is inside [inst/example](https://github.com/daattali/timevis/tree/master/inst/example).
-
-If you create any cool timelines that you'd like to share with me, or if you want to get in touch with me for any reason, feel free to [contact me](https://deanattali.com/contact/)!
 
 Lastly, if you want to learn how to develop an htmlwidget to have similar features as this package, you can check out the [`timevisBasic`](https://github.com/daattali/timevisBasic) package or [my tutorial on htmlwidgets tips](https://deanattali.com/blog/advanced-htmlwidgets-tips/).

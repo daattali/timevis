@@ -1,9 +1,15 @@
-# timevis 1.0.0.*
+# Unreleased version
 
-### Additions
+- List-columns may now be passed to `timevis()`, to support `nestedGroups` and any other parameters that may require nested lists
+- Support `subgroupStack = TRUE` option (#117)
+- Don't use local images in demo app (#118)
 
-- List-Columns may now be passed to `timevis`, to support use of `nestedGroups` 
-  ( `nestedGroups` is added in recent versions of `vis-timeline` thanks @matthewstrasiotto )
+# timevis 2.0.0 (2021-12-20)
+
+- **BREAKING CHANGE** Upgrade to visjs-Timeline version 7.4.9 which includes many new features and performance improvements. You may notice some small differences in behaviour when upgrading as the new version includes 5 years of developments. (#50)
+  - One of the major differences is that previously when a config option (such as `editable=TRUE`) was set on an existing timeline, the option would apply retroactively to all existing items. In the new version, existing items don't change and only new items will inherit the new options.
+  - You may also notice a difference in the way that editable items "snap" to the timeline when you modify their time. You can control the snapping behaviour, for example to only allow items to snap to round hours you can use `options = list(editable = TRUE, snap = htmlwidgets::JS("function (date, scale, step) { var hour = 60 * 60 * 1000; return Math.round(date / hour) * hour; }"))`
+- Add documentation about `id` parameter (#103)
 
 # timevis 1.0.0 (2020-09-15)
 
