@@ -360,6 +360,19 @@ timevis(data = data.frame(
   groups = data.frame(id = 1:2, content = c("G1", "G2"))
  )
 
+#----------------------- Using nested groups --------------------
+timevis(
+  data = data.frame(
+    start = c("2022-01-01", "2022-01-02", "2022-01-03", "2022-01-04", "2022-01-05"),
+    content = c("item 1", "item 2", "item 3", "item 4", "item 5"),
+    group = 1:5
+  ),
+  groups = data.frame(
+    id = 1:5,
+    content = c("John", "Lee", "Clean", "Cook", "Shop"),
+    nestedGroups = I(list(c(3, 4), 5, NA, NA, NA))
+  )
+)
 
 #----------------------- Getting data out of the timeline into Shiny -----------------
 if (interactive()) {
