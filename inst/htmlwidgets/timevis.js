@@ -260,10 +260,10 @@ HTMLWidgets.widget({
         timeline.setWindow(params.start, params.end, params.options);
       },
       zoomIn : function(params) {
-        timeline.zoomIn(params.percent);
+        timeline.zoomIn(params.percent, { animation : params.animation });
       },
       zoomOut : function(params) {
-        timeline.zoomOut(params.percent);
+        timeline.zoomOut(params.percent, { animation : params.animation });
       },
     };
   }

@@ -6,15 +6,17 @@
 \alias{zoomOut}
 \title{Zoom in/out the current visible window}
 \usage{
-zoomIn(id, percent = 0.5)
+zoomIn(id, percent = 0.5, animation = TRUE)
 
-zoomOut(id, percent = 0.5)
+zoomOut(id, percent = 0.5, animation = TRUE)
 }
 \arguments{
 \item{id}{Timeline id or a \code{timevis} object (the output from \code{timevis()})}
 
 \item{percent}{The amount to zoom in or out. Must be a number between 0 and 1.
 A value of 0.5 means that after zooming out the timeline will show 50\% more content.}
+
+\item{animation}{Whether or not to animate the zoom.}
 }
 \description{
 Zoom in/out the current visible window
@@ -33,6 +35,7 @@ shinyApp(
   ui = fluidPage(
     timevisOutput("timeline"),
     sliderInput("zoom", "Zoom by", min = 0, max = 1, value = 0.5, step = 0.1),
+    checkboxInput("animate", "Animate?", TRUE),
     actionButton("zoomIn", "Zoom IN"),
     actionButton("zoomOut", "Zoom OUT")
   ),
@@ -41,10 +44,10 @@ shinyApp(
       timevis()
     )
     observeEvent(input$zoomIn, {
-      zoomIn("timeline", percent = input$zoom)
+      zoomIn("timeline", percent = input$zoom, animation = input$animate)
     })
     observeEvent(input$zoomOut, {
-      zoomOut("timeline", percent = input$zoom)
+      zoomOut("timeline", percent = input$zoom, animation = input$animate)
     })
   }
 )

@@ -141,6 +141,7 @@ fluidPage(
               div(
                 class = "optionsSection",
                 sliderInput("zoomBy", tags$h4("Zoom:"), min = 0, max = 1, value = 0.5, step = 0.1),
+                checkboxInput("animate", "Animate?", TRUE),
                 actionButton("zoomIn", "Zoom In"),
                 actionButton("zoomOut", "Zoom Out")
               )

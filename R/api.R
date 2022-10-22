@@ -574,6 +574,7 @@ setWindow <- function(id, start, end, options) {
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param percent The amount to zoom in or out. Must be a number between 0 and 1.
 #' A value of 0.5 means that after zooming out the timeline will show 50% more content.
+#' @param animation Whether or not to animate the zoom.
 #' @examples
 #'
 #' timevis() %>%
@@ -588,6 +589,7 @@ setWindow <- function(id, start, end, options) {
 #'   ui = fluidPage(
 #'     timevisOutput("timeline"),
 #'     sliderInput("zoom", "Zoom by", min = 0, max = 1, value = 0.5, step = 0.1),
+#'     checkboxInput("animate", "Animate?", TRUE),
 #'     actionButton("zoomIn", "Zoom IN"),
 #'     actionButton("zoomOut", "Zoom OUT")
 #'   ),
@@ -596,10 +598,10 @@ setWindow <- function(id, start, end, options) {
 #'       timevis()
 #'     )
 #'     observeEvent(input$zoomIn, {
-#'       zoomIn("timeline", percent = input$zoom)
+#'       zoomIn("timeline", percent = input$zoom, animation = input$animate)
 #'     })
 #'     observeEvent(input$zoomOut, {
-#'       zoomOut("timeline", percent = input$zoom)
+#'       zoomOut("timeline", percent = input$zoom, animation = input$animate)
 #'     })
 #'   }
 #' )
@@ -609,14 +611,14 @@ NULL
 
 #' @export
 #' @rdname zoom
-zoomIn <- function(id, percent = 0.5) {
+zoomIn <- function(id, percent = 0.5, animation = TRUE) {
   method <- "zoomIn"
   callJS()
 }
 
 #' @export
 #' @rdname zoom
-zoomOut <- function(id, percent = 0.5) {
+zoomOut <- function(id, percent = 0.5, animation = TRUE) {
   method <- "zoomOut"
   callJS()
 }

@@ -102,9 +102,9 @@ function(input, output, session) {
     addCustomTime("timelineInteractive", "2016-01-17", randomID())
   })
   observeEvent(input$zoomIn, {
-    zoomIn("timelineInteractive", input$zoomBy)
+    zoomIn("timelineInteractive", input$zoomBy, animation = input$animate)
   })
   observeEvent(input$zoomOut, {
-    zoomOut("timelineInteractive", input$zoomBy)
+    zoomOut("timelineInteractive", input$zoomBy, animation = input$animate)
   })
 }
