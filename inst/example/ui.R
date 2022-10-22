@@ -114,7 +114,7 @@ fluidPage(
           ),
           fluidRow(
             column(
-              4,
+              3,
               div(class = "optionsSection",
                   uiOutput("selectIdsOutput", inline = TRUE),
                   actionButton("selectItems", "Select"),
@@ -122,7 +122,7 @@ fluidPage(
               )
             ),
             column(
-              4,
+              3,
               div(class = "optionsSection",
                   textInput("addText", tags$h4("Add item:"), "New item"),
                   dateInput("addDate", NULL, "2016-01-15"),
@@ -130,10 +130,19 @@ fluidPage(
               )
             ),
             column(
-              4,
+              3,
               div(class = "optionsSection",
                   uiOutput("removeIdsOutput", inline = TRUE),
                   actionButton("removeItem", "Remove")
+              )
+            ),
+            column(
+              3,
+              div(
+                class = "optionsSection",
+                sliderInput("zoomBy", tags$h4("Zoom:"), min = 0, max = 1, value = 0.5, step = 0.1),
+                actionButton("zoomIn", "Zoom In"),
+                actionButton("zoomOut", "Zoom Out")
               )
             )
           )
