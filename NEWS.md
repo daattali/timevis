@@ -1,8 +1,8 @@
-# Unreleased version
+# timevis 2.1.0 (2022-10-22)
 
 - Add functions `zoomIn()` and `zoomOut()`
-- List-columns may now be passed to `timevis()`, to support `nestedGroups` and any other parameters that may require nested lists (#11)
-- Support `subgroupStack = TRUE` option (#117)
+- List-columns can now be passed to `timevis()` in the `data` or `groups` dataframe, to support `nestedGroups` and any other parameters that may require nested lists (#11)
+- Boolean values can be passed to `timevis()` in the `data` or `groups` dataframe, to support `subgroupStack = TRUE` option (#117)
 - Simplify documentation and augment with more examples
 
 # timevis 2.0.0 (2021-12-20)
