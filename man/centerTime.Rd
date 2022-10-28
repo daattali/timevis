@@ -21,9 +21,10 @@ Timeline documentation}}
 Move the window such that the given time is centered
 }
 \examples{
-
+\dontrun{
 timevis() \%>\%
   centerTime(Sys.Date() - 1)
+}
 
 if (interactive()) {
 library(shiny)

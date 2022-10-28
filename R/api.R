@@ -31,9 +31,10 @@ callJS <- function() {
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param data A named list containing the item data to add.
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   addItem(list(start = Sys.Date(), content = "Today"))
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -62,10 +63,11 @@ addItem <- function(id, data) {
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param data A dataframe containing the items data to add.
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   addItems(data.frame(start = c(Sys.Date(), Sys.Date() - 1),
 #'            content = c("Today", "Yesterday")))
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -97,9 +99,10 @@ addItems <- function(id, data) {
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param itemId The id of the item to remove
 #' @examples
-#'
+#' \dontrun{
 #' timevis(data.frame(id = 1:2, start = Sys.Date(), content = c("1", "2"))) %>%
 #'   removeItem(2)
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -133,9 +136,10 @@ removeItem <- function(id, itemId) {
 #' @param time The date/time to add
 #' @param itemId The id of the custom time bar
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   addCustomTime(Sys.Date() - 1, "yesterday")
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -166,10 +170,11 @@ addCustomTime <- function(id, time, itemId) {
 #' @param time The new date/time
 #' @param itemId The id of the custom time bar
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   addCustomTime(Sys.Date(), "yesterday") %>%
 #'   setCustomTime(Sys.Date() - 1, "yesterday")
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -199,9 +204,10 @@ setCustomTime <- function(id, time, itemId) {
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param time The new date/time
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   setCurrentTime(Sys.Date())
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -230,11 +236,12 @@ setCurrentTime <- function(id, time) {
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param itemId The id of the custom time bar
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   addCustomTime(Sys.Date() - 1, "yesterday") %>%
 #'   addCustomTime(Sys.Date() + 1, "tomorrow") %>%
 #'   removeCustomTime("yesterday")
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -305,9 +312,10 @@ fitWindow <- function(id, options) {
 #' \href{https://visjs.github.io/vis-timeline/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   centerTime(Sys.Date() - 1)
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -341,13 +349,14 @@ centerTime <- function(id, time, options) {
 #' \href{https://visjs.github.io/vis-timeline/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
-#'
+#' \dontrun{
 #' timevis(data.frame(
 #'           id = 1:3,
 #'           start = c(Sys.Date() - 1, Sys.Date(), Sys.Date() + 1),
 #'           content = c("Item 1", "Item 2", "Item 3"))
 #' ) %>%
 #'   centerItem(1)
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -381,9 +390,10 @@ centerItem <- function(id, itemId, options) {
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param data A dataframe containing the item data to use.
 #' @examples
-#'
+#' \dontrun{
 #' timevis(data.frame(start = Sys.Date(), content = "Today")) %>%
 #'   setItems(data.frame(start = Sys.Date() - 1, content = "yesterday"))
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -414,7 +424,7 @@ setItems <- function(id, data) {
 #' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
 #' @param data A dataframe containing the groups data to use.
 #' @examples
-#'
+#' \dontrun{
 #' timevis(data = data.frame(
 #'   start = c(Sys.Date(), Sys.Date(), Sys.Date() + 1, Sys.Date() + 2),
 #'   content = c("one", "two", "three", "four"),
@@ -422,7 +432,7 @@ setItems <- function(id, data) {
 #'   groups = data.frame(id = 1:2, content = c("G1", "G2"))
 #' ) %>%
 #'   setGroups(data.frame(id = 1:2, content = c("Group 1", "Group 2")))
-#'
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -460,12 +470,13 @@ setGroups <- function(id, data) {
 #' See the \code{options} parameter of the
 #' \code{\link[timevis]{timevis}} function to see more details.
 #' @examples
-#'
+#' \dontrun{
 #' timevis(
 #'   data.frame(start = Sys.Date(), content = "Today"),
 #'   options = list(showCurrentTime = FALSE, orientation = "top")
 #' ) %>%
 #'   setOptions(list(editable = TRUE, showCurrentTime = TRUE))
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -503,9 +514,10 @@ setOptions <- function(id, options) {
 #' \href{https://visjs.github.io/vis-timeline/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
-#'
+#' \dontrun{
 #' timevis(data.frame(id = 1:3, start = Sys.Date(), content = 1:3)) %>%
 #'   setSelection(2)
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -542,9 +554,10 @@ setSelection <- function(id, itemId, options) {
 #' \href{https://visjs.github.io/vis-timeline/docs/timeline/#Methods}{official
 #' Timeline documentation}
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   setWindow(Sys.Date() - 1, Sys.Date() + 1)
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)
@@ -576,12 +589,13 @@ setWindow <- function(id, start, end, options) {
 #' A value of 0.5 means that after zooming out the timeline will show 50% more content.
 #' @param animation Whether or not to animate the zoom.
 #' @examples
-#'
+#' \dontrun{
 #' timevis() %>%
 #'   zoomIn()
 #'
 #' timevis() %>%
 #'   zoomOut(0.3)
+#' }
 #'
 #' if (interactive()) {
 #' library(shiny)

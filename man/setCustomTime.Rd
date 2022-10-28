@@ -17,10 +17,11 @@ setCustomTime(id, time, itemId)
 Adjust the time of a custom time bar
 }
 \examples{
-
+\dontrun{
 timevis() \%>\%
   addCustomTime(Sys.Date(), "yesterday") \%>\%
   setCustomTime(Sys.Date() - 1, "yesterday")
+}
 
 if (interactive()) {
 library(shiny)

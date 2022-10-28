@@ -22,12 +22,13 @@ A value of 0.5 means that after zooming out the timeline will show 50\% more con
 Zoom in/out the current visible window
 }
 \examples{
-
+\dontrun{
 timevis() \%>\%
   zoomIn()
 
 timevis() \%>\%
   zoomOut(0.3)
+}
 
 if (interactive()) {
 library(shiny)

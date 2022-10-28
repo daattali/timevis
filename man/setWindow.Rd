@@ -23,9 +23,10 @@ Timeline documentation}}
 Set the current visible window
 }
 \examples{
-
+\dontrun{
 timevis() \%>\%
   setWindow(Sys.Date() - 1, Sys.Date() + 1)
+}
 
 if (interactive()) {
 library(shiny)

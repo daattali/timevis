@@ -22,9 +22,10 @@ Timeline documentation}}
 Select one or multiple items on a timeline
 }
 \examples{
-
+\dontrun{
 timevis(data.frame(id = 1:3, start = Sys.Date(), content = 1:3)) \%>\%
   setSelection(2)
+}
 
 if (interactive()) {
 library(shiny)

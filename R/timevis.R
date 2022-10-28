@@ -210,6 +210,7 @@
 #' htmltools::html_print(tv)
 #' }
 #' @examples
+#' \dontrun{
 #' # For more examples, see https://daattali.com/shiny/timevis-demo/
 #'
 #' #----------------------- Most basic -----------------
@@ -326,7 +327,7 @@
 #'     nestedGroups = I(list(c(3, 4), 5, NA, NA, NA))
 #'   )
 #' )
-#'
+#' }
 #' #----------------------- Getting data out of the timeline into Shiny -----------------
 #' if (interactive()) {
 #' library(shiny)

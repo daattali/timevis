@@ -17,9 +17,10 @@ addCustomTime(id, time, itemId)
 Add a new vertical bar at a time point that can be dragged by the user
 }
 \examples{
-
+\dontrun{
 timevis() \%>\%
   addCustomTime(Sys.Date() - 1, "yesterday")
+}
 
 if (interactive()) {
 library(shiny)

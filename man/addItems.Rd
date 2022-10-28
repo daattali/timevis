@@ -15,10 +15,11 @@ addItems(id, data)
 Add multiple items to a timeline
 }
 \examples{
-
+\dontrun{
 timevis() \%>\%
   addItems(data.frame(start = c(Sys.Date(), Sys.Date() - 1),
            content = c("Today", "Yesterday")))
+}
 
 if (interactive()) {
 library(shiny)

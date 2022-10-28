@@ -15,9 +15,10 @@ setItems(id, data)
 Set the items of a timeline
 }
 \examples{
-
+\dontrun{
 timevis(data.frame(start = Sys.Date(), content = "Today")) \%>\%
   setItems(data.frame(start = Sys.Date() - 1, content = "yesterday"))
+}
 
 if (interactive()) {
 library(shiny)

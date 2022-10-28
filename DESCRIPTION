@@ -12,7 +12,7 @@ Description: Create rich and fully interactive timeline visualizations.
     'timevis' includes an extensive API to manipulate a timeline after creation,
     and supports getting data out of the visualization into R. Based on the
     'vis.js' Timeline JavaScript library.
-URL: https://github.com/daattali/timevis, https://daattali.com/shiny/timevis-demo/
+URL: https://github.com/daattali/timevis
 BugReports: https://github.com/daattali/timevis/issues
 Depends:
     R (>= 3.1.0)

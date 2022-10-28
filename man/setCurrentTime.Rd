@@ -15,9 +15,10 @@ setCurrentTime(id, time)
 Adjust the time of the current time bar
 }
 \examples{
-
+\dontrun{
 timevis() \%>\%
   setCurrentTime(Sys.Date())
+}
 
 if (interactive()) {
 library(shiny)

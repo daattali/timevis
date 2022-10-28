@@ -15,7 +15,7 @@ setGroups(id, data)
 Set the groups of a timeline
 }
 \examples{
-
+\dontrun{
 timevis(data = data.frame(
   start = c(Sys.Date(), Sys.Date(), Sys.Date() + 1, Sys.Date() + 2),
   content = c("one", "two", "three", "four"),
@@ -23,7 +23,7 @@ timevis(data = data.frame(
   groups = data.frame(id = 1:2, content = c("G1", "G2"))
 ) \%>\%
   setGroups(data.frame(id = 1:2, content = c("Group 1", "Group 2")))
-
+}
 
 if (interactive()) {
 library(shiny)
