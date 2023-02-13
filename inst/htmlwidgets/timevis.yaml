@@ -1,7 +1,7 @@
 dependencies:
   - name: visjs
-    version: 7.4.9
-    src: htmlwidgets/lib/vis-7.4.9
+    version: 7.7.0
+    src: htmlwidgets/lib/vis-7.7.0
     script: vis-timeline-graph2d.min.js
     stylesheet: vis-timeline-graph2d.min.css
 
