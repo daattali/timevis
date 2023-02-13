@@ -53,6 +53,12 @@ HTMLWidgets.widget({
 
             // The range of the window has changes (by dragging or zooming)
             timeline.on('rangechanged', function (properties) {
+
+              // If the byUser flag is not set, then just return
+              if(properties.byUser != true) {
+                return;
+              }
+
               Shiny.onInputChange(
                 elementId + "_window",
                 [timeline.getWindow().start, timeline.getWindow().end]
