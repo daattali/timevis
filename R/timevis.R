@@ -15,8 +15,8 @@
 #' here. To see the full details on what the timeline can support, please read the
 #' official documentation of visjs Timeline.**
 #'
-#' @param data A dataframe containing the timeline items. Each item on the
-#' timeline is represented by a row in the dataframe. \code{start} and
+#' @param data A dataframe (or \link[crosstalk]{SharedData} object for \{crosstalk\} support) containing the timeline items.
+#' Each item on the timeline is represented by a row in the dataframe. \code{start} and
 #' \code{content} are the only two required columns.
 #' See the \strong{Data format} section below for more
 #' details. For a full list of all supported columns, see the Data Format section in the
@@ -40,7 +40,8 @@
 #' \href{https://visjs.github.io/vis-timeline/docs/timeline/#Configuration_Options}{official
 #' Timeline documentation}. Note that any options that define a JavaScript
 #' function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
-#' examples section below to see example usage.
+#' examples section below to see example usage. If using \{crosstalk\}, it's recommended
+#' to use `list(multiselect = TRUE)`.
 #' @param width Fixed width for timeline (in css units). Ignored when used in a
 #' Shiny app -- use the \code{width} parameter in
 #' \code{\link[timevis]{timevisOutput}}.
@@ -380,6 +381,18 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
   if (missing(data)) {
     data <- data.frame()
   }
+  if (crosstalk::is.SharedData(data)) {
+    crosstalk_opts <- list(
+      key = data$key(),
+      group = data$groupName()
+    )
+    data <- data$origData()
+    if (!"id" %in% names(data)) {
+      stop("timevis: 'data' must contain a column named 'id' when using a {crosstalk} SharedData object.", call. = FALSE)
+    }
+  } else {
+    crosstalk_opts <- NULL
+  }
   if (!is.data.frame(data)) {
     stop("timevis: 'data' must be a data.frame",
          call. = FALSE)
@@ -445,19 +458,27 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     fit = fit,
     options = options,
     height = height,
-    timezone = timezone
+    timezone = timezone,
+    crosstalk = crosstalk_opts
   )
 
   # Allow a list of API functions to be called on the timevis after
   # initialization
   x$api <- list()
 
-  # add dependencies so that the zoom buttons will work in non-Shiny mode
   deps <- NULL
+
+  if (!is.null(crosstalk_opts)) {
+    deps <- crosstalk::crosstalkLibs()
+  }
+  # add dependencies so that the zoom buttons will work in non-Shiny mode
   if (loadDependencies) {
-    deps <- list(
-      rmarkdown::html_dependency_jquery(),
-      rmarkdown::html_dependency_bootstrap("default")
+    deps <- append(
+      deps,
+      list(
+        rmarkdown::html_dependency_jquery(),
+        rmarkdown::html_dependency_bootstrap("default")
+      )
     )
   }
 

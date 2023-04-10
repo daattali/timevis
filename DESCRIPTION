@@ -1,6 +1,6 @@
 Package: timevis
 Title: Create Interactive Timeline Visualizations in R
-Version: 2.1.0
+Version: 2.1.0.9000
 Authors@R: c(
     person("Dean", "Attali", email = "daattali@gmail.com",
       role = c("aut", "cre"), comment = c("R interface", ORCID="0000-0002-5645-3493")),
@@ -17,6 +17,7 @@ BugReports: https://github.com/daattali/timevis/issues
 Depends:
     R (>= 3.1.0)
 Imports:
+    crosstalk,
     htmltools (>= 0.2.6),
     htmlwidgets (>= 0.6),
     jsonlite,
@@ -31,5 +32,5 @@ Suggests:
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)

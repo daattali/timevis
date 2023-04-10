@@ -11,7 +11,7 @@ timevis(
   showZoom = TRUE,
   zoomFactor = 0.5,
   fit = TRUE,
-  options,
+  options = NULL,
   width = NULL,
   height = NULL,
   elementId = NULL,
@@ -20,8 +20,8 @@ timevis(
 )
 }
 \arguments{
-\item{data}{A dataframe containing the timeline items. Each item on the
-timeline is represented by a row in the dataframe. \code{start} and
+\item{data}{A dataframe (or \link[crosstalk]{SharedData} object for \{crosstalk\} support) containing the timeline items.
+Each item on the timeline is represented by a row in the dataframe. \code{start} and
 \code{content} are the only two required columns.
 See the \strong{Data format} section below for more
 details. For a full list of all supported columns, see the Data Format section in the
@@ -50,7 +50,8 @@ customize the timeline. All available options can be found in the
 \href{https://visjs.github.io/vis-timeline/docs/timeline/#Configuration_Options}{official
 Timeline documentation}. Note that any options that define a JavaScript
 function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
-examples section below to see example usage.}
+examples section below to see example usage. If using \{crosstalk\}, it's recommended
+to use \code{list(multiselect = TRUE)}}
 
 \item{width}{Fixed width for timeline (in css units). Ignored when used in a
 Shiny app -- use the \code{width} parameter in

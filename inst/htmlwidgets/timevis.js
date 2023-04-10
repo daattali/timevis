@@ -1,5 +1,5 @@
 /*********************************************************************/
-/* Dean Attali 2016                                                  */
+/* Dean Attali 2016-2023                                             */
 /* timevis                                                           */
 /* Create timeline visualizations in R using htmlwidgets and vis.js  */
 /*********************************************************************/
@@ -16,6 +16,9 @@ HTMLWidgets.widget({
     var container = document.getElementById(elementId);
     var timeline = new vis.Timeline(container, [], {});
     var initialized = false;
+    var ctSel = null;
+    var ctFil = null;
+    var allItems;
 
     return {
 
@@ -105,6 +108,34 @@ HTMLWidgets.widget({
             timeline.itemsData.on('remove', sendShinyVisible);
             setTimeout(sendShinyVisible, 0);
           }
+
+          // if a crosstalk dataframe is used, initialize crosstalk
+          if (typeof(crosstalk) !== "undefined" && opts.crosstalk) {
+            ctSel = new crosstalk.SelectionHandle(opts.crosstalk.group);
+            ctSel.on("change", function(e) {
+              if (e.sender !== ctSel) {
+                that.setSelection({ itemId : e.value });
+              }
+            });
+            timeline.on('select', function (properties) {
+              ctSel.set(properties.items);
+            });
+
+            ctFil = new crosstalk.FilterHandle(opts.crosstalk.group);
+            ctFil.on("change", function(e) {
+              if (e.value === null) {
+                that.setItems({ data : allItems });
+              } else {
+                let keys = e.value;
+                keys = keys.map(String); // workaround for https://github.com/rstudio/crosstalk/issues/140
+                that.setItems({ data : allItems.filter(function(item) { return keys.includes(item.id); } ) });
+              }
+              // after doing a filter, a new set of items is used so the selection needs to be re-done
+              if (ctSel !== null) {
+                that.setSelection({ itemId : ctSel.value });
+              }
+            });
+          }
         }
 
         // set the custom configuration options
@@ -151,6 +182,17 @@ HTMLWidgets.widget({
           try {
             that[method](call);
           } catch(err) {}
+        }
+
+        // If crosstalk is enabled, respect its selection
+        allItems = opts.items;
+        if (ctFil !== null && ctFil.filteredKeys !== null) {
+          let keys = ctFil.filteredKeys;
+          keys = keys.map(String);
+          that.setItems({ data : allItems.filter(function(item) { return keys.includes(item.id); } ) });
+        }
+        if (ctSel !== null) {
+          that.setSelection({ itemId : ctSel.value });
         }
       },
 

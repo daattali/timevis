@@ -1,3 +1,7 @@
+# Unreleased
+
+- Add {crosstalk} support for linked brushing and filtering with other crosstalk-enabled widgets
+
 # timevis 2.1.0 (2022-10-22)
 
 - Add functions `zoomIn()` and `zoomOut()`
