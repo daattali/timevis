@@ -16,7 +16,7 @@ Remove an item from a timeline
 }
 \examples{
 \dontrun{
-timevis(data.frame(id = 1:2, start = Sys.Date(), content = c("1", "2"))) \%>\%
+timevis(data.frame(start = Sys.Date(), content = c("1", "2"))) \%>\%
   removeItem(2)
 }
 
@@ -30,7 +30,7 @@ shinyApp(
   server = function(input, output) {
     output$timeline <- renderTimevis(
       timevis(data.frame(
-        id = 1:2, start = Sys.Date(), content = c("1", "2"))
+        start = Sys.Date(), content = c("1", "2"))
       )
     )
     observeEvent(input$btn, {

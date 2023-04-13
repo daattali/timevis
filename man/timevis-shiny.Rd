@@ -47,7 +47,6 @@ shinyApp(
 
 #----------------------- More advanced example -----------------
 data <- data.frame(
-  id = 1:3,
   start = c("2015-04-04", "2015-04-05 11:00:00", "2015-04-06 15:00:00"),
   end = c("2015-04-08", NA, NA),
   content = c("<h2>Vacation!!!</h2>", "Acupuncture", "Massage"),
