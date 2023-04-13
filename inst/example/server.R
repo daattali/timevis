@@ -116,6 +116,6 @@ function(input, output, session) {
     timevis(shared_df, options = list(multiselect = TRUE))
   })
   output$map <- leaflet::renderLeaflet({
-    leaflet::leaflet(shared_df) %>% addTiles() %>% addMarkers(label = ~start)
+    leaflet::leaflet(shared_df) %>% leaflet::addTiles() %>% leaflet::addMarkers(lng = ~lng, lat = ~lat, label = ~start)
   })
 }
