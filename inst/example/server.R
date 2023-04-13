@@ -107,4 +107,15 @@ function(input, output, session) {
   observeEvent(input$zoomOut, {
     zoomOut("timelineInteractive", input$zoomBy, animation = input$animate)
   })
+
+  eqs <- read.csv("earthquakes.csv")
+  eqs$content <- paste("<strong>Magnitude:", eqs$magnitude, "</strong><br/><em>", eqs$start, "</em>")
+  shared_df <- crosstalk::SharedData$new(eqs)
+
+  output$timelineCrosstalk <- renderTimevis({
+    timevis(shared_df, options = list(multiselect = TRUE))
+  })
+  output$map <- leaflet::renderLeaflet({
+    leaflet::leaflet(shared_df) %>% leaflet::addTiles() %>% leaflet::addMarkers(lng = ~lng, lat = ~lat, label = ~start)
+  })
 }

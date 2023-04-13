@@ -84,6 +84,7 @@ Sponsors 🏆
   - [Functions to manipulate a timeline](#manipulate-api)
   - [In a Shiny app](#shiny-apps)
       - [Retrieving data from the widget](#retrieve-data)
+  - [Crosstalk support](#crosstalk)
 
 <h2 id="install">
 
@@ -319,6 +320,27 @@ input variables will be available:
     (by zooming or moving the window).
   - **input$mytime\_visible** - will return a list of IDs of items
     currently visible in the timeline.
+
+<h2 id="crosstalk">
+
+Crosstalk support
+
+</h2>
+
+{timevis} is fully compatible with [crosstalk](https://github.com/rstudio/crosstalk). This means that you can provide it with a crosstalk `SharedData` object to select/filter data across multiple Shiny widgets.
+
+Here is a simple example:
+
+``` r
+df <- data.frame(start = c(Sys.Date(), Sys.Date() - 1, Sys.Date() - 2), content = 1:3)
+shared_df <- crosstalk::SharedData$new(df)
+crosstalk::bscols(
+  timevis(shared_df, options = list(multiselect = TRUE), showZoom = FALSE, width = "100%"),
+  DT::datatable(shared_df)
+)
+```
+
+If you select any events in the timeline (use *ctrl* or *shift* to select multiple events), then the table will automatically select those as well, and vice versa.
 
 -----
 

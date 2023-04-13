@@ -100,7 +100,7 @@ addItems <- function(id, data) {
 #' @param itemId The id of the item to remove
 #' @examples
 #' \dontrun{
-#' timevis(data.frame(id = 1:2, start = Sys.Date(), content = c("1", "2"))) %>%
+#' timevis(data.frame(start = Sys.Date(), content = c("1", "2"))) %>%
 #'   removeItem(2)
 #' }
 #'
@@ -114,7 +114,7 @@ addItems <- function(id, data) {
 #'   server = function(input, output) {
 #'     output$timeline <- renderTimevis(
 #'       timevis(data.frame(
-#'         id = 1:2, start = Sys.Date(), content = c("1", "2"))
+#'         start = Sys.Date(), content = c("1", "2"))
 #'       )
 #'     )
 #'     observeEvent(input$btn, {
@@ -288,7 +288,7 @@ removeCustomTime <- function(id, itemId) {
 #'   server = function(input, output) {
 #'     output$timeline <- renderTimevis(
 #'       timevis(data.frame(
-#'         id = 1:2, start = c(Sys.Date(), Sys.Date() - 1), content = c("1", "2")
+#'         start = c(Sys.Date(), Sys.Date() - 1), content = c("1", "2")
 #'       ))
 #'     )
 #'     observeEvent(input$btn, {
@@ -351,7 +351,6 @@ centerTime <- function(id, time, options) {
 #' @examples
 #' \dontrun{
 #' timevis(data.frame(
-#'           id = 1:3,
 #'           start = c(Sys.Date() - 1, Sys.Date(), Sys.Date() + 1),
 #'           content = c("Item 1", "Item 2", "Item 3"))
 #' ) %>%
@@ -368,7 +367,7 @@ centerTime <- function(id, time, options) {
 #'   server = function(input, output) {
 #'     output$timeline <- renderTimevis(
 #'       timevis(
-#'         data.frame(id = 1:3,
+#'         data.frame(
 #'           start = c(Sys.Date() - 1, Sys.Date(), Sys.Date() + 1),
 #'           content = c("Item 1", "Item 2", "Item 3"))
 #'       )
@@ -515,7 +514,7 @@ setOptions <- function(id, options) {
 #' Timeline documentation}
 #' @examples
 #' \dontrun{
-#' timevis(data.frame(id = 1:3, start = Sys.Date(), content = 1:3)) %>%
+#' timevis(data.frame(start = Sys.Date(), content = 1:3)) %>%
 #'   setSelection(2)
 #' }
 #'
@@ -529,7 +528,7 @@ setOptions <- function(id, options) {
 #'   server = function(input, output) {
 #'     output$timeline <- renderTimevis(
 #'       timevis(
-#'         data.frame(id = 1:3, start = Sys.Date(), content = 1:3)
+#'         data.frame(start = Sys.Date(), content = 1:3)
 #'       )
 #'     )
 #'     observeEvent(input$btn, {

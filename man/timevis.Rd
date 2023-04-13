@@ -11,7 +11,7 @@ timevis(
   showZoom = TRUE,
   zoomFactor = 0.5,
   fit = TRUE,
-  options,
+  options = list(),
   width = NULL,
   height = NULL,
   elementId = NULL,
@@ -20,8 +20,8 @@ timevis(
 )
 }
 \arguments{
-\item{data}{A dataframe containing the timeline items. Each item on the
-timeline is represented by a row in the dataframe. \code{start} and
+\item{data}{A dataframe (or \link[crosstalk]{SharedData} object for \{crosstalk\} support) containing the timeline items.
+Each item on the timeline is represented by a row in the dataframe. \code{start} and
 \code{content} are the only two required columns.
 See the \strong{Data format} section below for more
 details. For a full list of all supported columns, see the Data Format section in the
@@ -50,7 +50,8 @@ customize the timeline. All available options can be found in the
 \href{https://visjs.github.io/vis-timeline/docs/timeline/#Configuration_Options}{official
 Timeline documentation}. Note that any options that define a JavaScript
 function must be wrapped in a call to \code{htmlwidgets::JS()}. See the
-examples section below to see example usage.}
+examples section below to see example usage. If using \{crosstalk\}, it's recommended
+to use \code{list(multiselect = TRUE)}.}
 
 \item{width}{Fixed width for timeline (in css units). Ignored when used in a
 Shiny app -- use the \code{width} parameter in
@@ -111,8 +112,8 @@ can be plain text or HTML code.
 \item{\strong{\code{end}}} - The end date of the item. The end date is
 optional. If end date is provided, the item is displayed as a range. If
 not, the item is displayed as a single point on the timeline.
-\item{\strong{\code{id}}} - An id for the item. Using an id is not required
-but highly recommended, and must be unique. An id is needed when removing or
+\item{\strong{\code{id}}} - A unique ID for the item. If not provided,
+then the row names will be used as IDs. The ID is used when removing or
 selecting items (using \code{\link[timevis]{removeItem}} or
 \code{\link[timevis]{setSelection}}).
 \item{\strong{\code{type}}} - The type of the item. Can be 'box' (default),
@@ -124,7 +125,7 @@ hovering the mouse over the item. The title can only contain plain text.
 manipulated with the mouse. Overrides the global \code{editable}
 configuration option if it is set. An editable item can be removed or
 have its start/end dates modified by clicking on it.
-\item{\strong{\code{group}}} - The id of a group. When a \code{group} is
+\item{\strong{\code{group}}} - The ID of a group. When a \code{group} is
 provided, all items with the same group are placed on one line. A vertical
 axis is displayed showing the group names. See more details in the
 \strong{Groups} section below.
@@ -155,8 +156,8 @@ the groups dataframe. \strong{The full list of supported variables can be found 
 the \href{https://visjs.github.io/vis-timeline/docs/timeline/#groups}{official
 visjs documentation}}.
 \itemize{
-\item{\strong{\code{id}}} - (required) An id for the group. The group will
-display all items having a \code{group} variable which matches this id.
+\item{\strong{\code{id}}} - (required) An ID for the group. The group will
+display all items having a \code{group} variable which matches this ID.
 \item{\strong{\code{content}}} - (required) The contents of the group. This
 can be plain text or HTML code.
 \item{\strong{\code{title}}} - Add a title for the group, displayed when
@@ -182,7 +183,7 @@ not used. The groups data of a timeline can either be set by supplying the
 
 When a timeline widget is created in a Shiny app, there are four pieces of
 information that are always accessible as Shiny inputs. These inputs have
-special names based on the timeline's id. Suppose that a timeline is created
+special names based on the timeline's ID. Suppose that a timeline is created
 with an \code{outputId} of \strong{"mytime"}, then the following four input
 variables will be available:
 \itemize{
@@ -214,7 +215,7 @@ If you need to perform any actions on the timeline object that are not
 supported by this package's API, you may be able to do so by manipulating the
 timeline's JavaScript object directly. The timeline object is available via
 \code{document.getElementById("id").widget.timeline} (replace \code{id} with
-the timeline's id).\cr\cr
+the timeline's ID).\cr\cr
 This timeline object is the direct widget that \code{vis.js} creates, and you
 can see the \href{https://visjs.github.io/vis-timeline/docs/timeline/}{visjs documentation} to
 see what actions you can perform on that object.
@@ -267,15 +268,13 @@ timevis()
 
 #----------------------- Minimal data -----------------
 timevis(
-  data.frame(id = 1:2,
-             content = c("one", "two"),
+  data.frame(content = c("one", "two"),
              start = c("2016-01-10", "2016-01-12"))
 )
 
 #----------------------- Hide the zoom buttons, allow items to be editable -----------------
 timevis(
-  data.frame(id = 1:2,
-             content = c("one", "two"),
+  data.frame(content = c("one", "two"),
              start = c("2016-01-10", "2016-01-12")),
   showZoom = FALSE,
   options = list(editable = TRUE, height = "200px")
@@ -284,7 +283,6 @@ timevis(
 #----------------------- You can use \%>\% pipes to create timevis pipelines -----------------
 timevis() \%>\%
   setItems(data.frame(
-    id = 1:2,
     content = c("one", "two"),
     start = c("2016-01-10", "2016-01-12")
   )) \%>\%
@@ -295,8 +293,7 @@ timevis() \%>\%
 
 #------- Items can be a single point or a range, and can contain HTML -------
 timevis(
-  data.frame(id = 1:2,
-             content = c("one", "two<br><h3>HTML is supported</h3>"),
+  data.frame(content = c("one", "two<br><h3>HTML is supported</h3>"),
              start = c("2016-01-10", "2016-01-18"),
              end = c("2016-01-14", NA),
              style = c(NA, "color: red;")
@@ -305,8 +302,7 @@ timevis(
 
 #----------------------- Alternative look for each item -----------------
 timevis(
-  data.frame(id = 1:2,
-             content = c("one", "two"),
+  data.frame(content = c("one", "two"),
              start = c("2016-01-10", "2016-01-14"),
              end = c(NA, "2016-01-18"),
              type = c("point", "background"))
@@ -314,8 +310,7 @@ timevis(
 
 #----------------------- Using a function in the configuration options -----------------
 timevis(
-  data.frame(id = 1,
-             content = "double click anywhere<br>in the timeline<br>to add an item",
+  data.frame(content = "double click anywhere<br>in the timeline<br>to add an item",
              start = "2016-01-01"),
   options = list(
     editable = TRUE,
@@ -330,7 +325,6 @@ timevis(
 #----------------------- Using a custom format for hours ------------------
 timevis(
   data.frame(
-    id = 1:2,
     content = c("one", "two"),
     start = c("2020-01-10", "2020-01-10 04:00:00")
   ),
@@ -342,7 +336,6 @@ timevis(
 #----------------------- Allowing editable items to "snap" to round hours only -------------
 timevis(
   data.frame(
-    id = 1:2,
     content = c("one", "two"),
     start = c("2020-01-10", "2020-01-10 04:00:00")
   ),
@@ -377,12 +370,12 @@ timevis(
   )
 )
 }
+
 #----------------------- Getting data out of the timeline into Shiny -----------------
 if (interactive()) {
 library(shiny)
 
 data <- data.frame(
-  id = 1:3,
   start = c("2015-04-04", "2015-04-05 11:00:00", "2015-04-06 15:00:00"),
   end = c("2015-04-08", NA, NA),
   content = c("<h2>Vacation!!!</h2>", "Acupuncture", "Massage"),

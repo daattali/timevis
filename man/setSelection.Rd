@@ -23,7 +23,7 @@ Select one or multiple items on a timeline
 }
 \examples{
 \dontrun{
-timevis(data.frame(id = 1:3, start = Sys.Date(), content = 1:3)) \%>\%
+timevis(data.frame(start = Sys.Date(), content = 1:3)) \%>\%
   setSelection(2)
 }
 
@@ -37,7 +37,7 @@ shinyApp(
   server = function(input, output) {
     output$timeline <- renderTimevis(
       timevis(
-        data.frame(id = 1:3, start = Sys.Date(), content = 1:3)
+        data.frame(start = Sys.Date(), content = 1:3)
       )
     )
     observeEvent(input$btn, {

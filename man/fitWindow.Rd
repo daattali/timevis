@@ -29,7 +29,7 @@ shinyApp(
   server = function(input, output) {
     output$timeline <- renderTimevis(
       timevis(data.frame(
-        id = 1:2, start = c(Sys.Date(), Sys.Date() - 1), content = c("1", "2")
+        start = c(Sys.Date(), Sys.Date() - 1), content = c("1", "2")
       ))
     )
     observeEvent(input$btn, {
