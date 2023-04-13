@@ -1,5 +1,6 @@
 # Unreleased
 
+- TODO: make a pull request on crosstalk website to add timevis as a compatible widget
 - Add {crosstalk} support for linked brushing and filtering with other crosstalk-enabled widgets (#95)
 - If `id` column is not provided in the data for a timevis, the row names will be used as IDs
 
