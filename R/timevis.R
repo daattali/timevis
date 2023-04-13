@@ -366,7 +366,7 @@
 #' @seealso \href{https://daattali.com/shiny/timevis-demo/}{Demo Shiny app}
 #' @export
 timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
-                    options, width = NULL, height = NULL, elementId = NULL,
+                    options = list(), width = NULL, height = NULL, elementId = NULL,
                     loadDependencies = TRUE, timezone = NULL) {
 
   # Validate the input data
@@ -417,7 +417,7 @@ timevis <- function(data, groups, showZoom = TRUE, zoomFactor = 0.5, fit = TRUE,
     stop("timevis: 'fit' must be either 'TRUE' or 'FALSE'",
          call. = FALSE)
   }
-  if (missing(options) || is.null(options)) {
+  if (is.null(options)) {
     options <- list()
   }
   if (!is.list(options)) {

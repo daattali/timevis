@@ -11,7 +11,7 @@ timevis(
   showZoom = TRUE,
   zoomFactor = 0.5,
   fit = TRUE,
-  options,
+  options = list(),
   width = NULL,
   height = NULL,
   elementId = NULL,
