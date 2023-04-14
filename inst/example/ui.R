@@ -175,9 +175,8 @@ fluidPage(
           tags$a("Crosstalk", href = "https://github.com/rstudio/crosstalk"),
         )),
         tags$p(
-          "The following timeline and map show major earthquakes from March 2001.", br(),
-          "The data is linked between the two - select any events in the timeline to see",
-          "them highlighted on the map, and vice versa."
+          "The data in the timeline and the plot below are linked - select any events in the timeline to see",
+          "them highlighted on the plot, and vice versa."
         ),
         HTML("Use <i>ctrl</i> or <i>shift</i> to select multiple events"),
         fluidRow(
@@ -187,7 +186,7 @@ fluidPage(
           ),
           column(
             6,
-            leaflet::leafletOutput("map", height = 300)
+            d3scatter::d3scatterOutput("plot")
           )
         ),
         br()

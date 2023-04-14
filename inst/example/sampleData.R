@@ -55,7 +55,9 @@ dataWC <- data.frame(
     templateWC("semi-finals", "Brazil", "Germany", 1, 7),
     templateWC("semi-finals", "Netherlands", "Argentina", "0 (2)", "0 (4)"),
     templateWC("final", "Germany", "Argentina", 1, 0)
-  )
+  ),
+  goalsHome = c(0, 2, 1, 4, 1, 2, 1),
+  goalsAway = c(1, 1, 0, 3, 7, 4, 0)
 )
 
 # Data for groups example (this data also gets exported in the package)

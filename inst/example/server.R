@@ -108,14 +108,13 @@ function(input, output, session) {
     zoomOut("timelineInteractive", input$zoomBy, animation = input$animate)
   })
 
-  eqs <- read.csv("earthquakes.csv")
-  eqs$content <- paste("<strong>Magnitude:", eqs$magnitude, "</strong><br/><em>", eqs$start, "</em>")
-  shared_df <- crosstalk::SharedData$new(eqs)
+  shared_df <- crosstalk::SharedData$new(dataWC)
 
   output$timelineCrosstalk <- renderTimevis({
     timevis(shared_df, options = list(multiselect = TRUE))
   })
-  output$map <- leaflet::renderLeaflet({
-    leaflet::leaflet(shared_df) %>% leaflet::addTiles() %>% leaflet::addMarkers(lng = ~lng, lat = ~lat, label = ~start)
+  output$plot <- d3scatter::renderD3scatter({
+    d3scatter::d3scatter(shared_df, x = ~goalsHome, y = ~goalsAway,
+                         x_label = "Home Goals", y_label = "Away Goals")
   })
 }
