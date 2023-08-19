@@ -1,3 +1,2 @@
-#' @docType package
-#' @name timevis
-NULL
+#' @keywords internal
+"_PACKAGE"
