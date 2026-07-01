@@ -635,3 +635,39 @@ zoomOut <- function(id, percent = 0.5, animation = TRUE) {
   method <- "zoomOut"
   callJS()
 }
+
+#' Reset the timeline to its initial view
+#'
+#' Restores the timeline window to the state it was in when first rendered,
+#' useful after zooming or panning.
+#'
+#' @param id Timeline id or a \code{timevis} object (the output from \code{timevis()})
+#' @param animation Whether or not to animate the reset.
+#' @examples
+#' \dontrun{
+#' timevis() %>%
+#'   resetTimevis()
+#' }
+#'
+#' if (interactive()) {
+#' library(shiny)
+#' shinyApp(
+#'   ui = fluidPage(
+#'     timevisOutput("timeline"),
+#'     actionButton("btn", "Reset to initial view")
+#'   ),
+#'   server = function(input, output) {
+#'     output$timeline <- renderTimevis(
+#'       timevis()
+#'     )
+#'     observeEvent(input$btn, {
+#'       resetTimevis("timeline")
+#'     })
+#'   }
+#' )
+#' }
+#' @export
+resetTimevis <- function(id, animation = TRUE) {
+  method <- "resetTimevis"
+  callJS()
+}
